@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-01-21T00:00:00.000Z" agent="Draw.io" version="22.1.0" type="device">
+  <diagram id="class_diagram" name="Диаграмма классов (ГОСТ 19.101)">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1188" pageHeight="840" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Заголовок по ГОСТ 19.101 -->
+        <mxCell id="header_frame" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="ДИАГРАММА КЛАССОВ МОДУЛЯ TRANSFORMS&#xa;ГОСТ 19.101-77 | Лист 1 из 1 | AudioAnalyzer v2.0" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="1100" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== БАЗОВЫЙ КЛАСС ==================== -->
+        <mxCell id="base_class" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;strokeWidth=2" vertex="1" parent="1">
+          <mxGeometry x="420" y="110" width="300" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="base_header" value="&lt;&lt;abstract&gt;&gt;&#xa;BaseTransform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffecb3;strokeColor=#f57f17;strokeWidth=1;fontSize=12;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="420" y="110" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="base_attrs" value="- NAME: str&#xa;- DESCRIPTION: str&#xa;- FILE_SUFFIX: str&#xa;- block_size: int&#xa;- bitrate: str&#xa;- select_mode: str&#xa;- keep_energy_ratio: float&#xa;- sequency_keep_ratio: float" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;spacingLeft=10;spacingTop=5" vertex="1" parent="1">
+          <mxGeometry x="420" y="150" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="base_line" value="" style="endArrow=none;html=1;strokeWidth=1;strokeColor=#f57f17" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="220" as="sourcePoint" />
+            <mxPoint x="720" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base_methods" value="+ __init__(block_size, bitrate, select_mode, ...)&#xa;+ transform_block(block, **params) [abstract]&#xa;+ process(wav_path, out_dir, progress_cb) [abstract]&#xa;+ get_output_path(wav_path, out_dir): str&#xa;+ log_start(wav_path, **extra_params): void&#xa;+ log_done(out_path, time_sec): void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;spacingLeft=10;spacingTop=5" vertex="1" parent="1">
+          <mxGeometry x="420" y="220" width="300" height="70" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== FFT CLASS ==================== -->
+        <mxCell id="fft_class" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="60" y="360" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="fft_header" value="FFTTransform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#1565c0;strokeWidth=1;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="60" y="360" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fft_attrs" value="- NAME = 'FFT'&#xa;- DESCRIPTION = 'Быстрое преобр. Фурье'&#xa;- FILE_SUFFIX = 'fft'" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fft_line" value="" style="endArrow=none;html=1;strokeWidth=1;strokeColor=#1565c0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="430" as="sourcePoint" />
+            <mxPoint x="260" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fft_methods" value="+ transform_block(block): ndarray&#xa;+ process(...): Tuple[str, float]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="60" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== FWHT CLASS ==================== -->
+        <mxCell id="fwht_class" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="280" y="360" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="fwht_header" value="FWHTTransform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#2e7d32;strokeWidth=1;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="280" y="360" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fwht_attrs" value="- NAME = 'FWHT'&#xa;- DESCRIPTION = 'Уолша-Адамара'&#xa;- FILE_SUFFIX = 'fwht'&#xa;- keep_ratio: float" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="280" y="390" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fwht_line" value="" style="endArrow=none;html=1;strokeWidth=1;strokeColor=#2e7d32" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="430" as="sourcePoint" />
+            <mxPoint x="480" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fwht_methods" value="+ transform_block(block): ndarray&#xa;+ process(...): Tuple[str, float]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="280" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== DCT CLASS ==================== -->
+        <mxCell id="dct_class" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="360" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="dct_header" value="DCTTransform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8bbd9;strokeColor=#c2185b;strokeWidth=1;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="500" y="360" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dct_attrs" value="- NAME = 'DCT'&#xa;- DESCRIPTION = 'Дискр. косинусное'&#xa;- FILE_SUFFIX = 'dct'" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="500" y="390" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dct_line" value="" style="endArrow=none;html=1;strokeWidth=1;strokeColor=#c2185b" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="430" as="sourcePoint" />
+            <mxPoint x="700" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dct_methods" value="+ transform_block(block): ndarray&#xa;+ process(...): Tuple[str, float]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="500" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== DWT CLASS ==================== -->
+        <mxCell id="dwt_class" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="720" y="360" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="dwt_header" value="DWTTransform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#7b1fa2;strokeWidth=1;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="720" y="360" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dwt_attrs" value="- NAME = 'DWT'&#xa;- DESCRIPTION = 'Вейвлет Хаара'&#xa;- FILE_SUFFIX = 'dwt'&#xa;- levels: int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="720" y="390" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dwt_line" value="" style="endArrow=none;html=1;strokeWidth=1;strokeColor=#7b1fa2" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="430" as="sourcePoint" />
+            <mxPoint x="920" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dwt_methods" value="+ transform_block(block): ndarray&#xa;+ process(...): Tuple[str, float]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="720" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== HUFFMAN CLASS ==================== -->
+        <mxCell id="huffman_class" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="940" y="360" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="huffman_header" value="HuffmanLikeTransform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe0b2;strokeColor=#e65100;strokeWidth=1;fontSize=11;fontStyle=1;align=center" vertex="1" parent="1">
+          <mxGeometry x="940" y="360" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huffman_attrs" value="- NAME = 'HUFFMAN'&#xa;- DESCRIPTION = 'μ-law компанд.'&#xa;- mu: float&#xa;- bits: int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="940" y="390" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="huffman_line" value="" style="endArrow=none;html=1;strokeWidth=1;strokeColor=#e65100" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="940" y="430" as="sourcePoint" />
+            <mxPoint x="1140" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="huffman_methods" value="+ transform_block(block): ndarray&#xa;+ process(...): Tuple[str, float]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;spacingLeft=5;spacingTop=3" vertex="1" parent="1">
+          <mxGeometry x="940" y="430" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== СТРЕЛКИ НАСЛЕДОВАНИЯ ==================== -->
+        <mxCell id="inh_fft" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#000000;endFill=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="360" as="sourcePoint" />
+            <mxPoint x="500" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inh_fwht" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#000000;endFill=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="360" as="sourcePoint" />
+            <mxPoint x="520" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inh_dct" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#000000;endFill=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="360" as="sourcePoint" />
+            <mxPoint x="570" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inh_dwt" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#000000;endFill=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="820" y="360" as="sourcePoint" />
+            <mxPoint x="620" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inh_huffman" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#000000;endFill=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1040" y="360" as="sourcePoint" />
+            <mxPoint x="680" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- ==================== ЛЕГЕНДА ==================== -->
+        <mxCell id="legend_frame" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="520" width="400" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="Обозначения (ГОСТ 19.101):" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="525" width="200" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="l1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;strokeWidth=2" vertex="1" parent="1">
+          <mxGeometry x="50" y="550" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l1t" value="Абстрактный класс (не создаётся напрямую)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="90" y="550" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="l2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="580" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l2t" value="Конкретный класс (может быть создан)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="90" y="580" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="l3" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#000000;endFill=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" y="620" as="sourcePoint" />
+            <mxPoint x="90" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l3t" value="Наследование (обобщение)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="100" y="612" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="l4" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;dashed=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" y="650" as="sourcePoint" />
+            <mxPoint x="90" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l4t" value="Зависимость (использование)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="100" y="642" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ ==================== -->
+        <mxCell id="tech_frame" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="460" y="520" width="680" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="tech_title" value="Технические характеристики модуля transforms/:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="470" y="525" width="350" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tech_text" value="• Базовый класс: BaseTransform (~480 строк)&#xa;• FFTTransform: rFFT с отбором коэффициентов по энергии/частоте&#xa;• FWHTTransform: Быстрое Уолша-Адамара, только сложения/вычитания&#xa;• DCTTransform: Дискретное косинусное (JPEG, MP3 стандарт)&#xa;• DWTTransform: Вейвлет Хаара с многоуровневой декомпозицией&#xa;• HuffmanLikeTransform: μ-law компандирование для сжатия динамического диапазона&#xa;• Общий интерфейс: process(wav_path, out_dir, progress_cb) → (mp3_path, time_sec)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="470" y="545" width="660" height="110" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-03-12T00:00:00.000Z" agent="Draw.io" version="22.1.0" type="device">
+  <diagram id="ola-process" name="OLA - Overlap-Add процесс">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Заголовок по ГОСТ 19 -->
+        <mxCell id="title" value="МЕТОД OLA (OVERLAP-ADD)&#xa;Обработка сигналов произвольной длины с перекрытием блоков" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="700" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Легенда ГОСТ 19 -->
+        <mxCell id="legend_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="950" y="20" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="Легенда (ГОСТ 19.701-90)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="950" y="25" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_process" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf" vertex="1" parent="1">
+          <mxGeometry x="960" y="50" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_process_text" value="Процесс" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="1030" y="50" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_data" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656" vertex="1" parent="1">
+          <mxGeometry x="960" y="80" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_data_text" value="Данные" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="1030" y="80" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_decision" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="960" y="108" width="60" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_decision_text" value="Решение" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="1030" y="108" width="60" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- Секция 1: Зачем нужен OLA -->
+        <mxCell id="why_title" value="1. ЗАЧЕМ НУЖЕН МЕТОД OLA?" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontFamily=Times New Roman;fontColor=#1a73e8" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="300" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="why_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f0fe;strokeColor=#1a73e8;strokeWidth=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="400" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="why_text" value="ПРОБЛЕМА: Преобразования (FFT, DCT, DWT, FWHT)&#xa;работают только с блоками фиксированной длины.&#xa;&#xa;РЕШЕНИЕ: OLA разбивает сигнал на перекрывающиеся&#xa;блоки, обрабатывает каждый, затем собирает обратно.&#xa;&#xa;РЕЗУЛЬТАТ: Можно обрабатывать сигналы любой длины." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=11;spacingLeft=10;spacingTop=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="50" y="115" width="380" height="90" as="geometry" />
+        </mxCell>
+        
+        <!-- Секция 2: Параметры OLA -->
+        <mxCell id="params_title" value="2. ПАРАМЕТРЫ OLA" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontFamily=Times New Roman;fontColor=#1a73e8" vertex="1" parent="1">
+          <mxGeometry x="470" y="80" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="params_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="470" y="110" width="450" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="params_table" value="Параметр           Значение         Описание&#xa;─────────────────────────────────────────────────&#xa;block_size (N)     2048             Размер блока (степень 2)&#xa;hop_size (H)       N/2 = 1024       Шаг (50% перекрытие)&#xa;window             sqrt-Hann        Окно анализа/синтеза&#xa;n_frames           (L-N)/H + 1      Число фреймов" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;spacingLeft=10;spacingTop=10;fontFamily=Courier New" vertex="1" parent="1">
+          <mxGeometry x="480" y="115" width="430" height="90" as="geometry" />
+        </mxCell>
+        
+        <!-- Секция 3: Схема процесса -->
+        <mxCell id="process_title" value="3. СХЕМА ПРОЦЕССА OLA" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontFamily=Times New Roman;fontColor=#1a73e8" vertex="1" parent="1">
+          <mxGeometry x="40" y="230" width="300" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Начало -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000" vertex="1" parent="1">
+          <mxGeometry x="90" y="270" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Входной сигнал -->
+        <mxCell id="input" value="Входной сигнал&#xa;x[n], n=0...L-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="40" y="320" width="130" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Разбиение -->
+        <mxCell id="split" value="Разбиение на&#xa;фреймы&#xa;(50% overlap)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="130" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Цикл -->
+        <mxCell id="loop" value="Для каждого&#xa;фрейма i?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="40" y="490" width="130" height="70" as="geometry" />
+        </mxCell>
+        
+        <!-- Окно -->
+        <mxCell id="window" value="Применение&#xa;окна sqrt-Hann" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="220" y="505" width="110" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Преобразование -->
+        <mxCell id="transform" value="Прямое&#xa;преобразование&#xa;(FFT/DCT/DWT/FWHT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="360" y="495" width="120" height="70" as="geometry" />
+        </mxCell>
+        
+        <!-- Обработка -->
+        <mxCell id="process_coeff" value="Отбор&#xa;коэффициентов&#xa;(опционально)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="510" y="495" width="110" height="70" as="geometry" />
+        </mxCell>
+        
+        <!-- Обратное -->
+        <mxCell id="inverse" value="Обратное&#xa;преобразование" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="650" y="505" width="110" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Накопление -->
+        <mxCell id="accumulate" value="Накопление&#xa;y_accum += rec&#xa;w_accum += w²" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="650" y="590" width="110" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Нормировка -->
+        <mxCell id="normalize" value="Нормировка:&#xa;y = y_accum / w_accum" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="130" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Клиппинг -->
+        <mxCell id="clip" value="Защита от&#xa;клиппинга" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="130" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Выход -->
+        <mxCell id="output" value="Выходной сигнал&#xa;y[n]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="40" y="750" width="130" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Конец -->
+        <mxCell id="end" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000" vertex="1" parent="1">
+          <mxGeometry x="90" y="810" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Стрелки -->
+        <mxCell id="arr01" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="start" target="input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr02" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="input" target="split">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr03" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="split" target="loop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr04" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="loop" target="window">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr05" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="window" target="transform">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr06" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="transform" target="process_coeff">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr07" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="process_coeff" target="inverse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr08" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="inverse" target="accumulate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr09" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000;dashed=1" edge="1" parent="1" source="accumulate" target="loop">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="700" />
+              <mxPoint x="250" y="700" />
+              <mxPoint x="250" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr10" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="loop" target="normalize">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr11" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="normalize" target="clip">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr12" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="clip" target="output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr13" style="endArrow=classic;html=1;strokeWidth=1.5;strokeColor=#000000" edge="1" parent="1" source="output" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Метки Да/Нет -->
+        <mxCell id="yes_label" value="Да" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="180" y="515" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="no_label" value="Нет" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="70" y="570" width="30" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Секция 4: Визуализация перекрытия -->
+        <mxCell id="viz_title" value="4. ВИЗУАЛИЗАЦИЯ ПЕРЕКРЫТИЯ БЛОКОВ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontFamily=Times New Roman;fontColor=#1a73e8" vertex="1" parent="1">
+          <mxGeometry x="250" y="270" width="350" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Схема сигнала -->
+        <mxCell id="signal_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="250" y="300" width="500" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Основа сигнала -->
+        <mxCell id="signal_line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="375" as="sourcePoint" />
+            <mxPoint x="730" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Блоки -->
+        <mxCell id="block1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=50" vertex="1" parent="1">
+          <mxGeometry x="270" y="320" width="150" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="block2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=50" vertex="1" parent="1">
+          <mxGeometry x="345" y="320" width="150" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="block3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;opacity=50" vertex="1" parent="1">
+          <mxGeometry x="420" y="320" width="150" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="block4" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;opacity=50" vertex="1" parent="1">
+          <mxGeometry x="495" y="320" width="150" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="block5" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;opacity=50" vertex="1" parent="1">
+          <mxGeometry x="570" y="320" width="150" height="110" as="geometry" />
+        </mxCell>
+        
+        <!-- Перекрытие -->
+        <mxCell id="overlap1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1a73e8;strokeColor=none;opacity=30" vertex="1" parent="1">
+          <mxGeometry x="345" y="320" width="75" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="overlap2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1a73e8;strokeColor=none;opacity=30" vertex="1" parent="1">
+          <mxGeometry x="420" y="320" width="75" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="overlap3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1a73e8;strokeColor=none;opacity=30" vertex="1" parent="1">
+          <mxGeometry x="495" y="320" width="75" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="overlap4" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1a73e8;strokeColor=none;opacity=30" vertex="1" parent="1">
+          <mxGeometry x="570" y="320" width="75" height="110" as="geometry" />
+        </mxCell>
+        
+        <!-- Метки блоков -->
+        <mxCell id="b1_label" value="Фрейм 0" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="295" y="435" width="60" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="b2_label" value="Фрейм 1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="370" y="435" width="60" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="b3_label" value="Фрейм 2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="445" y="435" width="60" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="b4_label" value="Фрейм 3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="520" y="435" width="60" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="b5_label" value="Фрейм 4" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="595" y="435" width="60" height="15" as="geometry" />
+        </mxCell>
+        
+        <!-- Метки размеров -->
+        <mxCell id="size_N" value="N = block_size" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman;fontColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="270" y="455" width="80" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="size_H" value="H = N/2 (hop)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Times New Roman;fontColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="340" y="455" width="80" height="15" as="geometry" />
+        </mxCell>
+        
+        <!-- Стрелка hop -->
+        <mxCell id="hop_arrow" value="" style="endArrow=classic;html=1;strokeWidth=1;strokeColor=#1a73e8;dashed=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="345" y="465" as="sourcePoint" />
+            <mxPoint x="420" y="465" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Объяснение -->
+        <mxCell id="viz_explain" value="Перекрытие 50%: каждый отсчёт принадлежит двум блокам&#xa;Синие зоны — области перекрытия (усредняются при сборке)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontFamily=Times New Roman;fontColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="300" y="480" width="400" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Секция 5: Идеальная реконструкция -->
+        <mxCell id="recon_title" value="5. УСЛОВИЕ ИДЕАЛЬНОЙ РЕКОНСТРУКЦИИ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontFamily=Times New Roman;fontColor=#1a73e8" vertex="1" parent="1">
+          <mxGeometry x="800" y="270" width="350" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="recon_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="800" y="300" width="350" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="recon_text" value="При использовании sqrt-Hann окна с 50% перекрытием:&#xa;&#xa;     w²[n] + w²[n + N/2] = 1   для всех n&#xa;&#xa;Это обеспечивает идеальную реконструкцию&#xa;при отсутствии отбора коэффициентов.&#xa;&#xa;Окно: w[n] = √(Hann(n)) = √(0.5·(1 - cos(2πn/N)))" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;spacingLeft=10;spacingTop=10;fontFamily=Times New Roman" vertex="1" parent="1">
+          <mxGeometry x="810" y="305" width="330" height="110" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-01-20T00:00:00.000Z" agent="Draw.io" version="22.1.0" type="device">
+  <diagram id="methods-comparison" name="Сравнение методов (ГОСТ 19)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1188" pageHeight="840" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Заголовок по ГОСТ -->
+        <mxCell id="header" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Сравнительная характеристика методов обработки аудио&#xa;Лист 1 из 1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="25" width="1100" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Таблица сравнения -->
+        <mxCell id="table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="1100" height="280" as="geometry" />
+        </mxCell>
+        
+        <!-- Заголовки столбцов -->
+        <mxCell id="h1" value="Метод" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h2" value="Базис&#xa;преобразования" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="140" y="90" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h3" value="Операции" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="90" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h4" value="Сложность" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="360" y="90" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h5" value="Качество&#xa;(SNR)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="460" y="90" width="80" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h6" value="Скорость" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="90" width="80" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h7" value="Обратимость" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="90" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h8" value="Применение" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="720" y="90" width="180" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h9" value="Стандарт" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="90" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="h10" value="Особенности" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1020" y="90" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Строка 1: FWHT -->
+        <mxCell id="r1_1" value="FWHT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_2" value="Прямоугольные&#xa;волны (Уолша)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="140" y="130" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_3" value="+, −" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="130" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_4" value="O(N log N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="360" y="130" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_5" value="★★★★☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="460" y="130" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_6" value="★★★★★" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="130" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_7" value="100%" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="130" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_8" value="Встраиваемые&#xa;системы, IoT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="130" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_9" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="900" y="130" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_10" value="Нет умножения&#xa;Энергоэффективен" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="1020" y="130" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Строка 2: FFT -->
+        <mxCell id="r2_1" value="FFT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_2" value="Синусоиды&#xa;(Фурье)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="140" y="170" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_3" value="×, ÷, компл." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="260" y="170" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_4" value="O(N log N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="360" y="170" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_5" value="★★★★★" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="460" y="170" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_6" value="★★★★☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="540" y="170" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_7" value="100%" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="170" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_8" value="Спектральный&#xa;анализ, аудио" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="170" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_9" value="DSP, аудио" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="900" y="170" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_10" value="Физический&#xa;смысл частот" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="1020" y="170" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Строка 3: DCT -->
+        <mxCell id="r3_1" value="DCT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_2" value="Косинусы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="140" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_3" value="×, ÷" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="260" y="210" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_4" value="O(N log N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="360" y="210" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_5" value="★★★★★" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="460" y="210" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_6" value="★★★★☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="540" y="210" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_7" value="100%" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="210" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_8" value="Сжатие аудио,&#xa;изображений" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="210" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_9" value="MP3, AAC,&#xa;JPEG" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_10" value="Концентрация&#xa;энергии" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="1020" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Строка 4: DWT -->
+        <mxCell id="r4_1" value="DWT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="250" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_2" value="Ступеньки&#xa;(Хаар)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="140" y="250" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_3" value="+, −" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="250" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_4" value="O(N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="360" y="250" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_5" value="★★★★☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="460" y="250" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_6" value="★★★★☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="540" y="250" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_7" value="100%" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="250" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_8" value="Ударные,&#xa;переходы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="250" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_9" value="JPEG2000" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="900" y="250" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4_10" value="Многомасштаб.&#xa;анализ" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="1020" y="250" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Строка 5: Huffman -->
+        <mxCell id="r5_1" value="Huffman-like" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_2" value="μ-law&#xa;компанд." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="140" y="290" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_3" value="log, квант." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="260" y="290" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_4" value="O(N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="360" y="290" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_5" value="★★★☆☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="460" y="290" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_6" value="★★★★★" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="290" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_7" value="≈95%" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="620" y="290" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_8" value="Телефония,&#xa;голос" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="290" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_9" value="G.711" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="900" y="290" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r5_10" value="Потери при&#xa;квантовании" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="1020" y="290" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Строка 6: Rosenbrock -->
+        <mxCell id="r6_1" value="Rosenbrock" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_2" value="Нелинейная&#xa;функция" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="140" y="330" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_3" value="×, ÷, ²" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="260" y="330" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_4" value="O(N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="360" y="330" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_5" value="★★★☆☆" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="460" y="330" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_6" value="★★★★★" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="330" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_7" value="≈90%" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="620" y="330" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_8" value="Эксперименты,&#xa;эффекты" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="330" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_9" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="900" y="330" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_10" value="Нелинейные&#xa;искажения" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="1020" y="330" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Блок рекомендаций -->
+        <mxCell id="rec_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="520" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="rec_title" value="Рекомендации по выбору метода:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="405" width="300" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="rec_text" value="• DCT — оптимальный выбор для сжатия аудио (стандарт MP3)&#xa;• FFT — для спектрального анализа и визуализации частот&#xa;• FWHT — для встраиваемых систем с ограниченными ресурсами&#xa;• DWT — для анализа переходных процессов (ударные инструменты)&#xa;• Huffman-like — для телефонии и голосовых кодеков&#xa;• Rosenbrock — для экспериментальных эффектов&#xa;&#xa;Критерии выбора: качество (SNR) vs скорость vs размер выходного файла" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="50" y="425" width="500" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Блок метрик -->
+        <mxCell id="metrics_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="580" y="400" width="560" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metrics_title" value="Метрики качества для сравнения:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="590" y="405" width="300" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="metrics_text" value="Временная область:                Спектральная область:&#xa;• SNR (дБ) — выше лучше      • LSD (дБ) — ниже лучше&#xa;• RMSE — ниже лучше            • Spectral Conv. — ниже лучше&#xa;• SI-SDR (дБ) — выше лучше    • Centroid Δ (Гц) — ниже лучше&#xa;                                         • Cosine Sim. — выше лучше&#xa;&#xa;Агрегированный балл: взвешенная комбинация всех метрик" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontFamily=Courier New" vertex="1" parent="1">
+          <mxGeometry x="590" y="425" width="540" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Легенда -->
+        <mxCell id="legend_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="570" width="300" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_title" value="Условные обозначения:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="575" width="150" height="15" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="595" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1t" value="Лучший показатель" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="90" y="595" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="620" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2t" value="Средний показатель" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="90" y="620" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="645" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3t" value="Низкий показатель" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="90" y="645" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

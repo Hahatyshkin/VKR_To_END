@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-01-20T00:00:00.000Z" agent="Draw.io" version="22.1.0" type="device">
+  <diagram id="method-dwt" name="Метод DWT (ГОСТ 19.701-90)">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="840" pageHeight="1188" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Заголовок по ГОСТ -->
+        <mxCell id="header" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="760" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Метод DWT — Дискретное вейвлет-преобразование Хаара&#xa;Лист 1 из 1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="25" width="760" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Начало -->
+        <mxCell id="start" value="Начало" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="370" y="90" width="100" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Вход -->
+        <mxCell id="p1" value="Вход: аудиосигнал&#xa;x[n], число уровней L" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="350" y="150" width="140" height="45" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a1" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="start" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Инициализация -->
+        <mxCell id="p2" value="A₀ = x[n]&#xa;(аппроксимация)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="350" y="220" width="140" height="45" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a2" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="p1" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Цикл по уровням -->
+        <mxCell id="d1" value="i = 1..L?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="370" y="290" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a3" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="p2" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Разложение Хаара -->
+        <mxCell id="p3" value="Декомпозиция Хаара:&#xa;&#xa;Aᵢ = (Aᵢ₋₁[2n] + Aᵢ₋₁[2n+1])/√2&#xa;Dᵢ = (Aᵢ₋₁[2n] - Aᵢ₋₁[2n+1])/√2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="340" y="380" width="160" height="65" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a4" value="Да" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="d1" target="p3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Отбор -->
+        <mxCell id="p4" value="Отбор коэффициентов:&#xa;• energy (по энергии)&#xa;• lowpass (НЧ)&#xa;• none" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="350" y="470" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a5" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="p3" target="p4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Возврат к циклу -->
+        <mxCell id="a6" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1;dashed=1" edge="1" parent="1" source="p4" target="d1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="500" />
+              <mxPoint x="280" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Реконструкция -->
+        <mxCell id="p5" value="Реконструкция:&#xa;&#xa;x'[2n] = (Aᵢ + Dᵢ)/√2&#xa;x'[2n+1] = (Aᵢ - Dᵢ)/√2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#000000;strokeWidth=1;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="340" y="560" width="160" height="65" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a7" value="Все" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="d1" target="p5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="320" />
+              <mxPoint x="560" y="593" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- OLA -->
+        <mxCell id="p6" value="Восстановление&#xa;сигнала (OLA)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="350" y="650" width="140" height="45" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a8" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="p5" target="p6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Выход -->
+        <mxCell id="p7" value="Выход:&#xa;обработанный сигнал" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#000000;strokeWidth=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="350" y="720" width="140" height="45" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a9" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="p6" target="p7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Конец -->
+        <mxCell id="end" value="Конец" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="370" y="790" width="100" height="35" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a10" style="endArrow=block;html=1;strokeWidth=1;strokeColor=#000000;endFill=1" edge="1" parent="1" source="p7" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Схема декомпозиции (справа) -->
+        <mxCell id="decomp_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="560" y="150" width="220" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="decomp_title" value="Многомасштабная декомпозиция:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="570" y="155" width="200" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="decomp_scheme" value="     x[n]&#xa;       ↓&#xa;   [DWT Level 1]&#xa;   ↙        ↘&#xa;A₁ (сглаж.)  D₁ (детали)&#xa;   ↓&#xa;[DWT Level 2]&#xa;   ↙        ↘&#xa;A₂         D₂&#xa;   ↓&#xa;  ...&#xa;   ↓&#xa;Aₗ (финальная)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Courier New" vertex="1" parent="1">
+          <mxGeometry x="570" y="175" width="200" height="170" as="geometry" />
+        </mxCell>
+        
+        <!-- Свойства -->
+        <mxCell id="props_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="560" y="370" width="220" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="props_title" value="Свойства вейвлета Хаара:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="570" y="375" width="200" height="15" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="props" value="• Локализация во времени и частоте&#xa;• Разные масштабы анализа&#xa;• Быстрое вычисление (только + и −)&#xa;• Эффективен для переходных процессов&#xa;• Только + и − (без умножения)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="570" y="390" width="200" height="75" as="geometry" />
+        </mxCell>
+        
+        <!-- Применение -->
+        <mxCell id="use_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#000000;strokeWidth=1" vertex="1" parent="1">
+          <mxGeometry x="560" y="490" width="220" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="use_title" value="Применение:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="570" y="495" width="100" height="15" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="use_text" value="• Анализ ударных инструментов&#xa;• Детекция переходов&#xa;• Мультимасштабный анализ&#xa;• Сжатие с сохранением деталей" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="570" y="510" width="200" height="55" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

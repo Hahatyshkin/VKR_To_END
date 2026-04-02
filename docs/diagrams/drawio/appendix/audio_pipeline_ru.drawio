@@ -1,0 +1,113 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="audio-pipeline" type="device">
+  <diagram name="Audio-Processing-Pipeline" id="audio-pipeline-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Конвейер обработки аудио" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="250" height="30" as="geometry" />
+        </mxCell>
+        <!-- Input -->
+        <mxCell id="input" value="Вход: Аудиофайл (WAV/MP3)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="80" width="180" height="40" as="geometry" />
+        </mxCell>
+        <!-- Stage 1: Loading -->
+        <mxCell id="stage1" value="1. Загрузка" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="100" y="150" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s1_desc" value="• Чтение файла&#xa;• Определение формата&#xa;• Извлечение метаданных" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="105" y="175" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Stage 2: Decoding -->
+        <mxCell id="stage2" value="2. Декодирование" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="320" y="150" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_desc" value="• Конвертация в PCM&#xa;• Нормализация амплитуды&#xa;• Преобразование каналов" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="325" y="175" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Stage 3: Analysis -->
+        <mxCell id="stage3" value="3. Анализ" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="540" y="150" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_desc" value="• Спектральный анализ&#xa;• Определение характеристик&#xa;• Оценка ёмкости" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="545" y="175" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Stage 4: Processing -->
+        <mxCell id="stage4" value="4. Обработка" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="760" y="150" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s4_desc" value="• Встраивание/извлечение&#xa;• Применение метода&#xa;• Проверка целостности" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="765" y="175" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Stage 5: Encoding -->
+        <mxCell id="stage5" value="5. Кодирование" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="320" y="280" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s5_desc" value="• Обратное преобразование&#xa;• Восстановление формата&#xa;• Генерация выходных данных" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="325" y="305" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Stage 6: Saving -->
+        <mxCell id="stage6" value="6. Сохранение" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="540" y="280" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s6_desc" value="• Запись файла&#xa;• Добавление метаданных&#xa;• Логирование" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="545" y="305" width="170" height="50" as="geometry" />
+        </mxCell>
+        <!-- Output -->
+        <mxCell id="output" value="Выход: Модифицированный файл / Извлечённые данные" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="400" width="320" height="40" as="geometry" />
+        </mxCell>
+        <!-- Arrows -->
+        <mxCell id="arr1" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="190" y="120" as="sourcePoint" />
+            <mxPoint x="190" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr2" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="190" as="sourcePoint" />
+            <mxPoint x="320" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr3" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="190" as="sourcePoint" />
+            <mxPoint x="540" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr4" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="190" as="sourcePoint" />
+            <mxPoint x="760" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr5" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="230" as="sourcePoint" />
+            <mxPoint x="850" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr6" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="260" as="sourcePoint" />
+            <mxPoint x="500" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr7" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="320" as="sourcePoint" />
+            <mxPoint x="540" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr8" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="360" as="sourcePoint" />
+            <mxPoint x="540" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

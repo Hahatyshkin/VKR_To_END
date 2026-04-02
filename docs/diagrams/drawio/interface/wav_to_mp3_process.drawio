@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="wav-to-mp3" type="device">
+  <diagram name="WAV-to-MP3-Conversion" id="wav-to-mp3-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Процесс конвертации WAV в MP3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="250" height="30" as="geometry" />
+        </mxCell>
+        <!-- WAV Input -->
+        <mxCell id="wav" value="WAV файл&#xa;(несжатый PCM)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Steps -->
+        <mxCell id="step1" value="1. Фильтрация&#xa;(Anti-aliasing filter)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="260" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step2" value="2. Субдискретизация&#xa;(Downsampling)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="410" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step3" value="3. Разбиение на кадры&#xa;(Analysis filter bank)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="560" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step4" value="4. MDCT&#xa;(Modified DCT)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="710" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step5" value="5. Психоакустическая&#xa;модель" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="860" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Second row -->
+        <mxCell id="step6" value="6. Квантование&#xa;(Quantization)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="860" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step7" value="7. Кодирование&#xa;Хаффмана" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="710" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step8" value="8. Формирование&#xa;MP3 фреймов" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="560" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step9" value="9. Добавление&#xa;заголовка/метаданных" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="410" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- MP3 Output -->
+        <mxCell id="mp3" value="MP3 файл&#xa;(сжатый)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Arrows first row -->
+        <mxCell id="a1" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="130" as="sourcePoint" />
+            <mxPoint x="260" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a2" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="130" as="sourcePoint" />
+            <mxPoint x="410" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="130" as="sourcePoint" />
+            <mxPoint x="560" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="130" as="sourcePoint" />
+            <mxPoint x="710" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="830" y="130" as="sourcePoint" />
+            <mxPoint x="860" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Arrows second row -->
+        <mxCell id="a6" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="160" as="sourcePoint" />
+            <mxPoint x="920" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="250" as="sourcePoint" />
+            <mxPoint x="830" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a8" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="250" as="sourcePoint" />
+            <mxPoint x="680" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a9" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="250" as="sourcePoint" />
+            <mxPoint x="530" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a10" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="250" as="sourcePoint" />
+            <mxPoint x="380" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Steganography opportunities -->
+        <mxCell id="stego_title" value="Места для встраивания информации:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="340" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="stego1" value="• Scalefactor данных (шаг 6)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="370" width="200" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="stego2" value="• Ancillary данные (шаг 8)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="400" width="200" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="stego3" value="• Padding байты (шаг 9)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="430" width="200" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="stego4" value="• Метаданные ID3 (шаг 9)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="460" width="200" height="25" as="geometry" />
+        </mxCell>
+        <!-- Bitrate info -->
+        <mxCell id="bitrate" value="Типичные битрейты:&#xa;• 128 кбит/с (стандарт)&#xa;• 192 кбит/с (хорошее качество)&#xa;• 320 кбит/с (максимальное качество)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;verticalAlign=top;align=left" vertex="1" parent="1">
+          <mxGeometry x="350" y="370" width="200" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

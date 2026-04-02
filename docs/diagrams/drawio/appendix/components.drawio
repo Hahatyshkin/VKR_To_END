@@ -1,0 +1,125 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="components" type="device">
+  <diagram name="System-Components" id="components-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Компоненты системы AudioAnalyzer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="20" width="300" height="30" as="geometry" />
+        </mxCell>
+        <!-- Core module -->
+        <mxCell id="core" value="Ядро системы" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="100" y="80" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="core_components" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="110" y="110" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="AudioProcessor" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="115" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="StegoEngine" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="145" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="MethodSelector" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="180" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="QualityAnalyzer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="210" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="Optimizer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="260" y="115" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="ConfigManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="260" y="145" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="Logger" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="260" y="180" width="120" height="25" as="geometry" />
+        </mxCell>
+        <!-- Methods module -->
+        <mxCell id="methods" value="Модуль методов" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="450" y="80" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="FFTMethod" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="465" y="115" width="80" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="FWHTMethod" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="555" y="115" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="DCTMethod" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="650" y="115" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="DWTMethod" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="465" y="150" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" value="OLAMethod" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="560" y="150" width="80" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" value="MuLawMethod" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="650" y="150" width="85" height="25" as="geometry" />
+        </mxCell>
+        <!-- Base class -->
+        <mxCell id="base" value="StegoMethod (base)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="530" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <!-- UI module -->
+        <mxCell id="ui" value="Интерфейс пользователя" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="100" y="320" width="300" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ui1" value="MainWindow" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="355" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ui2" value="ConfigDialog" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="210" y="355" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ui3" value="ResultsPanel" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="390" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ui4" value="Visualizer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="210" y="390" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="ui5" value="PlotWidget" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="115" y="425" width="85" height="25" as="geometry" />
+        </mxCell>
+        <!-- Utils module -->
+        <mxCell id="utils" value="Утилиты" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="450" y="320" width="300" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="u1" value="FileHandler" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="465" y="355" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="u2" value="AudioUtils" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="560" y="355" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="u3" value="SignalUtils" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="655" y="355" width="85" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="u4" value="MetricsCalculator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="465" y="390" width="100" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="u5" value="BitManipulator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="575" y="390" width="100" height="25" as="geometry" />
+        </mxCell>
+        <!-- Dependencies -->
+        <mxCell id="dep1" style="endArrow=classic;html=1;dashed=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="180" as="sourcePoint" />
+            <mxPoint x="450" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep2" style="endArrow=classic;html=1;dashed=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="280" as="sourcePoint" />
+            <mxPoint x="250" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dep3" style="endArrow=classic;html=1;dashed=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="280" as="sourcePoint" />
+            <mxPoint x="600" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

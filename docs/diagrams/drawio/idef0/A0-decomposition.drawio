@@ -1,0 +1,140 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="a0-decomp" type="device">
+  <diagram name="IDEF0-A0-Decomposition" id="a0-decomp-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Декомпозиция А0: Система стеганографического скрытия информации" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="500" height="30" as="geometry" />
+        </mxCell>
+        <!-- A1: Input processing -->
+        <mxCell id="A1" value="Загрузка и&#xa;предварительная&#xa;обработка данных" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="80" y="280" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="A1_label" value="А1" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="80" y="260" width="20" height="20" as="geometry" />
+        </mxCell>
+        <!-- A2: Method selection -->
+        <mxCell id="A2" value="Выбор метода&#xa;стеганографии" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="280" y="280" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="A2_label" value="А2" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="20" height="20" as="geometry" />
+        </mxCell>
+        <!-- A3: Embedding/Extraction -->
+        <mxCell id="A3" value="Встраивание/&#xa;извлечение&#xa;информации" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="480" y="280" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="A3_label" value="А3" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="480" y="260" width="20" height="20" as="geometry" />
+        </mxCell>
+        <!-- A4: Output -->
+        <mxCell id="A4" value="Формирование&#xa;выходных данных" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="680" y="280" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="A4_label" value="А4" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="680" y="260" width="20" height="20" as="geometry" />
+        </mxCell>
+        <!-- Input arrows (left) -->
+        <mxCell id="input1" value="Аудиофайл" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="10" y="290" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="input1_arr" style="endArrow=classic;html=1" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="80" y="300" as="sourcePoint" />
+            <mxPoint x="80" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="input2" value="Сообщение" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="10" y="350" width="70" height="20" as="geometry" />
+        </mxCell>
+        <!-- Internal arrows -->
+        <mxCell id="arr1" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="A1" target="A2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr1_label" value="Обработанные данные" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="200" y="240" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="A2" target="A3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2_label" value="Выбранный метод" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="400" y="240" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arr3" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="A3" target="A4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr3_label" value="Результат" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="600" y="240" width="60" height="20" as="geometry" />
+        </mxCell>
+        <!-- Control arrows (top) -->
+        <mxCell id="ctrl1" value="Параметры встраивания" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="480" y="140" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl1_arr" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="545" y="160" as="sourcePoint" />
+            <mxPoint x="545" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ctrl2" value="Ключ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="330" y="140" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl2_arr" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="160" as="sourcePoint" />
+            <mxPoint x="355" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Output arrows (right) -->
+        <mxCell id="out1" value="Модифицированный файл" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="830" y="290" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out1_arr" style="endArrow=classic;html=1;exitX=1;exitY=0.3;entryX=0;entryY=0.5" edge="1" parent="1" source="A4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="820" y="310" as="sourcePoint" />
+            <mxPoint x="830" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="out2" value="Извлечённое сообщение" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="830" y="350" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out2_arr" style="endArrow=classic;html=1;exitX=1;exitY=0.7;entryX=0;entryY=0.5" edge="1" parent="1" source="A4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="820" y="350" as="sourcePoint" />
+            <mxPoint x="830" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Mechanism arrows (bottom) -->
+        <mxCell id="mech1" value="Модуль обработки" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="100" y="420" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mech1_arr" style="endArrow=classic;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="420" as="sourcePoint" />
+            <mxPoint x="150" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech2" value="Модуль методов" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="510" y="420" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mech2_arr" style="endArrow=classic;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="555" y="420" as="sourcePoint" />
+            <mxPoint x="555" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech3" value="Интерфейс пользователя" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="700" y="420" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mech3_arr" style="endArrow=classic;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="755" y="420" as="sourcePoint" />
+            <mxPoint x="755" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

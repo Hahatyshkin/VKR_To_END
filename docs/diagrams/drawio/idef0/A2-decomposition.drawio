@@ -1,0 +1,101 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="a2-decomp" type="device">
+  <diagram name="IDEF0-A2-Decomposition" id="a2-decomp-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Декомпозиция А2: Выбор метода стеганографии" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="350" height="30" as="geometry" />
+        </mxCell>
+        <!-- A21: Analyze requirements -->
+        <mxCell id="A21" value="Анализ требований к встраиванию" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="120" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A21_label" value="А21" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="120" y="260" width="25" height="20" as="geometry" />
+        </mxCell>
+        <!-- A22: Method selection -->
+        <mxCell id="A22" value="Выбор оптимального метода" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="360" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A22_label" value="А22" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="360" y="260" width="25" height="20" as="geometry" />
+        </mxCell>
+        <!-- A23: Configure parameters -->
+        <mxCell id="A23" value="Настройка параметров метода" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalAlign=middle" vertex="1" parent="1">
+          <mxGeometry x="600" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A23_label" value="А23" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="600" y="260" width="25" height="20" as="geometry" />
+        </mxCell>
+        <!-- Input arrows -->
+        <mxCell id="input1" value="Аудиофайл" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="input1_arr" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" target="A21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="310" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Internal arrows -->
+        <mxCell id="arr1" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="A21" target="A22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr1_label" value="Требования" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="285" y="240" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="A22" target="A23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2_label" value="Метод" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="525" y="240" width="50" height="20" as="geometry" />
+        </mxCell>
+        <!-- Control arrows -->
+        <mxCell id="ctrl1" value="Требования к скрытности" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="130" y="160" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl1_arr" style="endArrow=classic;html=1;entryX=0.5;entryY=0" edge="1" parent="1" target="A21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="180" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ctrl2" value="Доступные методы" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="380" y="160" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl2_arr" style="endArrow=classic;html=1;entryX=0.5;entryY=0" edge="1" parent="1" target="A22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="180" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Output arrows -->
+        <mxCell id="out1" value="Настроенный метод" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="780" y="300" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="out1_arr" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="A23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="770" y="310" as="sourcePoint" />
+            <mxPoint x="780" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Mechanism arrows -->
+        <mxCell id="mech1" value="Модуль анализа" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="155" y="400" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mech1_arr" style="endArrow=classic;html=1;entryX=0.5;entryY=1" edge="1" parent="1" target="A21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="400" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech2" value="База методов" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="395" y="400" width="85" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mech2_arr" style="endArrow=classic;html=1;entryX=0.5;entryY=1" edge="1" parent="1" target="A22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="400" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

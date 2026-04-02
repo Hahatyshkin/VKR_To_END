@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="wav-structure" type="device">
+  <diagram name="WAV-File-Structure" id="wav-structure-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Структура WAV файла" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="200" height="30" as="geometry" />
+        </mxCell>
+        <!-- RIFF Header -->
+        <mxCell id="riff" value="RIFF Header (12 байт)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="70" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="riff_id" value="ChunkID&#xa;&quot;RIFF&quot;&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="200" y="110" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="riff_size" value="ChunkSize&#xa;Размер файла - 8&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="350" y="110" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="riff_fmt" value="Format&#xa;&quot;WAVE&quot;&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="500" y="110" width="150" height="50" as="geometry" />
+        </mxCell>
+        <!-- fmt chunk -->
+        <mxCell id="fmt" value="fmt Chunk (24+ байт)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="180" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_id" value="Subchunk1ID&#xa;&quot;fmt &quot;&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="200" y="220" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_size" value="Subchunk1Size&#xa;16&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="300" y="220" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_audio" value="AudioFormat&#xa;1 = PCM&#xa;2 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="400" y="220" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_chan" value="NumChannels&#xa;1=Моно, 2=Стерео&#xa;2 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="500" y="220" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_rate" value="SampleRate&#xa;44100&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="600" y="220" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_brate" value="ByteRate&#xa;SampleRate*Channels*BPS/8&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="200" y="270" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_align" value="BlockAlign&#xa;Channels*BPS/8&#xa;2 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="320" y="270" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fmt_bps" value="BitsPerSample&#xa;8, 16, 24&#xa;2 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="420" y="270" width="100" height="50" as="geometry" />
+        </mxCell>
+        <!-- data chunk -->
+        <mxCell id="data" value="data Chunk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="340" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="data_id" value="Subchunk2ID&#xa;&quot;data&quot;&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="200" y="380" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="data_size" value="Subchunk2Size&#xa;NumSamples * NumChannels * BitsPerSample/8&#xa;4 байта" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="350" y="380" width="200" height="50" as="geometry" />
+        </mxCell>
+        <!-- Audio data -->
+        <mxCell id="audio_data" value="Аудиоданные (Sound Data)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="450" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="audio_desc" value="Sample 1 (Channel 1) | Sample 1 (Channel 2) | Sample 2 (Channel 1) | Sample 2 (Channel 2) | ..." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="200" y="490" width="600" height="30" as="geometry" />
+        </mxCell>
+        <!-- Annotation -->
+        <mxCell id="note" value="Место для встраивания информации&#xa;(LSB стеганография)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="550" y="530" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="note_arrow" style="endArrow=classic;html=1;dashed=1" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="550" y="550" as="sourcePoint" />
+            <mxPoint x="500" y="505" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

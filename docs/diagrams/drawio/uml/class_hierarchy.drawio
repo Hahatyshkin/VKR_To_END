@@ -1,0 +1,113 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="class-hierarchy" type="device">
+  <diagram name="Class-Hierarchy" id="class-hierarchy-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Диаграмма классов системы" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="250" height="30" as="geometry" />
+        </mxCell>
+        <!-- Base class -->
+        <mxCell id="base_class" value="&lt;b&gt;StegoMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#6c8ebf;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="420" y="70" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="base_attrs" value="- name: str&#xa;- params: dict" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="base_class">
+          <mxGeometry y="26" width="180" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="base_methods" value="+ embed(audio, msg): Audio&#xa;+ extract(audio): str&#xa;+ analyze(audio): dict" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="base_class">
+          <mxGeometry y="60" width="180" height="40" as="geometry" />
+        </mxCell>
+        <!-- FFT class -->
+        <mxCell id="fft_class" value="&lt;b&gt;FFTMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#d5e8d4;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#82b366;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fft_attrs" value="- n_fft: int&#xa;- overlap: float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="fft_class">
+          <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fft_methods" value="+ embed(): Audio&#xa;+ extract(): str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="fft_class">
+          <mxGeometry y="56" width="160" height="34" as="geometry" />
+        </mxCell>
+        <!-- FWHT class -->
+        <mxCell id="fwht_class" value="&lt;b&gt;FWHTMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#d5e8d4;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#82b366;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="270" y="250" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fwht_attrs" value="- seq_length: int&#xa;- walsh_order: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="fwht_class">
+          <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fwht_methods" value="+ embed(): Audio&#xa;+ extract(): str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="fwht_class">
+          <mxGeometry y="56" width="160" height="34" as="geometry" />
+        </mxCell>
+        <!-- DCT class -->
+        <mxCell id="dct_class" value="&lt;b&gt;DCTMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#d6b656;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="460" y="250" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dct_attrs" value="- block_size: int&#xa;- coeffs: list" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="dct_class">
+          <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dct_methods" value="+ embed(): Audio&#xa;+ extract(): str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="dct_class">
+          <mxGeometry y="56" width="160" height="34" as="geometry" />
+        </mxCell>
+        <!-- DWT class -->
+        <mxCell id="dwt_class" value="&lt;b&gt;DWTMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#d6b656;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="650" y="250" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dwt_attrs" value="- wavelet: str&#xa;- levels: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="dwt_class">
+          <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dwt_methods" value="+ embed(): Audio&#xa;+ extract(): str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="dwt_class">
+          <mxGeometry y="56" width="160" height="34" as="geometry" />
+        </mxCell>
+        <!-- OLA class -->
+        <mxCell id="ola_class" value="&lt;b&gt;OLAMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#f8cecc;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#b85450;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="270" y="400" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ola_attrs" value="- frame_size: int&#xa;- hop_size: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="ola_class">
+          <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ola_methods" value="+ embed(): Audio&#xa;+ extract(): str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="ola_class">
+          <mxGeometry y="56" width="160" height="34" as="geometry" />
+        </mxCell>
+        <!-- MuLaw class -->
+        <mxCell id="mulaw_class" value="&lt;b&gt;MuLawMethod&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#f8cecc;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;strokeColor=#b85450;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="460" y="400" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="mulaw_attrs" value="- mu: float&#xa;- bits: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="mulaw_class">
+          <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mulaw_methods" value="+ embed(): Audio&#xa;+ extract(): str" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10" vertex="1" parent="mulaw_class">
+          <mxGeometry y="56" width="160" height="34" as="geometry" />
+        </mxCell>
+        <!-- Inheritance arrows -->
+        <mxCell id="inh1" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;entryX=0.25;entryY=1" edge="1" parent="1" source="fft_class" target="base_class">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inh2" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;entryX=0.4;entryY=1" edge="1" parent="1" source="fwht_class" target="base_class">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inh3" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1" source="dct_class" target="base_class">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inh4" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;entryX=0.6;entryY=1" edge="1" parent="1" source="dwt_class" target="base_class">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inh5" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;entryX=0.35;entryY=1" edge="1" parent="1" source="ola_class" target="base_class">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="210" />
+              <mxPoint x="483" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inh6" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;entryX=0.65;entryY=1" edge="1" parent="1" source="mulaw_class" target="base_class">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="210" />
+              <mxPoint x="537" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,87 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="mp3-frame" type="device">
+  <diagram name="MP3-Frame-Structure" id="mp3-frame-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Структура MP3 фрейма" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="200" height="30" as="geometry" />
+        </mxCell>
+        <!-- Main frame -->
+        <mxCell id="frame" value="MP3 Frame (обычно 1152 сэмпла)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="150" y="70" width="700" height="40" as="geometry" />
+        </mxCell>
+        <!-- Header -->
+        <mxCell id="header" value="Header (4 байта)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="150" y="120" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="Sync&#xa;FF" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="150" y="180" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="MPEG&#xa;Version" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="200" y="180" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="Layer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="150" y="210" width="33" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" value="Bitrate" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="183" y="210" width="33" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h5" value="Sample&#xa;Rate" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=8" vertex="1" parent="1">
+          <mxGeometry x="216" y="210" width="34" height="25" as="geometry" />
+        </mxCell>
+        <!-- CRC -->
+        <mxCell id="crc" value="CRC&#xa;(2 байта, опционально)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="250" y="120" width="80" height="60" as="geometry" />
+        </mxCell>
+        <!-- Side Info -->
+        <mxCell id="side" value="Side Info&#xa;(17-32 байта)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="330" y="120" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="side_desc" value="Информация о масштабных&#xa;факторах и данных Хаффмана" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="320" y="180" width="120" height="30" as="geometry" />
+        </mxCell>
+        <!-- Main Data -->
+        <mxCell id="main" value="Main Data (аудиоданные)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="430" y="120" width="320" height="60" as="geometry" />
+        </mxCell>
+        <!-- Main data components -->
+        <mxCell id="scale" value="Scalefactors&#xa;(масштабные&#xa;факторы)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="180" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="huff" value="Huffman&#xa;Encoded&#xa;Data" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="530" y="180" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="anc" value="Ancillary&#xa;Data&#xa;(доп. данные)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="630" y="180" width="100" height="50" as="geometry" />
+        </mxCell>
+        <!-- Padding -->
+        <mxCell id="pad" value="Padding&#xa;(выравнивание)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="750" y="120" width="100" height="60" as="geometry" />
+        </mxCell>
+        <!-- Bit reservoir explanation -->
+        <mxCell id="reservoir" value="Bit Reservoir: данные могут быть распределены между фреймами" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="330" y="250" width="320" height="30" as="geometry" />
+        </mxCell>
+        <!-- Steganography annotation -->
+        <mxCell id="stego_note" value="Места для встраивания:&#xa;• Scalefactors&#xa;• Ancillary Data&#xa;• Padding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="550" y="300" width="140" height="80" as="geometry" />
+        </mxCell>
+        <!-- Layer structure -->
+        <mxCell id="layer_title" value="MPEG Audio Layer III" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="400" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1" value="Layer I: 384 сэмпла/фрейм" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="250" y="440" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2" value="Layer II: 1152 сэмпла/фрейм" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="450" y="440" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3" value="Layer III: 1152 сэмпла/фрейм (MP3)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="480" width="220" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

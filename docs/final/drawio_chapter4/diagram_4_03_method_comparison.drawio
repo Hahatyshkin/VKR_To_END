@@ -1,0 +1,81 @@
+<mxfile host="app.diagrams.net" modified="2026-04-06T12:00:00.000Z" agent="Super Z" version="1.0">
+  <diagram name="Method Comparison" id="method-comp">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Сравнительный анализ методов обработки аудио: позиция FWHT" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="500" height="30" as="geometry" />
+        </mxCell>
+        <!-- FWHT Central -->
+        <mxCell id="fwht" value="FWHT MP3&#xa;SNR: 13.59 дБ&#xa;SI-SDR: 14.06 дБ&#xa;LSD: 24.57 дБ&#xa;Время: 1.53 с" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="350" y="150" width="200" height="120" as="geometry" />
+        </mxCell>
+        <!-- Superior Methods -->
+        <mxCell id="sup_header" value="Методы с ЛУЧШИМ качеством" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#006600;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="200" height="20" as="geometry" />
+        </mxCell>
+        <!-- MP3 Standard -->
+        <mxCell id="mp3" value="Стандартный MP3&#xa;SNR: 29.15 дБ (+15.56)&#xa;SI-SDR: 39.55 дБ (+25.49)&#xa;LSD: 5.98 дБ (−18.59)&#xa;Время: 0.91 с (−0.62)&#xa;✓ ЛУЧШИЙ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- Huffman -->
+        <mxCell id="huffman" value="Хаффман MP3&#xa;SNR: 27.87 дБ (+14.29)&#xa;SI-SDR: 27.87 дБ (+13.81)&#xa;LSD: 14.05 дБ (−10.52)&#xa;Время: 0.76 с (−0.77)&#xa;✓ Лучше" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- Rosenbrock -->
+        <mxCell id="rosen" value="Розенброк MP3&#xa;SNR: 14.65 дБ (+1.06)&#xa;SI-SDR: 21.17 дБ (+7.11)&#xa;LSD: 6.77 дБ (−17.80)&#xa;Время: 0.60 с (−0.93)&#xa;✓ Лучше" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- Comparable Methods -->
+        <mxCell id="comp_header" value="СОПОСТАВИМЫЙ метод" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#996600;" vertex="1" parent="1">
+          <mxGeometry x="650" y="70" width="180" height="20" as="geometry" />
+        </mxCell>
+        <!-- FFT -->
+        <mxCell id="fft" value="FFT MP3&#xa;SNR: 12.75 дБ (−0.84)&#xa;SI-SDR: 14.76 дБ (+0.70)&#xa;LSD: 32.22 дБ (+7.65)&#xa;Время: 0.90 с (−0.62)&#xa;≈ Сопоставим" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="650" y="100" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- Inferior Methods -->
+        <mxCell id="inf_header" value="Методы с ХУДШИМ качеством" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#990000;" vertex="1" parent="1">
+          <mxGeometry x="650" y="220" width="180" height="20" as="geometry" />
+        </mxCell>
+        <!-- DWT -->
+        <mxCell id="dwt" value="DWT MP3&#xa;SNR: 0.02 дБ (−13.57)&#xa;SI-SDR: −29.28 дБ (−43.34)&#xa;LSD: 28.48 дБ (+3.91)&#xa;Время: 1.65 с (+0.12)&#xa;✗ Хуже" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="650" y="250" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- DCT -->
+        <mxCell id="dct" value="DCT MP3&#xa;SNR: 0.01 дБ (−13.58)&#xa;SI-SDR: 13.65 дБ (−0.41)&#xa;LSD: 39.88 дБ (+15.31)&#xa;Время: 1.47 с (−0.06)&#xa;✗ Хуже" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="650" y="370" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- Comparison arrows -->
+        <mxCell id="arr1" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#006600;" edge="1" parent="1" source="mp3" target="fwht">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#006600;" edge="1" parent="1" source="huffman" target="fwht">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr3" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#006600;" edge="1" parent="1" source="rosen" target="fwht">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr4" value="" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeWidth=2;strokeColor=#996600;" edge="1" parent="1" source="fft" target="fwht">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr5" value="" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeWidth=2;strokeColor=#990000;" edge="1" parent="1" source="dwt" target="fwht">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr6" value="" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeWidth=2;strokeColor=#990000;" edge="1" parent="1" source="dct" target="fwht">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Summary Box -->
+        <mxCell id="summary" value="ВЫВОДЫ ПО FWHT:&#xa;&#xa;✓ Превосходит DCT и DWT по всем метрикам&#xa;✓ Близок к FFT по качеству, но медленнее (1.53 с vs 0.90 с)&#xa;✗ Уступает MP3, Хаффман и Розенброк по качеству SNR на 1-16 дБ&#xa;✗ Медленнее большинства методов (только DWT медленнее)&#xa;&#xa;НИШИ ПРИМЕНЕНИЯ FWHT:&#xa;• Стеганография (скрытие данных в аудио)&#xa;• Аппаратная реализация на FPGA (нет умножителей)&#xa;• Предобработка для ML на edge-устройствах" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="470" width="790" height="160" as="geometry" />
+        </mxCell>
+        <!-- Legend -->
+        <mxCell id="legend" value="Легенда:&#xa;🟢 Лучше FWHT&#xa;🟡 Сопоставим&#xa;🔴 Хуже FWHT" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;rounded=1;fontSize=10;align=left;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="350" y="320" width="100" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

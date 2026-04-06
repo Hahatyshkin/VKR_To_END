@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" modified="2026-04-06T12:00:00.000Z" agent="Super Z" version="1.0">
+  <diagram name="FPGA Architecture" id="fpga-arch">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title" value="Архитектура аппаратной реализации FWHT на FPGA" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="400" height="30" as="geometry" />
+        </mxCell>
+        <!-- Input Buffer -->
+        <mxCell id="input" value="Входной буфер&#xa;(BRAM)&#xa;N отсчётов" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="120" height="70" as="geometry" />
+        </mxCell>
+        <!-- Stage 1 -->
+        <mxCell id="stage1" value="Стадия 1&#xa;(Бабочка)&#xa;N/2 операций&#xa;только + и −" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="120" height="70" as="geometry" />
+        </mxCell>
+        <!-- Stage 2 -->
+        <mxCell id="stage2" value="Стадия 2&#xa;(Бабочка)&#xa;N/4 операций&#xa;только + и −" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="360" y="80" width="120" height="70" as="geometry" />
+        </mxCell>
+        <!-- Stage N -->
+        <mxCell id="stageN" value="Стадия log₂N&#xa;(Бабочка)&#xa;1 операция&#xa;только + и −" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="80" width="120" height="70" as="geometry" />
+        </mxCell>
+        <!-- Output Buffer -->
+        <mxCell id="output" value="Выходной буфер&#xa;(BRAM)&#xa;N коэффициентов" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="680" y="80" width="120" height="70" as="geometry" />
+        </mxCell>
+        <!-- Arrows -->
+        <mxCell id="a1" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="1" source="input" target="stage1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="1" source="stage1" target="stage2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="..." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="100" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="1" source="stageN" target="output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Control Unit -->
+        <mxCell id="control" value="Блок управления&#xa;(FSM)&#xa;Генерация адресов&#xa;Управление стадиями" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="200" width="200" height="70" as="geometry" />
+        </mxCell>
+        <!-- Control arrows -->
+        <mxCell id="c1" value="" style="endArrow=classic;html=1;exitX=0.25;exitY=0;entryX=0.5;entryY=1;dashed=1;strokeWidth=1;" edge="1" parent="1" source="control" target="stage1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;dashed=1;strokeWidth=1;" edge="1" parent="1" source="control" target="stage2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=0;entryX=0.5;entryY=1;dashed=1;strokeWidth=1;" edge="1" parent="1" source="control" target="stageN">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Advantages Box -->
+        <mxCell id="adv" value="Преимущества FWHT на FPGA:&#xa;• Только сложение и вычитание (нет умножителей)&#xa;• В 3-5 раз меньше логических элементов чем FFT&#xa;• Время выполнения: N·log₂N тактов&#xa;• Подходит для IoT и носимых устройств" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="320" height="100" as="geometry" />
+        </mxCell>
+        <!-- Comparison Box -->
+        <mxCell id="comp" value="Сравнение ресурсов FPGA:&#xa;┌────────────────┬─────────┬─────────┐&#xa;│    Ресурс      │   FFT   │  FWHT   │&#xa;├────────────────┼─────────┼─────────┤&#xa;│ Умножители     │  N·log₂N│    0    │&#xa;│ LUT (логика)   │   Высок.│  Низк.  │&#xa;│ Потребление    │   Высок.│  Низк.  │&#xa;│ Задержка       │ Средняя │ Низкая  │&#xa;└────────────────┴─────────┴─────────┘" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;rounded=1;fontSize=9;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;fontFamily=monospace;" vertex="1" parent="1">
+          <mxGeometry x="400" y="300" width="280" height="140" as="geometry" />
+        </mxCell>
+        <!-- Application domains -->
+        <mxCell id="apps" value="Области применения:&#xa;• Стеганография аудиосигналов&#xa;• Предобработка для ML на edge-устройствах&#xa;• Сжатие в системах IoT&#xa;• Низкоэнергетические аудиосистемы" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="230" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

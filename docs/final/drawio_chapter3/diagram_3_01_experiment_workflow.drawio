@@ -1,0 +1,119 @@
+<mxfile host="app.diagrams.net" modified="2026-04-06T12:00:00.000Z" agent="Super Z" version="21.0.0" type="device">
+  <diagram name="Процесс эксперимента" id="exp-workflow">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Start -->
+        <mxCell id="start" value="Начало эксперимента" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="450" y="20" width="160" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Stage 1: Data Preparation -->
+        <mxCell id="stage1" value="1. Подготовка данных&#xa;&#xa;• Загрузка аудиофайлов (560 шт.)&#xa;• Разделение по жанрам (16 категорий)&#xa;• Нормализация амплитуды" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=10" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="260" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrow 1 -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6c8ebf" edge="1" parent="1" source="start" target="stage1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Stage 2: Parameter Setup -->
+        <mxCell id="stage2" value="2. Настройка параметров&#xa;&#xa;• Частота дискретизации: 44100 Гц&#xa;• Размер блока: 2048 отсчётов&#xa;• Перекрытие: 50%&#xa;• Окно Хэннинга" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=10" vertex="1" parent="1">
+          <mxGeometry x="400" y="230" width="260" height="110" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrow 2 -->
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#d6b656" edge="1" parent="1" source="stage1" target="stage2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Stage 3: Processing Methods -->
+        <mxCell id="stage3_header" value="3. Применение методов обработки" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="370" width="660" height="30" as="geometry"/>
+        </mxCell>
+        
+        <!-- Method boxes -->
+        <mxCell id="method1" value="Стандартный&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="210" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="method2" value="FWHT&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="300" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="method3" value="FFT&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="390" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="method4" value="DCT&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="480" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="method5" value="DWT&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="570" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="method6" value="μ-law&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="660" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="method7" value="Rosenbrock&#xa;MP3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="750" y="410" width="80" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrow 3 -->
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#b85450" edge="1" parent="1" source="stage2" target="stage3_header">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Stage 4: Metrics Calculation -->
+        <mxCell id="stage4" value="4. Расчёт метрик качества&#xa;&#xa;• Временные: SNR, RMSE, SI-SDR&#xa;• Спектральные: LSD, Spectral Conv.&#xa;• Психоакустические: STOI, PESQ, MOS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=left;spacingLeft=10" vertex="1" parent="1">
+          <mxGeometry x="400" y="490" width="260" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrow 4 -->
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#9673a6" edge="1" parent="1" source="stage3_header" target="stage4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Stage 5: Statistical Analysis -->
+        <mxCell id="stage5" value="5. Статистический анализ&#xa;&#xa;• Среднее значение&#xa;• Стандартное отклонение&#xa;• Доверительные интервалы (95%)&#xa;• Корреляционный анализ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;spacingLeft=10" vertex="1" parent="1">
+          <mxGeometry x="400" y="620" width="260" height="110" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrow 5 -->
+        <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#82b366" edge="1" parent="1" source="stage4" target="stage5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- End -->
+        <mxCell id="end" value="Формирование выводов&#xa;и рекомендаций" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="435" y="760" width="190" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrow 6 -->
+        <mxCell id="arrow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#b85450" edge="1" parent="1" source="stage5" target="end">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend_title" value="Легенда:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend1" value="Подготовка данных" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="20" y="45" width="100" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend2" value="Параметры" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="20" y="75" width="100" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend3" value="Обработка" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="20" y="105" width="100" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend4" value="Метрики" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="20" y="135" width="100" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend5" value="Анализ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="20" y="165" width="100" height="25" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

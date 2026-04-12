@@ -1,0 +1,208 @@
+<mxfile host="app.diagrams.net" modified="2025-01-01T00:00:00.000Z" agent="IDEF0" version="24.0.0" type="device">
+  <diagram id="idef0_A22_decomposition" name="A22 Декомпозиция — FWHT метод">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="IDEF0 — Декомпозиция A22: БПУХ (FWHT) — Быстрое преобразование Уолша-Адамара" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="1000" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A221: Баттерфляй-схема FWHT ===== -->
+        <mxCell id="A221" value="&lt;b&gt;A221&lt;/b&gt;&lt;br&gt;Баттерфляй-схема&lt;br&gt;прямого FWHT&lt;br&gt;&lt;i&gt;log₂(N) стадий&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A222: Пороговая обработка коэффициентов Уолша ===== -->
+        <mxCell id="A222" value="&lt;b&gt;A222&lt;/b&gt;&lt;br&gt;Пороговая обработка&lt;br&gt;коэффициентов Уолша&lt;br&gt;&lt;i&gt;Soft/Hard thresholding&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="430" y="320" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A223: Обратное FWHT ===== -->
+        <mxCell id="A223" value="&lt;b&gt;A223&lt;/b&gt;&lt;br&gt;Обратное FWHT&lt;br&gt;(FWHT⁻¹ = FWHT / N)&lt;br&gt;&lt;i&gt;Инверсия баттерфляй-схемы&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="740" y="320" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A224: Overlap-Add и нормализация ===== -->
+        <mxCell id="A224" value="&lt;b&gt;A224&lt;/b&gt;&lt;br&gt;Overlap-Add и&lt;br&gt;нормализация" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="320" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Internal Flows ===== -->
+        <!-- A221 → A222: Коэффициенты Уолша-Адамара -->
+        <mxCell id="f221_222" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A221" target="A222">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f221_222_lbl" value="Коэффициенты Уолша-Адамара&#xa;(N значений)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="290" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- A222 → A223: Модифицированные коэффициенты -->
+        <mxCell id="f222_223" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A222" target="A223">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f222_223_lbl" value="Модифицированные&#xa;коэффициенты" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="635" y="290" width="130" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- A223 → A224: Временной сигнал фрагмента -->
+        <mxCell id="f223_224" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="A223" target="A224">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f223_224_lbl" value="Обработанные&#xa;фрагменты сигнала" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=bottom;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;" vertex="1" parent="1">
+          <mxGeometry x="950" y="290" width="120" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Feedback loop: A224 → A221 (overlap-add feeds next window) -->
+        <mxCell id="feedback" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;dashed=1;dashPattern=8 4;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="A224" target="A221">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="530"/>
+              <mxPoint x="1180" y="570"/>
+              <mxPoint x="180" y="570"/>
+              <mxPoint x="180" y="530"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="feedback_lbl" value="Следующий фрагмент (Overlap-Add цикл)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="500" y="555" width="250" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== EXTERNAL INPUT (left) ===== -->
+        <mxCell id="ext_in_lbl" value="Аудиофрагмент&#xa;(N отсчётов, N=2ᵏ)" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="5" y="325" width="110" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_in" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="356" as="sourcePoint"/>
+            <mxPoint x="120" y="356" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== EXTERNAL OUTPUT (right) ===== -->
+        <mxCell id="ext_out" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1250" y="380" as="sourcePoint"/>
+            <mxPoint x="1340" y="380" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ext_out_lbl" value="FWHT-обработанные&#xa;аудиоданные" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1345" y="355" width="140" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== CONTROLS (top boundary) ===== -->
+        <!-- Порог → A222 -->
+        <mxCell id="ctrl_thresh_lbl" value="Порог (threshold)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="370" y="190" width="140" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_thresh" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="215" as="sourcePoint"/>
+            <mxPoint x="530" y="320" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Размер окна N (степень 2) → A221 -->
+        <mxCell id="ctrl_n_lbl" value="Размер окна N = 2ᵏ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="70" y="190" width="150" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_n" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="145" y="215" as="sourcePoint"/>
+            <mxPoint x="220" y="320" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Тип порога (soft/hard) → A222 -->
+        <mxCell id="ctrl_type_lbl" value="Тип порога (soft/hard)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="555" y="190" width="150" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_type" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="215" as="sourcePoint"/>
+            <mxPoint x="530" y="320" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Порядок (sequency/natural) → A221 -->
+        <mxCell id="ctrl_order_lbl" value="Порядок (sequency)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="740" y="190" width="150" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_order" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="815" y="215" as="sourcePoint"/>
+            <mxPoint x="220" y="320" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Шаг перекрытия → A224 -->
+        <mxCell id="ctrl_hop_lbl" value="Шаг перекрытия (hop)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="190" width="170" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_hop" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1105" y="215" as="sourcePoint"/>
+            <mxPoint x="1150" y="320" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== MECHANISMS (bottom boundary) ===== -->
+        <mxCell id="mech_line" value="" style="strokeColor=#000000;endArrow=none;fontFamily=Times New Roman;fontSize=9;dashed=1;dashPattern=5 5;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="630" as="sourcePoint"/>
+            <mxPoint x="1240" y="630" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="mech_fwht_lbl" value="fwht() — реализация" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="130" y="645" width="150" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="mech_numpy_lbl" value="NumPy (add, subtract)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="480" y="645" width="170" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="mech_norm_lbl" value="numpy (multiply, divide)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="830" y="645" width="200" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Mechanism arrows UP -->
+        <mxCell id="mech_up221" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.3;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="630" as="sourcePoint"/>
+            <mxPoint x="180" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech_up222" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="630" as="sourcePoint"/>
+            <mxPoint x="530" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech_up223" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="630" as="sourcePoint"/>
+            <mxPoint x="840" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech_up224" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150" y="630" as="sourcePoint"/>
+            <mxPoint x="1150" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== Annotation: FWHT property ===== -->
+        <mxCell id="note" value="&lt;i&gt;Примечание: FWHT является обратным самому себе с нормировкой на N:&lt;br&gt;FWHT⁻¹(X) = FWHT(X) / N&lt;br&gt;Все вычисления выполняются в вещественной арифметике&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFCC;strokeColor=#CCCCCC;fontFamily=Times New Roman;fontSize=9;align=left;verticalAlign=top;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="720" width="400" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Annotation: Butterfly diagram reference -->
+        <mxCell id="note2" value="&lt;i&gt;Баттерфляй-схема FWHT: на каждой из log₂(N) стадий&lt;br&gt;попарно складываются/вычитаются элементы вектора&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFCC;strokeColor=#CCCCCC;fontFamily=Times New Roman;fontSize=9;align=left;verticalAlign=top;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="720" width="400" height="70" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

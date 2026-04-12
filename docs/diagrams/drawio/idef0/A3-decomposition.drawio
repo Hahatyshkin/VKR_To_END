@@ -1,0 +1,246 @@
+<mxfile host="app.diagrams.net" modified="2025-01-01T00:00:00.000Z" agent="IDEF0" version="24.0.0" type="device">
+  <diagram id="idef0_A3_decomposition" name="A3 Декомпозиция — Метрики качества">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="IDEF0 — Декомпозиция A3: Вычисление метрик качества" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="800" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A31: Метрики временной области ===== -->
+        <mxCell id="A31" value="&lt;b&gt;A31&lt;/b&gt;&lt;br&gt;Метрики временной&#xa;области&lt;br&gt;&lt;i&gt;SNR, SI-SDR&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="180" y="310" width="220" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A32: Метрики спектральной области ===== -->
+        <mxCell id="A32" value="&lt;b&gt;A32&lt;/b&gt;&lt;br&gt;Метрики спектральной&#xa;области&lt;br&gt;&lt;i&gt;LSD, Log-Spectral Distance&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="580" y="310" width="220" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A33: Психоакустические метрики ===== -->
+        <mxCell id="A33" value="&lt;b&gt;A33&lt;/b&gt;&lt;br&gt;Психоакустические&#xa;метрики&lt;br&gt;&lt;i&gt;PESQ, ODG&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="980" y="310" width="220" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== Block A34: Метрики производительности ===== -->
+        <mxCell id="A34" value="&lt;b&gt;A34&lt;/b&gt;&lt;br&gt;Метрики&#xa;производительности&lt;br&gt;&lt;i&gt;Время обработки, RAM&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;align=center;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="580" y="580" width="220" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== EXTERNAL INPUT (left) — fork to all blocks ===== -->
+        <mxCell id="ext_in_lbl" value="Обработанные&#xa;аудиоданные&#xa;(6 методов)" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="10" y="430" width="110" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Input fork vertical line -->
+        <mxCell id="in_fork_v" value="" style="strokeColor=#000000;endArrow=none;fontFamily=Times New Roman;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="340" as="sourcePoint"/>
+            <mxPoint x="140" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Input arrows to blocks -->
+        <mxCell id="in_A31" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="346" as="sourcePoint"/>
+            <mxPoint x="180" y="346" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="in_A32" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="346" as="sourcePoint"/>
+            <mxPoint x="580" y="346" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="in_A33" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="346" as="sourcePoint"/>
+            <mxPoint x="980" y="346" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="in_A34" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="616" as="sourcePoint"/>
+            <mxPoint x="580" y="616" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Input label annotations -->
+        <mxCell id="in_lbl_r1" value="Обработанный сигнал ↔ Эталонный сигнал" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="275" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== EXTERNAL OUTPUT (right) — join from all blocks ===== -->
+        <mxCell id="ext_out_lbl" value="Значения метрик&#xa;качества и&#xa;производительности" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="380" width="150" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Output join vertical line -->
+        <mxCell id="out_join_v" value="" style="strokeColor=#000000;endArrow=none;fontFamily=Times New Roman;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1280" y="340" as="sourcePoint"/>
+            <mxPoint x="1280" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Output arrows from blocks -->
+        <mxCell id="out_A31" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.3;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="346" as="sourcePoint"/>
+            <mxPoint x="1280" y="346" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="out_A32" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.3;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="346" as="sourcePoint"/>
+            <mxPoint x="1280" y="346" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="out_A33" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.3;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1200" y="346" as="sourcePoint"/>
+            <mxPoint x="1280" y="346" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="out_A34" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;exitX=1;exitY=0.3;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="616" as="sourcePoint"/>
+            <mxPoint x="1280" y="616" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Output label annotations -->
+        <mxCell id="out_lbl_31" value="SNR(dB), SI-SDR(dB)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="260" width="150" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="out_lbl_32" value="LSD(dB)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="810" y="260" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="out_lbl_33" value="PESQ(1–5), ODG(−4…0)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="260" width="150" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="out_lbl_34" value="t (мс), RAM (МБ)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="830" y="560" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== CONTROLS (top boundary) ===== -->
+        <!-- Control dashed line -->
+        <mxCell id="ctrl_line" value="" style="strokeColor=#000000;endArrow=none;fontFamily=Times New Roman;fontSize=9;dashed=1;dashPattern=5 5;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="240" as="sourcePoint"/>
+            <mxPoint x="1180" y="240" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="ctrl_form_lbl" value="Формулы метрик" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="250" y="170" width="130" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_form" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="315" y="195" as="sourcePoint"/>
+            <mxPoint x="315" y="240" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="ctrl_ref_lbl" value="Эталонные сигналы" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="650" y="170" width="140" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_ref" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="195" as="sourcePoint"/>
+            <mxPoint x="720" y="240" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="ctrl_pesq_lbl" value="Режим PESQ (WB/NB)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=4;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="170" width="160" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctrl_pesq" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="195" as="sourcePoint"/>
+            <mxPoint x="1090" y="240" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Vertical control taps -->
+        <mxCell id="ctrl_tap31" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="240" as="sourcePoint"/>
+            <mxPoint x="290" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ctrl_tap32" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="240" as="sourcePoint"/>
+            <mxPoint x="690" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ctrl_tap33" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="240" as="sourcePoint"/>
+            <mxPoint x="1090" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ctrl_tap34" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="240" as="sourcePoint"/>
+            <mxPoint x="690" y="580" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== MECHANISMS (bottom boundary) ===== -->
+        <!-- Mechanism dashed line -->
+        <mxCell id="mech_line" value="" style="strokeColor=#000000;endArrow=none;fontFamily=Times New Roman;fontSize=9;dashed=1;dashPattern=5 5;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="810" as="sourcePoint"/>
+            <mxPoint x="1180" y="810" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="mech_numpy_lbl" value="NumPy" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="210" y="825" width="80" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="mech_scipy_lbl" value="SciPy" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="560" y="825" width="80" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="mech_pesq_lbl" value="pesq library" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="825" width="100" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="mech_time_lbl" value="time, tracemalloc" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="825" width="130" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Mechanism arrows UP -->
+        <mxCell id="mech_up31" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="810" as="sourcePoint"/>
+            <mxPoint x="290" y="700" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech_up32" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="810" as="sourcePoint"/>
+            <mxPoint x="690" y="700" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech_up33" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="810" as="sourcePoint"/>
+            <mxPoint x="1090" y="700" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mech_up34" value="" style="strokeColor=#000000;endArrow=block;endFill=1;endSize=6;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="810" as="sourcePoint"/>
+            <mxPoint x="690" y="430" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

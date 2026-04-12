@@ -1,0 +1,131 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="hadamard-matrices" type="device">
+  <diagram name="Hadamard Matrices" id="hadamard-matrices-id">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- H1 matrix box -->
+        <mxCell id="h1_group" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=10;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="80" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h1_label" value="&lt;b&gt;H₁&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="55" y="85" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h1_val" value="&lt;font face=&quot;Courier New&quot; style=&quot;font-size: 14px;&quot;&gt;[&amp;nbsp;&lt;b&gt;+&lt;/b&gt;&amp;nbsp;]&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="30" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="h1_sub" value="(n = 1)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="45" y="170" width="50" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow H1 -> H2 -->
+        <mxCell id="arr1" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=10" edge="1" source="h1_group" target="h2_group" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr1_label" value="H₂ ⊗ H₁" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=10;fontStyle=0" vertex="1" connectable="0" parent="arr1">
+          <mxGeometry x="-0.1" y="0" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- H2 matrix box -->
+        <mxCell id="h2_group" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=10;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="190" y="80" width="140" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="h2_label" value="&lt;b&gt;H₂&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="245" y="85" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h2_val" value="&lt;table cellpadding=&quot;2&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;font-family:Courier New;font-size:13px;text-align:center;color:#000000;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="210" y="115" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h2_bracket_l" value="[" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Courier New;font-size=36px;" vertex="1" parent="1">
+          <mxGeometry x="195" y="105" width="20" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h2_bracket_r" value="]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Courier New;font-size=36px;" vertex="1" parent="1">
+          <mxGeometry x="305" y="105" width="20" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h2_sub" value="(n = 2)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="245" y="180" width="50" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow H2 -> H4 -->
+        <mxCell id="arr2" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5" edge="1" source="h2_group" target="h4_group" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2_label" value="H₂ ⊗ H₂" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=10" vertex="1" connectable="0" parent="arr2">
+          <mxGeometry x="-0.1" y="0" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- H4 matrix box -->
+        <mxCell id="h4_group" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="420" y="80" width="220" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="h4_label" value="&lt;b&gt;H₄&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="510" y="85" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h4_bracket_l" value="[" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Courier New;font-size=48px;" vertex="1" parent="1">
+          <mxGeometry x="425" y="110" width="25" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="h4_bracket_r" value="]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Courier New;font-size=48px;" vertex="1" parent="1">
+          <mxGeometry x="612" y="110" width="25" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="h4_val" value="&lt;table cellpadding=&quot;2&quot; cellspacing=&quot;4&quot; border=&quot;0&quot; style=&quot;font-family:Courier New;font-size:14px;text-align:center;color:#000000;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none" vertex="1" parent="1">
+          <mxGeometry x="455" y="115" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="h4_sub" value="(n = 4)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="505" y="220" width="50" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow H4 -> H8 -->
+        <mxCell id="arr3" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5" edge="1" source="h4_group" target="h8_group" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr3_label" value="H₂ ⊗ H₄" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=10" vertex="1" connectable="0" parent="arr3">
+          <mxGeometry x="-0.1" y="0" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- H8 matrix box -->
+        <mxCell id="h8_group" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="730" y="80" width="340" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="h8_label" value="&lt;b&gt;H₈&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="880" y="85" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h8_bracket_l" value="[" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Courier New;font-size:60px;" vertex="1" parent="1">
+          <mxGeometry x="735" y="110" width="30" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h8_bracket_r" value="]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontFamily=Courier New;font-size:60px;" vertex="1" parent="1">
+          <mxGeometry x="1037" y="110" width="30" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="h8_val" value="&lt;table cellpadding=&quot;1&quot; cellspacing=&quot;3&quot; border=&quot;0&quot; style=&quot;font-family:Courier New;font-size:12px;text-align:center;color:#000000;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;+&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#CC0000;&quot;&gt;&lt;b&gt;−&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none" vertex="1" parent="1">
+          <mxGeometry x="770" y="110" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="h8_sub" value="(n = 8)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="875" y="225" width="50" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Formula box at bottom -->
+        <mxCell id="formula_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1;dashed=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="190" y="320" width="880" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="formula_title" value="&lt;b&gt;Рекуррентная формула:&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="560" y="325" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="formula_text" value="H₂ₙ = H₂ ⊗ Hₙ ,&amp;nbsp;&amp;nbsp; где ⊗ — произведение Кронекера" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="380" y="350" width="420" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;Рисунок 1.4 — Матрицы Адамара порядков 1, 2, 4, 8&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="460" y="30" width="360" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

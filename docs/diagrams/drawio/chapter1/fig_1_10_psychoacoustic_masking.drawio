@@ -1,0 +1,136 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="psychoacoustic-masking" type="device">
+  <diagram name="Psychoacoustic Masking" id="psychoacoustic-masking-id">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;Рисунок 1.10 — Психоакустическое маскирование&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="380" y="15" width="370" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MAIN FLOW (top row) ==================== -->
+
+        <!-- Block 1: Input signal spectrum -->
+        <mxCell id="b1" value="&lt;b&gt;Спектр входного&lt;br/&gt;сигнала&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;|X(f)|&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;амплитудный спектр&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="170" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow b1 -> b2 -->
+        <mxCell id="a12" value="анализ" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=9" edge="1" source="b1" target="b2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Block 2: Psychoacoustic model -->
+        <mxCell id="b2" value="&lt;b&gt;Психоакустическая&lt;br/&gt;модель&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;• Критические полосы&lt;br/&gt;• Порог слышимости&lt;br/&gt;• Маскирование" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="290" y="90" width="200" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow b2 -> b3 -->
+        <mxCell id="a23" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=9" edge="1" source="b2" target="b3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Block 3: Masking threshold -->
+        <mxCell id="b3" value="&lt;b&gt;Порог маскирования&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;T(f) = max{T₀(f), Tₘ(f)}&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;глобальный порог&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="570" y="90" width="200" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow b3 -> b4 -->
+        <mxCell id="a34" value="кванти-&lt;br&gt;зация" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=9" edge="1" source="b3" target="b4" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Block 4: Quantized/Compressed spectrum -->
+        <mxCell id="b4" value="&lt;b&gt;Квантованный&lt;br/&gt;спектр&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;X̂(f)&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;сжатые данные&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="850" y="90" width="170" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== MASKING CONCEPT DETAIL (middle) ==================== -->
+
+        <!-- Detail box -->
+        <mxCell id="detail_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#000000;strokeWidth=1.5;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="980" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="detail_title" value="&lt;b&gt;Механизм маскирования (в частотной области)&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="55" y="268" width="320" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Sub-block: Masker tone -->
+        <mxCell id="masker" value="&lt;b&gt;Маскер&lt;/b&gt;&lt;br/&gt;(маскирующий тон)&lt;br/&gt;&lt;br/&gt;f₀ = частота маскера&lt;br/&gt;L₀ = уровень маскера" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="65" y="310" width="170" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow masker -> threshold_curve -->
+        <mxCell id="a_mt" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5" edge="1" source="masker" target="threshold_curve" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sub-block: Masking threshold curve -->
+        <mxCell id="threshold_curve" value="&lt;b&gt;Кривая маскирования&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;• Спад на низких частотах&lt;br/&gt;• Резкий спад на высоких&lt;br/&gt;• Зависит от уровня L₀&lt;br/&gt;• Ширина &amp;asymp; критич. полоса" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="310" y="310" width="230" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow threshold_curve -> masked -->
+        <mxCell id="a_tm" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5" edge="1" source="threshold_curve" target="masked" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sub-block: Masked tone -->
+        <mxCell id="masked" value="&lt;b&gt;Маскируемый&lt;/b&gt;&lt;br/&gt;(masked tone)&lt;br/&gt;&lt;br/&gt;fₘ = частота маскируемого&lt;br/&gt;Lₘ &amp;lt; T(f) → не слышен" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="620" y="310" width="185" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow masked -> result -->
+        <mxCell id="a_mr" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5" edge="1" source="masked" target="result" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sub-block: Result -->
+        <mxCell id="result" value="&lt;b&gt;Результат:&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Маскируемые компоненты&lt;br/&gt;с уровнем ниже порога&lt;br/&gt;могут быть отброшены&lt;br/&gt;без заметной потери&lt;br/&gt;качества восприятия" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="870" y="310" width="140" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Annotation: Minimum masking threshold -->
+        <mxCell id="min_threshold" value="&lt;b&gt;Минимальный порог маскирования:&lt;/b&gt;&lt;br/&gt;Tₘᵢₙ(f) = min{Tₘₐₛₖₑᵢ(f)} для всех маскеров i&lt;br/&gt;Компоненты с |X(f)| &amp;lt; Tₘᵢₙ(f) считаются неразличимыми для слуха" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;dashed=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="430" width="480" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== BOTTOM: Types of masking ==================== -->
+        <mxCell id="types_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1;dashed=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="530" width="980" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="types_title" value="&lt;b&gt;Виды маскирования:&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="55" y="538" width="140" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Simultaneous masking -->
+        <mxCell id="type1" value="&lt;b&gt;Одновременное&lt;br/&gt;маскирование&lt;/b&gt;&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;simultaneous masking&lt;br/&gt;(частотная область)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="65" y="565" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Temporal masking -->
+        <mxCell id="type2" value="&lt;b&gt;Временное&lt;br/&gt;маскирование&lt;/b&gt;&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;pre-masking (до 20 мс)&lt;br/&gt;post-masking (до 100 мс)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="285" y="565" width="200" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Application -->
+        <mxCell id="type3" value="&lt;b&gt;Применение:&lt;/b&gt;&lt;br/&gt;MP3, AAC, Ogg Vorbis,&lt;br/&gt;Dolby Digital — используют&lt;br/&gt;психоакустическую модель&lt;br/&gt;для адаптивного квантования&lt;br/&gt;в частотных полосах" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="565" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from detail to b3 (threshold) -->
+        <mxCell id="a_detail_b3" value="вычисление&lt;br/&gt;порога" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;dashed=1;fontFamily=Times New Roman;fontSize=9;entryX=0.5;entryY=1" edge="1" source="threshold_curve" target="b3" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="425" y="250" />
+              <mxPoint x="670" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

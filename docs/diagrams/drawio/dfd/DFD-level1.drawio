@@ -1,119 +1,200 @@
-<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="dfd-level1" type="device">
-  <diagram name="DFD-Level1" id="dfd-level1-id">
-    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="drawio" version="21.0.0" type="device">
+  <diagram id="dfd-level1" name="DFD Level 1 — Decomposition">
+    <mxGraphModel dx="1800" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="700" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <!-- Title -->
-        <mxCell id="title" value="Диаграмма потоков данных (уровень 1)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="380" y="20" width="300" height="30" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- External Entity: Пользователь (left)         -->
+        <!-- ============================================ -->
+        <mxCell id="ee_user" value="Пользователь" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="20" y="290" width="110" height="50" as="geometry" />
         </mxCell>
-        <!-- External entities -->
-        <mxCell id="user" value="Пользователь" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="40" y="300" width="100" height="50" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Process P1: Загрузка аудиофайлов             -->
+        <!-- ============================================ -->
+        <mxCell id="p1" value="P1&lt;br&gt;Загрузка&lt;br&gt;аудиофайлов" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="190" y="265" width="130" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="audio_db" value="База аудиофайлов" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="900" y="150" width="100" height="50" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Process P2: Нормализация и фреймирование     -->
+        <!-- ============================================ -->
+        <mxCell id="p2" value="P2&lt;br&gt;Нормализация&lt;br&gt;и фреймирование" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="395" y="265" width="130" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="msg_source" value="Источник сообщения" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="900" y="500" width="100" height="50" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Process P3: Применение методов обработки     -->
+        <!-- ============================================ -->
+        <mxCell id="p3" value="P3&lt;br&gt;Применение методов&lt;br&gt;обработки" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="600" y="255" width="150" height="120" as="geometry" />
         </mxCell>
-        <!-- Data store -->
-        <mxCell id="store1" value="D1  Параметры встраивания" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10" vertex="1" parent="1">
-          <mxGeometry x="450" y="550" width="180" height="40" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Process P4: Вычисление метрик качества       -->
+        <!-- ============================================ -->
+        <mxCell id="p4" value="P4&lt;br&gt;Вычисление&lt;br&gt;метрик качества" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="825" y="265" width="130" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="store2" value="D2  Результаты анализа" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10" vertex="1" parent="1">
-          <mxGeometry x="450" y="620" width="180" height="40" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Process P5: Сравнительный анализ             -->
+        <!-- ============================================ -->
+        <mxCell id="p5" value="P5&lt;br&gt;Сравнительный&lt;br&gt;анализ" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="265" width="130" height="100" as="geometry" />
         </mxCell>
-        <!-- Processes -->
-        <mxCell id="p1" value="1&#xa;Загрузка аудиофайла" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="200" y="180" width="140" height="80" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Process P6: Сохранение результатов           -->
+        <!-- ============================================ -->
+        <mxCell id="p6" value="P6&lt;br&gt;Сохранение&lt;br&gt;результатов" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="265" width="130" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="p2" value="2&#xa;Анализ сигнала" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="410" y="180" width="140" height="80" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Data Store D1: Аудиодатасет                  -->
+        <!-- (double-line left border simulation)         -->
+        <!-- ============================================ -->
+        <mxCell id="d1" value="" style="rounded=0;whiteSpace=wrap;html=0;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="210" y="490" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="p3" value="3&#xa;Встраивание информации" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="620" y="280" width="140" height="80" as="geometry" />
+        <mxCell id="d1_line" value="" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="216" y="490" as="sourcePoint" />
+            <mxPoint x="216" y="530" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="p4" value="4&#xa;Извлечение информации" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="620" y="400" width="140" height="80" as="geometry" />
+        <mxCell id="d1_label" value="D1: Аудиодатасет" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="222" y="495" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="p5" value="5&#xa;Сохранение результатов" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="200" y="400" width="140" height="80" as="geometry" />
+
+        <!-- ============================================ -->
+        <!-- Data Store D2: Обработанные файлы            -->
+        <!-- ============================================ -->
+        <mxCell id="d2" value="" style="rounded=0;whiteSpace=wrap;html=0;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="490" width="160" height="40" as="geometry" />
         </mxCell>
-        <!-- Data flows -->
-        <mxCell id="f1" value="Команды" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="user" target="p1">
+        <mxCell id="d2_line" value="" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1231" y="490" as="sourcePoint" />
+            <mxPoint x="1231" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d2_label" value="D2: Обработанные файлы" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1237" y="495" width="140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================ -->
+        <!-- Data Store D3: Результаты метрик             -->
+        <!-- ============================================ -->
+        <mxCell id="d3" value="" style="rounded=0;whiteSpace=wrap;html=0;fontFamily=Times New Roman;fontSize=10;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1025" y="490" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d3_line" value="" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1031" y="490" as="sourcePoint" />
+            <mxPoint x="1031" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d3_label" value="D3: Результаты метрик" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1037" y="495" width="140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================ -->
+        <!-- DATA FLOWS                                   -->
+        <!-- ============================================ -->
+
+        <!-- DF: Пользователь → P1 -->
+        <mxCell id="df_eu_p1" value="WAV-файлы,&lt;br&gt;параметры" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="ee_user" target="p1" parent="1">
+          <mxGeometry x="0.1" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: D1 → P1 (Аудиоданные) -->
+        <mxCell id="df_d1_p1" value="Аудиоданные" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" source="d1" target="p1" parent="1">
+          <mxGeometry x="0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P1 → P2 (Сырые аудиоданные) -->
+        <mxCell id="df_p1_p2" value="Сырые&lt;br&gt;аудиоданные" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="p1" target="p2" parent="1">
+          <mxGeometry x="0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P2 → P3 (Нормализованные кадры) -->
+        <mxCell id="df_p2_p3" value="Нормализованные&lt;br&gt;кадры" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="p2" target="p3" parent="1">
+          <mxGeometry x="0.1" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P3 → P4 (Обработанные сигналы ×6) -->
+        <mxCell id="df_p3_p4" value="Обработанные&lt;br&gt;сигналы (×6)" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="p3" target="p4" parent="1">
+          <mxGeometry x="-0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P4 → P5 (Значения метрик) -->
+        <mxCell id="df_p4_p5" value="Значения&lt;br&gt;метрик" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="p4" target="p5" parent="1">
+          <mxGeometry x="0.1" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P5 → D3 (Сохранение метрик) -->
+        <mxCell id="df_p5_d3" value="Сохранение&lt;br&gt;метрик" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" source="p5" target="d3" parent="1">
+          <mxGeometry x="0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: D3 → P5 (Пред. результаты) -->
+        <mxCell id="df_d3_p5" value="Пред.&lt;br&gt;результаты" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=0.25;exitY=0;entryX=0.25;entryY=1;dashed=1;dashPattern=5 3;" edge="1" source="d3" target="p5" parent="1">
+          <mxGeometry x="-0.3" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P5 → P6 (Сравнительный отчёт) -->
+        <mxCell id="df_p5_p6" value="Сравнительный&lt;br&gt;отчёт" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" source="p5" target="p6" parent="1">
+          <mxGeometry x="-0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P6 → D2 (Обработанные файлы) -->
+        <mxCell id="df_p6_d2" value="Обработанные&lt;br&gt;файлы" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" source="p6" target="d2" parent="1">
+          <mxGeometry x="0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P1 → D1 (Запись метаданных) -->
+        <mxCell id="df_p1_d1" value="Метаданные&lt;br&gt;файлов" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" source="p1" target="d1" parent="1">
+          <mxGeometry x="0.2" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DF: P6 → Пользователь (Результаты, routed below) -->
+        <mxCell id="df_p6_eu" value="Результаты" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontFamily=Times New Roman;fontSize=9;fontColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" source="p6" target="ee_user" parent="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="170" y="325" />
-              <mxPoint x="170" y="220" />
+              <mxPoint x="1305" y="600" />
+              <mxPoint x="75" y="600" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="f2" value="Аудиоданные" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5" edge="1" parent="1" source="audio_db" target="p1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="870" y="175" />
-              <mxPoint x="870" y="100" />
-              <mxPoint x="350" y="100" />
-              <mxPoint x="350" y="220" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="f3" value="Загруженный сигнал" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="p1" target="p2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f4" value="Параметры сигнала" style="endArrow=classic;html=1;exitX=1;exitY=0.7;entryX=0;entryY=0.3" edge="1" parent="1" source="p2" target="p3">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="580" y="236" />
-              <mxPoint x="580" y="304" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="f5" value="Сообщение" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5" edge="1" parent="1" source="msg_source" target="p3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f6" value="Сигнал с данными" style="endArrow=classic;html=1;exitX=0;exitY=0.7;entryX=1;entryY=0.5" edge="1" parent="1" source="p3" target="p5">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="380" y="336" />
-              <mxPoint x="380" y="440" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="f7" value="Модифицированный файл" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5" edge="1" parent="1" source="p5" target="audio_db">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="170" y="440" />
-              <mxPoint x="170" y="60" />
-              <mxPoint x="950" y="60" />
-              <mxPoint x="950" y="150" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="f8" value="Аудиофайл с данными" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5" edge="1" parent="1" source="audio_db" target="p4">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="870" y="175" />
-              <mxPoint x="870" y="440" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="f9" value="Извлечённое сообщение" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="p4" target="msg_source">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f10" value="Параметры" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="p2" target="store1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="f11" value="Результаты" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="p5" target="store2">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="270" y="520" />
-              <mxPoint x="540" y="520" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>

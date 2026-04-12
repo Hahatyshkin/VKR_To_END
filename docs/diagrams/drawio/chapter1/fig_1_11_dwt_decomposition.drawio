@@ -1,0 +1,206 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="dwt-decomposition" type="device">
+  <diagram name="DWT Decomposition" id="dwt-decomposition-id">
+    <mxGraphModel dx="1100" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="750" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;Рисунок 1.11 — Многомасштабная декомпозиция DWT (вейвлет Хаара)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="310" y="15" width="460" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEVEL LABELS (left side) ==================== -->
+        <mxCell id="lvl0" value="&lt;b&gt;Уровень 0&lt;/b&gt;&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;N отсчётов&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="60" y="85" width="110" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="lvl1" value="&lt;b&gt;Уровень 1&lt;/b&gt;&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;N/2 отсчётов&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="60" y="205" width="110" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="lvl2" value="&lt;b&gt;Уровень 2&lt;/b&gt;&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;N/4 отсчёта&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="60" y="335" width="110" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="lvl3" value="&lt;b&gt;Уровень 3&lt;/b&gt;&lt;br/&gt;&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;N/8 отсчётов&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="60" y="465" width="110" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEVEL 0: Original signal ==================== -->
+        <mxCell id="sig0" value="&lt;b&gt;x[n]&lt;/b&gt; — исходный сигнал (N отсчётов)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="85" width="640" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== Split arrows from Level 0 to Level 1 ==================== -->
+        <!-- h[n] filter arrow -->
+        <mxCell id="a_h1" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;exitX=0.25;exitY=1;entryX=0.5;entryY=0" edge="1" source="sig0" target="A1" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h1_label" value="h[n]&lt;br/&gt;НЧ-фильтр&lt;br/&gt;↓2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="a_h1">
+          <mxGeometry x="-0.2" y="0" relative="1" as="geometry">
+            <mxPoint x="15" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- g[n] filter arrow -->
+        <mxCell id="a_g1" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;exitX=0.75;exitY=1;entryX=0.5;entryY=0" edge="1" source="sig0" target="D1" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1_label" value="g[n]&lt;br/&gt;ВЧ-фильтр&lt;br/&gt;↓2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="a_g1">
+          <mxGeometry x="-0.2" y="0" relative="1" as="geometry">
+            <mxPoint x="15" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== LEVEL 1 ==================== -->
+        <mxCell id="A1" value="&lt;b&gt;A₁&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:8px;&quot;&gt;аппроксимация&lt;/font&gt;&lt;br/&gt;&lt;font style=&quot;font-size:8px;&quot;&gt;low-pass&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="200" y="205" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="D1" value="&lt;b&gt;D₁&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:8px;&quot;&gt;детализация&lt;/font&gt;&lt;br/&gt;&lt;font style=&quot;font-size:8px;&quot;&gt;high-pass&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="520" y="205" width="320" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== Split arrows from Level 1 (A1) to Level 2 ==================== -->
+        <!-- h[n] filter arrow from A1 to A2 -->
+        <mxCell id="a_h2" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;exitX=0.25;exitY=1;entryX=0.5;entryY=0" edge="1" source="A1" target="A2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h2_label" value="h[n] ↓2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="a_h2">
+          <mxGeometry x="-0.3" y="0" relative="1" as="geometry">
+            <mxPoint x="15" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- g[n] filter arrow from A1 to D2 -->
+        <mxCell id="a_g2" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;exitX=0.75;exitY=1;entryX=0.5;entryY=0" edge="1" source="A1" target="D2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g2_label" value="g[n] ↓2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="a_g2">
+          <mxGeometry x="-0.3" y="0" relative="1" as="geometry">
+            <mxPoint x="15" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- D1 continues down (no split) -->
+        <mxCell id="a_d1_cont" value="" style="endArrow=none;html=1;strokeColor=#999999;strokeWidth=1;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="D1" target="D1_l2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEVEL 2 ==================== -->
+        <mxCell id="A2" value="&lt;b&gt;A₂&lt;/b&gt;&lt;br/&gt;low-pass" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="200" y="335" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="D2" value="&lt;b&gt;D₂&lt;/b&gt;&lt;br/&gt;high-pass" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="335" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="D1_l2" value="&lt;b&gt;D₁&lt;/b&gt;&lt;br/&gt;high-pass" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;fontFamily=Times New Roman;fontSize=10;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="335" width="320" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== Split arrows from Level 2 (A2) to Level 3 ==================== -->
+        <!-- h[n] filter arrow from A2 to A3 -->
+        <mxCell id="a_h3" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;exitX=0.25;exitY=1;entryX=0.5;entryY=0" edge="1" source="A2" target="A3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="h3_label" value="h[n] ↓2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="a_h3">
+          <mxGeometry x="-0.3" y="0" relative="1" as="geometry">
+            <mxPoint x="15" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- g[n] filter arrow from A2 to D3 -->
+        <mxCell id="a_g3" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;exitX=0.75;exitY=1;entryX=0.5;entryY=0" edge="1" source="A2" target="D3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g3_label" value="g[n] ↓2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" connectable="0" parent="a_g3">
+          <mxGeometry x="-0.3" y="0" relative="1" as="geometry">
+            <mxPoint x="15" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- D2 and D1 continue down -->
+        <mxCell id="a_d2_cont" value="" style="endArrow=none;html=1;strokeColor=#999999;strokeWidth=1;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="D2" target="D2_l3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_d1_cont2" value="" style="endArrow=none;html=1;strokeColor=#999999;strokeWidth=1;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="D1_l2" target="D1_l3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEVEL 3 ==================== -->
+        <mxCell id="A3" value="&lt;b&gt;A₃&lt;/b&gt;&lt;br/&gt;low-pass" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="200" y="465" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D3" value="&lt;b&gt;D₃&lt;/b&gt;&lt;br/&gt;high-pass" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontFamily=Times New Roman;fontSize=10;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="280" y="465" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D2_l3" value="&lt;b&gt;D₂&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;fontFamily=Times New Roman;fontSize=10;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="465" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D1_l3" value="&lt;b&gt;D₁&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;fontFamily=Times New Roman;fontSize=10;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="465" width="320" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== BRACE / summary at bottom ==================== -->
+        <mxCell id="result_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="200" y="530" width="640" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="result_text" value="&lt;b&gt;Результат декомпозиции:&lt;/b&gt;&amp;nbsp;&amp;nbsp; [A₃ | D₃ | D₂ | D₁]&amp;nbsp;&amp;nbsp; — полный набор коэффициентов (N/2 + N/4 + N/8 + N/8 = N)" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="210" y="540" width="620" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="result_detail" value="Коэффициенты A₃ (грубая аппроксимация) + D₃, D₂, D₁ (детали на разных масштабах) = полное вейвлет-представление сигнала" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="210" y="565" width="620" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEGEND ==================== -->
+        <mxCell id="legend_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="870" y="85" width="200" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="&lt;b&gt;Обозначения:&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="880" y="90" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_a" value="&lt;b&gt;A&lt;/b&gt; — аппроксимация&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(low-pass, НЧ-фильтр)" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="880" y="112" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_d" value="&lt;b&gt;D&lt;/b&gt; — детализация&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(high-pass, ВЧ-фильтр)" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="880" y="142" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_h" value="&lt;font face=&quot;Courier New&quot;&gt;h[n]&lt;/font&gt; — фильтр нижних&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;частот (НЧ)" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="880" y="172" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_g" value="&lt;font face=&quot;Courier New&quot;&gt;g[n]&lt;/font&gt; — фильтр верхних&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;частот (ВЧ)" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="880" y="202" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Haar wavelet info -->
+        <mxCell id="haar_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="870" y="260" width="200" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="haar_title" value="&lt;b&gt;Вейвлет Хаара:&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="880" y="265" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="haar_h" value="&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;h[n] = [1, 1] / √2&lt;br/&gt;g[n] = [1, −1] / √2&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="880" y="288" width="180" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="haar_note" value="&lt;font face=&quot;Courier New&quot; style=&quot;font-size:9px;&quot;&gt;↓2&lt;/font&gt; — децимация&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(прореживание в 2 раза)" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="880" y="323" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Frequency scale labels on the right -->
+        <mxCell id="freq_label" value="Частота →" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="870" y="380" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="freq_low" value="НЧ" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="870" y="405" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="freq_high" value="ВЧ" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1040" y="405" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="freq_arrow" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="905" y="415" as="sourcePoint" />
+            <mxPoint x="1035" y="415" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,75 +1,76 @@
 <mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="fwht-flow" type="device">
-  <diagram name="FWHT-Algorithm" id="fwht-flow-id">
+  <diagram name="FWHT Flow" id="fwht-flow-id">
     <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <!-- Start -->
         <mxCell id="2" value="Начало" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="340" y="40" width="120" height="40" as="geometry" />
+          <mxGeometry x="240" y="40" width="200" height="40" as="geometry" />
         </mxCell>
-        <!-- Input -->
-        <mxCell id="3" value="Ввод аудиосигнала x[n]" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="310" y="110" width="180" height="40" as="geometry" />
+        <mxCell id="3" value="WAV файл (PCM сигнал)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="220" y="120" width="240" height="40" as="geometry" />
         </mxCell>
-        <!-- Normalize -->
-        <mxCell id="4" value="Нормализация сигнала к диапазону [-1, 1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="300" y="180" width="200" height="40" as="geometry" />
+        <mxCell id="4" value="Дополнение нулями до степени 2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="240" y="200" width="200" height="40" as="geometry" />
         </mxCell>
-        <!-- Pad -->
-        <mxCell id="5" value="Дополнение нулями до N = 2^k" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="300" y="250" width="200" height="40" as="geometry" />
+        <mxCell id="5" value="Разбиение на блоки&#xa;(2048 отсчётов)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="240" y="280" width="200" height="50" as="geometry" />
         </mxCell>
-        <!-- FWHT Process -->
-        <mxCell id="6" value="Применение БПУА (FWHT)&#xa;X[k] = (1/N)·Σ x[n]·H[k,n]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="300" y="320" width="200" height="50" as="geometry" />
+        <mxCell id="6" value="Применение окна Ханна" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="240" y="360" width="200" height="40" as="geometry" />
         </mxCell>
-        <!-- Embedding -->
-        <mxCell id="7" value="Встраивание битов сообщения&#xa;в коэффициенты Уолша" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="300" y="400" width="200" height="50" as="geometry" />
+        <mxCell id="7" value="Прямое ПУА&#xa;(баттерфляй-алгоритм):&#xa;только сложения и вычитания" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="210" y="440" width="260" height="60" as="geometry" />
         </mxCell>
-        <!-- IFWHT -->
-        <mxCell id="8" value="Обратное БПУА (IFWHT)&#xa;x'[n] = Σ X[k]·H[k,n]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="300" y="480" width="200" height="50" as="geometry" />
+        <mxCell id="8" value="Ортогональная нормировка:&#xa;FWHT / corr(N)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="220" y="530" width="240" height="50" as="geometry" />
         </mxCell>
-        <!-- Denormalize -->
-        <mxCell id="9" value="Денормализация сигнала" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
-          <mxGeometry x="310" y="560" width="180" height="40" as="geometry" />
+        <mxCell id="9" value="Отбор коэффициентов&#xa;(энергетический/последовательностный)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="200" y="610" width="280" height="50" as="geometry" />
         </mxCell>
-        <!-- Output -->
-        <mxCell id="10" value="Вывод модифицированного сигнала" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10" vertex="1" parent="1">
-          <mxGeometry x="300" y="630" width="200" height="40" as="geometry" />
+        <mxCell id="10" value="Обратное ПУА&#xa;(самообратное преобразование)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="210" y="690" width="260" height="50" as="geometry" />
         </mxCell>
-        <!-- End -->
-        <mxCell id="11" value="Конец" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="340" y="700" width="120" height="40" as="geometry" />
+        <mxCell id="11" value="Синтез OLA (перекрытие и сложение)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="210" y="770" width="260" height="40" as="geometry" />
         </mxCell>
-        <!-- Arrows -->
-        <mxCell id="12" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="2" target="3">
+        <mxCell id="12" value="MP3 кодирование" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="240" y="850" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="Конец" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="930" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="14" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="2" target="3" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="13" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="3" target="4">
+        <mxCell id="15" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="3" target="4" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="14" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="4" target="5">
+        <mxCell id="16" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="4" target="5" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="15" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="5" target="6">
+        <mxCell id="17" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="5" target="6" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="16" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="6" target="7">
+        <mxCell id="18" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="6" target="7" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="17" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="7" target="8">
+        <mxCell id="19" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="7" target="8" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="18" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="8" target="9">
+        <mxCell id="20" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="8" target="9" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="19" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="9" target="10">
+        <mxCell id="21" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="9" target="10" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="20" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="10" target="11">
+        <mxCell id="22" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="10" target="11" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="23" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="11" target="12" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="24" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" source="12" target="13" parent="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io"><diagram id="classes" name="Class Hierarchy">
+  <mxGraphModel dx="1400" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" shadow="0">
+    <root><mxCell id="0"/><mxCell id="1" parent="0"/>
+      <mxCell id="base" value="BaseTransform (abstract)" style="swimlane;fontStyle=1;align=center;startSize=26;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;collapsible=0;" vertex="1" parent="1">
+        <mxGeometry x="270" y="30" width="300" height="110" as="geometry"/>
+      </mxCell>
+      <mxCell id="base_a" value="threshold: float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;html=1;fontFamily=Consolas;fontSize=10;" vertex="1" parent="base">
+        <mxGeometry y="26" width="300" height="24" as="geometry"/>
+      </mxCell>
+      <mxCell id="base_m" value="+ process(inp, out)&#xa;+ forward(signal)&#xa;+ inverse(coeffs)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;html=1;fontFamily=Consolas;fontSize=10;" vertex="1" parent="base">
+        <mxGeometry y="50" width="300" height="60" as="geometry"/>
+      </mxCell>
+      <mxCell id="c1" value="FFTTransform" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="10" y="230" width="130" height="40" as="geometry"/></mxCell>
+      <mxCell id="c2" value="FWHTTransform" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="230" width="130" height="40" as="geometry"/></mxCell>
+      <mxCell id="c3" value="DCTTransform" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="330" y="230" width="130" height="40" as="geometry"/></mxCell>
+      <mxCell id="c4" value="DWTTransform" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="490" y="230" width="130" height="40" as="geometry"/></mxCell>
+      <mxCell id="c5" value="MuLawTransform" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="650" y="230" width="130" height="40" as="geometry"/></mxCell>
+      <mxCell id="c6" value="RosenbrockTransform" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=10;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="810" y="230" width="150" height="40" as="geometry"/></mxCell>
+      <mxCell id="i1" style="html=1;strokeColor=#000;endArrow=block;endFill=0;endSize=8;" edge="1" source="c1" target="base" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="i2" style="html=1;strokeColor=#000;endArrow=block;endFill=0;endSize=8;" edge="1" source="c2" target="base" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="i3" style="html=1;strokeColor=#000;endArrow=block;endFill=0;endSize=8;" edge="1" source="c3" target="base" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="i4" style="html=1;strokeColor=#000;endArrow=block;endFill=0;endSize=8;" edge="1" source="c4" target="base" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="i5" style="html=1;strokeColor=#000;endArrow=block;endFill=0;endSize=8;" edge="1" source="c5" target="base" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="i6" style="html=1;strokeColor=#000;endArrow=block;endFill=0;endSize=8;" edge="1" source="c6" target="base" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    </root>
+  </mxGraphModel>
+</diagram></mxfile>

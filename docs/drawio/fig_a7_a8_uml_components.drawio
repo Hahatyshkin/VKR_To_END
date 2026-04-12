@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io"><diagram id="umlcomp" name="UML Components">
+  <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" shadow="0">
+    <root><mxCell id="0"/><mxCell id="1" parent="0"/>
+      <mxCell id="sys" value="Аудиопроцессор v1.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000;dashed=1;fontFamily=Times New Roman;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="40" y="30" width="640" height="430" as="geometry"/></mxCell>
+      <mxCell id="comp1" value="MainWindow&#xa;(Графический интерфейс)" style="shape=note;whiteSpace=wrap;html=1;size=15;align=center;strokeColor=#000;fillColor=#FFF;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1"><mxGeometry x="60" y="80" width="170" height="70" as="geometry"/></mxCell>
+      <mxCell id="comp2" value="AudioProcessor&#xa;(Ядро обработки)" style="shape=note;whiteSpace=wrap;html=1;size=15;align=center;strokeColor=#000;fillColor=#FFF;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1"><mxGeometry x="270" y="80" width="170" height="70" as="geometry"/></mxCell>
+      <mxCell id="comp3" value="MetricEngine&#xa;(Вычисление метрик)" style="shape=note;whiteSpace=wrap;html=1;size=15;align=center;strokeColor=#000;fillColor=#FFF;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1"><mxGeometry x="480" y="80" width="170" height="70" as="geometry"/></mxCell>
+      <mxCell id="comp4" value="TransformPlugin&#xa;(FFT, FWHT, DCT, DWT...)" style="shape=note;whiteSpace=wrap;html=1;size=15;align=center;strokeColor=#000;fillColor=#FFF;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1"><mxGeometry x="60" y="220" width="170" height="70" as="geometry"/></mxCell>
+      <mxCell id="comp5" value="FileHandler&#xa;(Чтение/запись WAV/MP3)" style="shape=note;whiteSpace=wrap;html=1;size=15;align=center;strokeColor=#000;fillColor=#FFF;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1"><mxGeometry x="270" y="220" width="170" height="70" as="geometry"/></mxCell>
+      <mxCell id="comp6" value="ReportGen&#xa;(Генерация отчётов)" style="shape=note;whiteSpace=wrap;html=1;size=15;align=center;strokeColor=#000;fillColor=#FFF;fontFamily=Times New Roman;fontSize=10;" vertex="1" parent="1"><mxGeometry x="480" y="220" width="170" height="70" as="geometry"/></mxCell>
+      <mxCell id="l1" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="comp1" target="comp2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="l2" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="comp2" target="comp3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="l3" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="comp1" target="comp4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="l4" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="comp2" target="comp5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="l5" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="comp3" target="comp6" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    </root>
+  </mxGraphModel>
+</diagram></mxfile>

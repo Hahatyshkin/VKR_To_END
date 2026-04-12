@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io"><diagram id="ola" name="OLA">
+  <mxGraphModel dx="1100" dy="1500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" shadow="0">
+    <root><mxCell id="0"/><mxCell id="1" parent="0"/>
+      <mxCell id="s1" value="Входной аудиосигнал x[n]" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=12;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="40" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s2" value="Разбиение на кадры с перекрытием 50%" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="140" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s3" value="Применение весового окна (w[n])" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="240" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s4" value="Преобразование каждого кадра (FWHT/DCT/DWT)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="340" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s5" value="Пороговая обработка коэффициентов" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="440" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s6" value="Обратное преобразование" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="540" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s7" value="Наложение-сложение (Overlap-Add)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="640" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s8" value="Нормализация амплитуды" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="740" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="s9" value="Выходной сигнал y[n]" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=12;strokeColor=#000;fillColor=#FFF;" vertex="1" parent="1"><mxGeometry x="170" y="840" width="260" height="45" as="geometry"/></mxCell>
+      <mxCell id="a1" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s1" target="s2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a2" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s2" target="s3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a3" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s3" target="s4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a4" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s4" target="s5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a5" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s5" target="s6" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a6" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s6" target="s7" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a7" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s7" target="s8" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="a8" style="html=1;strokeColor=#000;endArrow=block;endFill=1;" edge="1" source="s8" target="s9" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    </root>
+  </mxGraphModel>
+</diagram></mxfile>

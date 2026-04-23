@@ -36,6 +36,7 @@ except ImportError:
 # Заголовки столбцов для экспорта
 EXPORT_HEADERS = [
     "Источник",
+    "Жанр",
     "Метод",
     "Размер (МБ)",
     "LSD (дБ)",
@@ -56,6 +57,7 @@ EXPORT_HEADERS = [
 # Заголовки столбцов данных (соответствуют полям ResultRow)
 EXPORT_FIELDS = [
     "source",
+    "genre",
     "variant",
     "size_mb",
     "lsd_db",

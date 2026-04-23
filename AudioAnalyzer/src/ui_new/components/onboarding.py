@@ -224,10 +224,9 @@ class OnboardingOverlay(QWidget):
 
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
-            Qt.WindowType.Tool
+            Qt.WindowType.Window
         )
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setAttribute(Qt.WA_ShowWithoutActivating)
         self.setMouseTracking(True)
 
         self._setup_ui()
@@ -448,7 +447,9 @@ class OnboardingOverlay(QWidget):
 
     def showEvent(self, event) -> None:
         """Обработать показ."""
-        self.resize(self.parent().size())
+        if self.parent():
+            self.resize(self.parent().size())
+            self.move(self.parent().mapToGlobal(QPoint(0, 0)))
         super().showEvent(event)
 
 

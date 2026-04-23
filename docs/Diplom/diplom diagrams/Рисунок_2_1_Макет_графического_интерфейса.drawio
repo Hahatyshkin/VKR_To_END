@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.0" etag="gui-mockup" type="device">
+  <diagram name="GUI-Mockup" id="gui-mockup-id">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Main window frame -->
+        <mxCell id="window" value="AudioAnalyzer - Система стеганографического скрытия информации" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;verticalAlign=top;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="50" width="800" height="550" as="geometry" />
+        </mxCell>
+        <!-- Menu bar -->
+        <mxCell id="menu" value="Файл    Правка    Метод    Анализ    Справка" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="80" width="800" height="25" as="geometry" />
+        </mxCell>
+        <!-- Toolbar -->
+        <mxCell id="toolbar" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="100" y="105" width="800" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="tb1" value="📂 Открыть" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="110" y="110" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tb2" value="💾 Сохранить" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="185" y="110" width="75" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tb3" value="📊 Анализ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="265" y="110" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tb4" value="⚙️ Настройки" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="340" y="110" width="80" height="25" as="geometry" />
+        </mxCell>
+        <!-- Left panel - File info -->
+        <mxCell id="left_panel" value="Информация о файле" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="110" y="150" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="file_info" value="Имя: audio.wav&#xa;Формат: WAV&#xa;Частота: 44100 Гц&#xa;Каналы: 2 (стерео)&#xa;Битрейт: 1411 кбит/с&#xa;Длительность: 3:45" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="180" height="100" as="geometry" />
+        </mxCell>
+        <!-- Left panel - Method selection -->
+        <mxCell id="method_panel" value="Выбор метода" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="110" y="360" width="200" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="method_list" value="○ FFT (БПФ)&#xa;○ FWHT (БПУА)&#xa;○ DCT (ДКП)&#xa;○ DWT (Вейвлет)&#xa;○ OLA (μ-закон)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="120" y="390" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="params" value="Параметры метода:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="120" y="490" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="param1" value="Глубина: [====] 2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;align=left" vertex="1" parent="1">
+          <mxGeometry x="120" y="510" width="180" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="param2" value="Порог:   [====] 0.5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;align=left" vertex="1" parent="1">
+          <mxGeometry x="120" y="540" width="180" height="25" as="geometry" />
+        </mxCell>
+        <!-- Center - Visualization -->
+        <mxCell id="center_panel" value="Визуализация сигнала" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="320" y="150" width="380" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="waveform" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="330" y="180" width="360" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="spectrum" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="330" y="265" width="360" height="80" as="geometry" />
+        </mxCell>
+        <!-- Right panel - Message -->
+        <mxCell id="msg_panel" value="Сообщение" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="710" y="150" width="180" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_input" value="Введите сообщение для скрытия..." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;align=left;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="720" y="180" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="embed_btn" value="Встроить" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="720" y="290" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="extract_btn" value="Извлечь" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="805" y="290" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="capacity" value="Ёмкость: 1024 байт" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="720" y="325" width="160" height="20" as="geometry" />
+        </mxCell>
+        <!-- Bottom - Results -->
+        <mxCell id="results_panel" value="Результаты анализа" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="320" y="360" width="570" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics" value="SNR: 45.2 dB | PSNR: 52.1 dB | SSIM: 0.998&#xa;SI-SDR: 38.5 dB | LSD: 0.02" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="330" y="390" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="chart_area" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="330" y="420" width="550" height="160" as="geometry" />
+        </mxCell>
+        <!-- Status bar -->
+        <mxCell id="status" value="Готов | Файл загружен: audio.wav | Метод: FFT | Размер: 15.2 МБ" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;align=left" vertex="1" parent="1">
+          <mxGeometry x="100" y="600" width="800" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

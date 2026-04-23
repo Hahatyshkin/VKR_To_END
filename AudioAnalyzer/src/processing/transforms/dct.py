@@ -153,11 +153,13 @@ def idct3(X: np.ndarray) -> np.ndarray:
     """IDCT-III (ортонормированная), парная к dct2.
 
     Восстанавливает сигнал из коэффициентов DCT-II.
+    dct2() выдаёт коэффициенты в 2× от ортонормированных;
+    данный inverse корректно инвертирует это масштабирование.
 
     Параметры:
     ----------
     X : np.ndarray
-        Коэффициенты DCT-II
+        Коэффициенты DCT-II (выход dct2)
 
     Возвращает:
     -----------
@@ -166,33 +168,34 @@ def idct3(X: np.ndarray) -> np.ndarray:
 
     Алгоритм:
     ---------
-    1. Масштабируем DC-коэффициент
-    2. Умножаем на обратный фазовый множитель
-    3. Дополняем до N+1 элементов
-    4. Вычисляем irFFT
-    5. Нормируем
+    1. Применяем вес DC-компоненты alpha(0) = 1/sqrt(2)
+    2. Умножаем на фазовый множитель exp(j*pi*k/(2N))
+    3. Формируем 2N-точечный массив и вычисляем ifft
+    4. Масштабируем по sqrt(2N)
     """
     N = int(X.shape[0])
     Xd = X.astype(np.float64, copy=False).copy()
 
-    # Обратное масштабирование DC
+    # Вес DC-компоненты: alpha(0) = 1/sqrt(2)
     Xd[0] /= np.sqrt(2.0)
 
     # Фазовый множитель для IDCT-III
     k = np.arange(N, dtype=np.float64)
     W = np.exp(1j * np.pi * k / (2.0 * N))
 
-    # Комплексный вектор для irFFT
+    # Комплексный вектор
     Z = Xd * W
-    H = np.zeros(N + 1, dtype=np.complex128)
+
+    # Полный 2N-точечный IFFT
+    # (Z не эрмитово-симметричен, поэтому используем ifft, а не irfft)
+    H = np.zeros(2 * N, dtype=np.complex128)
     H[:N] = Z
-    H[N] = 0.0
 
     # Обратное FFT
-    y = np.fft.irfft(H, n=2 * N)
+    y = np.fft.ifft(H)
 
-    # Нормировка
-    x = y[:N] * np.sqrt(2.0 / N)
+    # Нормировка: x[n] = sqrt(2N) * Re(y[n])
+    x = np.real(y[:N]) * np.sqrt(2.0 * N)
 
     return x.astype(np.float32)
 
@@ -393,19 +396,8 @@ class DCTTransform(BaseTransform):
             blk = x_padded[i0 : i0 + N]
             xb = blk * win
 
-            # Проверка: нужно ли преобразование?
-            identity = (
-                self.select_mode == SELECT_MODE_NONE
-                and self.keep_energy_ratio >= 1.0
-                and self.sequency_keep_ratio >= 1.0
-            )
-
-            if identity:
-                # Идеальная реконструкция без DCT
-                rec = (xb * win).astype(np.float32)
-            else:
-                # DCT трансформация
-                rec = self.transform_block(xb) * win
+            # DCT трансформация
+            rec = self.transform_block(xb) * win
 
             # OLA накопление
             y_accum[i0 : i0 + N] += rec

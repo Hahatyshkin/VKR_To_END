@@ -211,11 +211,11 @@ def dwt_reconstruct(coeffs: List[np.ndarray], orig_len: int) -> np.ndarray:
     np.ndarray
         Восстановленный сигнал
     """
-    # Начинаем с аппроксимации
-    a = coeffs[-1].astype(np.float32)
+    # Начинаем с аппроксимации (первый элемент)
+    a = coeffs[0].astype(np.float32)
 
-    # Восстанавливаем по уровням
-    for i in range(len(coeffs) - 2, -1, -1):
+    # Восстанавливаем по уровням (от грубого к детальному)
+    for i in range(1, len(coeffs)):
         d = coeffs[i].astype(np.float32)
 
         # Выравниваем длины при необходимости

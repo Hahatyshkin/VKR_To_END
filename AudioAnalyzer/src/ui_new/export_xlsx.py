@@ -45,6 +45,9 @@ EXPORT_HEADERS = [
     "SI-SDR (дБ)",
     "Центроид Δ (Гц)",
     "Косин. сх.",
+    "STOI",
+    "PESQ",
+    "MOS",
     "Общий балл",
     "Время (с)",
     "Путь",
@@ -62,6 +65,9 @@ EXPORT_FIELDS = [
     "si_sdr_db",
     "spec_centroid_diff_hz",
     "spec_cosine",
+    "stoi",
+    "pesq",
+    "mos",
     "score",
     "time_sec",
     "path",
@@ -77,6 +83,9 @@ EXPORT_FORMATS = {
     "si_sdr_db": "0.000",
     "spec_centroid_diff_hz": "0.000",
     "spec_cosine": "0.0000",
+    "stoi": "0.000",
+    "pesq": "0.00",
+    "mos": "0.00",
     "score": "0.0000",
     "time_sec": "0.000",
 }
@@ -152,6 +161,9 @@ def export_results_to_xlsx(
                 "si_sdr_db": getattr(r, "si_sdr_db", float("nan")),
                 "spec_centroid_diff_hz": getattr(r, "spec_centroid_diff_hz", float("nan")),
                 "spec_cosine": getattr(r, "spec_cosine", float("nan")),
+                "stoi": getattr(r, "stoi", float("nan")),
+                "pesq": getattr(r, "pesq", float("nan")),
+                "mos": getattr(r, "mos", float("nan")),
                 "score": getattr(r, "score", float("nan")),
                 "time_sec": getattr(r, "time_sec", float("nan")),
                 "path": getattr(r, "path", ""),
@@ -195,9 +207,12 @@ def export_results_to_xlsx(
             8: 12,   # SI-SDR
             9: 14,   # Центроид
             10: 12,  # Косин. сх.
-            11: 12,  # Балл
-            12: 10,  # Время
-            13: 40,  # Путь
+            11: 10,  # STOI
+            12: 10,  # PESQ
+            13: 10,  # MOS
+            14: 12,  # Балл
+            15: 10,  # Время
+            16: 40,  # Путь
         }
 
         for col, width in column_widths.items():

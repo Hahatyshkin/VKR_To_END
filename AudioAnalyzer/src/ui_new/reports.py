@@ -626,7 +626,7 @@ class PDFReportGenerator:
             elements.append(Spacer(1, 10))
             
             # Заголовки таблицы результатов
-            results_header = ["Файл", "Метод", "SNR", "LSD", "Время"]
+            results_header = ["Файл", "Метод", "SNR", "LSD", "RMSE", "SI-SDR", "STOI", "PESQ", "MOS", "Время"]
             results_data = [results_header]
             
             for r in data.results:
@@ -639,19 +639,29 @@ class PDFReportGenerator:
                 snr_str = f"{snr:.1f}" if snr is not None else "—"
                 lsd = getattr(r, 'lsd_db', None)
                 lsd_str = f"{lsd:.2f}" if lsd is not None else "—"
+                rmse = getattr(r, 'rmse', None)
+                rmse_str = f"{rmse:.4f}" if rmse is not None else "—"
+                si_sdr = getattr(r, 'si_sdr_db', None)
+                si_sdr_str = f"{si_sdr:.1f}" if si_sdr is not None else "—"
+                stoi = getattr(r, 'stoi', None)
+                stoi_str = f"{stoi:.2f}" if stoi is not None else "—"
+                pesq = getattr(r, 'pesq', None)
+                pesq_str = f"{pesq:.2f}" if pesq is not None else "—"
+                mos = getattr(r, 'mos', None)
+                mos_str = f"{mos:.2f}" if mos is not None else "—"
                 time_sec = getattr(r, 'time_sec', None)
                 time_str = f"{time_sec:.2f}s" if time_sec is not None else "—"
                 
-                results_data.append([source, method, snr_str, lsd_str, time_str])
+                results_data.append([source, method, snr_str, lsd_str, rmse_str, si_sdr_str, stoi_str, pesq_str, mos_str, time_str])
             
             # Создаём таблицу (максимум 50 строк для производительности)
             if len(results_data) > 51:
                 results_data = results_data[:51]
-                results_data.append(["...", "...", "...", "...", "..."])
+                results_data.append(["...", "...", "...", "...", "...", "...", "...", "...", "...", "..."])
             
             results_table = Table(
                 results_data,
-                colWidths=[150, 80, 70, 70, 70]
+                colWidths=[100, 60, 50, 50, 50, 50, 40, 40, 40, 50]
             )
             results_table.setStyle(TableStyle([
                 ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#1E40AF')),

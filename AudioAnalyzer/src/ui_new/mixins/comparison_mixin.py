@@ -353,6 +353,9 @@ class ComparisonMixin:
             ("SI-SDR (дБ)", "Scale-Invariant SDR", "Устойчивый к масштабу SDR, выше лучше"),
             ("Центроид Δ (Гц)", "Spectral Centroid Difference", "Разница центров спектра"),
             ("Косин. сход.", "Cosine Similarity", "Схожесть спектров (0-1), выше лучше"),
+            ("STOI", "Short-Time Objective Intelligibility", "Разборчивость речи (0-1), выше лучше"),
+            ("PESQ", "Perceptual Evaluation of Speech Quality", "Оценка качества речи (-0.5-4.5)"),
+            ("MOS", "Mean Opinion Score", "Средняя оценка мнений (1-5), выше лучше"),
             ("Общий балл", "Aggregate Score", "Комплексная оценка качества, выше лучше"),
         ]
 

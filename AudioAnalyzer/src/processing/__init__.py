@@ -184,6 +184,9 @@ __all__ = [
     "compute_spectral_convergence",
     "compute_spectral_centroid_diff_hz",
     "compute_spectral_cosine_similarity",
+    "compute_stoi_simplified",
+    "compute_pesq_approx",
+    "compute_pesq_mos",
     "compute_metrics_batch",
 
     # Пакетный расчёт

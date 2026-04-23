@@ -933,6 +933,17 @@ class DashboardWidget(QWidget):
         self.snr_card.setMaximumWidth(200)
         cards_layout.addWidget(self.snr_card)
 
+        # Карточка: Средний LSD
+        self.lsd_card = KPICard(
+            title="LSD",
+            value="-- дБ",
+            subtitle="Спектр. расст.",
+            icon_name="analytics",
+            color="warning"
+        )
+        self.lsd_card.setMaximumWidth(200)
+        cards_layout.addWidget(self.lsd_card)
+
         # Карточка: Методы
         self.methods_card = KPICard(
             title="Методов",
@@ -1255,6 +1266,22 @@ class DashboardWidget(QWidget):
             else:
                 self.snr_card.set_value("-- dB")
 
+            # Средний LSD
+            lsd_values = []
+            for r in results:
+                if hasattr(r, 'lsd_db') and r.lsd_db is not None:
+                    try:
+                        val = float(r.lsd_db)
+                        if not math.isnan(val) and not math.isinf(val):
+                            lsd_values.append(val)
+                    except (ValueError, TypeError):
+                        pass
+            if lsd_values:
+                avg_lsd = sum(lsd_values) / len(lsd_values)
+                self.lsd_card.set_value(f"{avg_lsd:.2f} дБ")
+            else:
+                self.lsd_card.set_value("-- дБ")
+
             # Количество уникальных методов
             methods = set(r.variant for r in results if r.variant)
             self.methods_card.set_value(str(len(methods)))
@@ -1297,7 +1324,23 @@ class DashboardWidget(QWidget):
                         snr_val = float(result.snr_db)
                 except (ValueError, TypeError):
                     pass
-            metrics = {'snr': snr_val}
+            lsd_val = 0.0
+            if hasattr(result, 'lsd_db') and result.lsd_db is not None:
+                try:
+                    import math
+                    if not math.isnan(float(result.lsd_db)):
+                        lsd_val = float(result.lsd_db)
+                except (ValueError, TypeError):
+                    pass
+            stoi_val = 0.0
+            if hasattr(result, 'stoi') and result.stoi is not None:
+                try:
+                    import math
+                    if not math.isnan(float(result.stoi)):
+                        stoi_val = float(result.stoi)
+                except (ValueError, TypeError):
+                    pass
+            metrics = {'snr': snr_val, 'lsd': lsd_val, 'stoi': stoi_val}
             item = RecentActivityItem(
                 filename=result.source if hasattr(result, 'source') else "Unknown",
                 method=result.variant if hasattr(result, 'variant') else "Unknown",

@@ -295,6 +295,9 @@ class WorkerMixin:
                         item.get("spec_centroid_diff_hz")
                     ),
                     spec_cosine=self._safe_float(item.get("spec_cosine")),
+                    stoi=self._safe_float(item.get("stoi")),
+                    pesq=self._safe_float(item.get("pesq")),
+                    mos=self._safe_float(item.get("mos")),
                     score=self._safe_float(item.get("score")),
                     time_sec=self._safe_float(item.get("time_sec")),
                 )
@@ -377,9 +380,12 @@ class WorkerMixin:
         set_col(7, fmt_val(r.si_sdr_db, "{:.3f}"), True)
         set_col(8, fmt_val(r.spec_centroid_diff_hz, "{:.3f}"), True)
         set_col(9, fmt_val(r.spec_cosine, "{:.4f}"), True)
-        set_col(10, fmt_val(r.score, "{:.4f}"), True)
-        set_col(11, fmt_val(r.time_sec, "{:.3f}"), True)
-        self.table.setItem(row, 12, QTableWidgetItem(r.path))
+        set_col(10, fmt_val(r.stoi, "{:.3f}"), True)
+        set_col(11, fmt_val(r.pesq, "{:.2f}"), True)
+        set_col(12, fmt_val(r.mos, "{:.2f}"), True)
+        set_col(13, fmt_val(r.score, "{:.4f}"), True)
+        set_col(14, fmt_val(r.time_sec, "{:.3f}"), True)
+        self.table.setItem(row, 15, QTableWidgetItem(r.path))
 
     # =========================================================================
     # ПРОГРЕСС

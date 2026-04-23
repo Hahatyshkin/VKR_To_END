@@ -121,14 +121,17 @@ class MetricsConfig:
     hop: int = 512
 
     # Веса для агрегированного балла
-    weight_lsd: float = 0.25
-    weight_spectral_conv: float = 0.20
+    weight_lsd: float = 0.15
+    weight_spectral_conv: float = 0.10
     weight_snr: float = 0.15
-    weight_rmse: float = 0.15
+    weight_rmse: float = 0.10
     weight_si_sdr: float = 0.10
     weight_centroid_diff: float = 0.05
     weight_cosine_sim: float = 0.05
     weight_time: float = 0.05
+    weight_stoi: float = 0.10
+    weight_pesq: float = 0.10
+    weight_mos: float = 0.05
 
 
 # =============================================================================

@@ -456,7 +456,7 @@ def compute_metrics_batch(
     orig = get_meta_func(original_wav)
     ref, sr_ref = load_wav_func(original_wav)
 
-    def metrics_for(path: str) -> Tuple[Dict, float, float, float, float, float, float, float]:
+    def metrics_for(path: str) -> Tuple[Dict, float, float, float, float, float, float, float, float, float, float]:
         """Вычислить все метрики для одного файла."""
         meta = get_meta_func(path)
         sig, sr = decode_audio_func(path)
@@ -467,11 +467,14 @@ def compute_metrics_batch(
         si_sdr = compute_si_sdr_db(ref, sig)
         sc_diff = compute_spectral_centroid_diff_hz(ref, sig, sr_ref, sr)
         cos_sim = compute_spectral_cosine_similarity(ref, sig, sr_ref, sr)
-        return meta, float(lsd), float(snr), float(sc), float(rmse), float(si_sdr), float(sc_diff), float(cos_sim)
+        stoi = compute_stoi_simplified(ref, sig, sr_ref, sr)
+        pesq = compute_pesq_approx(ref, sig, sr_ref, sr)
+        mos = compute_pesq_mos(ref, sig, sr_ref, sr)
+        return meta, float(lsd), float(snr), float(sc), float(rmse), float(si_sdr), float(sc_diff), float(cos_sim), float(stoi), float(pesq), float(mos)
 
     results: List[Dict] = []
     for variant, path, time_s in items:
-        meta, lsd, snr, sc, rmse, sisdr, scdiff, cossim = metrics_for(path)
+        meta, lsd, snr, sc, rmse, sisdr, scdiff, cossim, stoi, pesq, mos = metrics_for(path)
 
         logger.info(
             "metrics_computed",
@@ -485,6 +488,9 @@ def compute_metrics_batch(
                 "si_sdr_db": float(sisdr),
                 "spec_centroid_diff_hz": float(scdiff),
                 "spec_cosine": float(cossim),
+                "stoi": float(stoi),
+                "pesq": float(pesq),
+                "mos": float(mos),
             }
         )
 
@@ -503,6 +509,9 @@ def compute_metrics_batch(
             "si_sdr_db": float(sisdr),
             "spec_centroid_diff_hz": float(scdiff),
             "spec_cosine": float(cossim),
+            "stoi": float(stoi),
+            "pesq": float(pesq),
+            "mos": float(mos),
             "orig_sample_rate_hz": orig["sample_rate_hz"],
             "orig_bit_depth_bits": orig["bit_depth_bits"],
             "orig_bitrate_bps": orig["bitrate_bps"],
@@ -528,6 +537,9 @@ def compute_metrics_batch(
     sisdr_min, sisdr_max = _minmax([r.get("si_sdr_db") for r in results])
     scdiff_min, scdiff_max = _minmax([r.get("spec_centroid_diff_hz") for r in results])
     cos_min, cos_max = _minmax([r.get("spec_cosine") for r in results])
+    stoi_min, stoi_max = _minmax([r.get("stoi") for r in results])
+    pesq_min, pesq_max = _minmax([r.get("pesq") for r in results])
+    mos_min, mos_max = _minmax([r.get("mos") for r in results])
 
     for r in results:
         # Нормировка: все приводим к "выше-лучше" (1.0 = лучший результат)
@@ -546,17 +558,25 @@ def compute_metrics_batch(
         sisdr_n = 0.0 if sisdr_min is None else (r["si_sdr_db"] - sisdr_min) / ((sisdr_max - sisdr_min) + eps)
         cos_n = 0.0 if cos_min is None else (r["spec_cosine"] - cos_min) / ((cos_max - cos_min) + eps)
 
+        # Новые метрики "выше-лучше"
+        stoi_n = 0.0 if stoi_min is None else (r["stoi"] - stoi_min) / ((stoi_max - stoi_min) + eps)
+        pesq_n = 0.0 if pesq_min is None else (r["pesq"] - pesq_min) / ((pesq_max - pesq_min) + eps)
+        mos_n = 0.0 if mos_min is None else (r["mos"] - mos_min) / ((mos_max - mos_min) + eps)
+
         # Взвешенная сумма (все компоненты приведены к "выше-лучше")
         # Чем выше score, тем лучше метод
         r["score"] = float(
-            0.20 * lsd_n +       # LSD: ниже лучше → инвертировано
-            0.15 * sc_n +        # Spectral Conv: ниже лучше → инвертировано
-            0.20 * snr_n +       # SNR: выше лучше
-            0.15 * rmse_n +      # RMSE: ниже лучше → инвертировано
-            0.15 * sisdr_n +     # SI-SDR: выше лучше
+            0.15 * lsd_n +       # LSD: ниже лучше → инвертировано
+            0.10 * sc_n +        # Spectral Conv: ниже лучше → инвертировано
+            0.15 * snr_n +       # SNR: выше лучше
+            0.10 * rmse_n +      # RMSE: ниже лучше → инвертировано
+            0.10 * sisdr_n +     # SI-SDR: выше лучше
             0.05 * scdiff_n +    # Centroid Δ: ниже лучше → инвертировано
             0.05 * cos_n +       # Cosine: выше лучше
-            0.05 * t_n           # Time: ниже лучше → инвертировано
+            0.05 * t_n +         # Time: ниже лучше → инвертировано
+            0.10 * stoi_n +      # STOI: выше лучше
+            0.10 * pesq_n +      # PESQ: выше лучше
+            0.05 * mos_n         # MOS: выше лучше
         )
 
     return results

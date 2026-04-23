@@ -60,6 +60,9 @@ class ProcessingResult:
     si_sdr_db: float
     spec_centroid_diff_hz: float
     spec_cosine: float
+    stoi: float
+    pesq: float
+    mos: float
     score: float
     time_sec: float
     

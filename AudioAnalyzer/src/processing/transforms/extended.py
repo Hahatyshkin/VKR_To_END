@@ -711,7 +711,7 @@ class MDCTTransform(BaseTransform):
         if np.max(np.abs(y)) > 0:
             y = y / np.max(np.abs(y)) * 0.95
 
-        out_mp3 = self.get_output_path(wav_path, out_dir, suffix="_mdct")
+        out_mp3 = self.get_output_path(wav_path, out_dir)
 
         if progress_cb:
             progress_cb(0.9, "MDCT: кодирование")

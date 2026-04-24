@@ -1500,9 +1500,13 @@ class Worker(QObject):
                 wav_path = os.path.normpath(wav_path)
                 self._log.info("file_start", extra={"path": wav_path, "idx": processed + 1, "total": total})
                 self._ui_log(f"\n📄 Файл {processed + 1}/{total}: {os.path.basename(wav_path)}")
+                self._ui_log(f"   Путь: {wav_path}")
 
                 if not os.path.exists(wav_path):
-                    raise FileNotFoundError(wav_path)
+                    raise FileNotFoundError(
+                        f"Файл не найден: {wav_path}\n"
+                        f"Убедитесь, что файл существует и путь корректен."
+                    )
 
                 self._cur_file_t0 = time.perf_counter()
                 self.status.emit(f"Обработка: {os.path.basename(wav_path)} ({processed + 1}/{total})…")

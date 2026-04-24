@@ -85,13 +85,32 @@ def configure_ffmpeg_search() -> None:
 def ensure_ffmpeg_available() -> None:
     """Убедиться, что ffmpeg/ffprobe доступны (сконфигурированы в pydub/ENV).
 
+    Логирует путь к бинарнику и его версию.
     Бросает RuntimeError с подсказкой, если обнаружить бинарники не удалось.
     """
     configure_ffmpeg_search()
+    ffmpeg_path = os.environ.get("FFMPEG_BINARY") or shutil.which("ffmpeg")
+    if not ffmpeg_path:
+        raise RuntimeError(
+            "FFmpeg не найден. Установите FFmpeg и добавьте его в PATH.\n"
+            "Скачать: https://ffmpeg.org/download.html"
+        )
+    if not os.path.exists(ffmpeg_path):
+        raise RuntimeError(
+            f"FFmpeg найден в PATH, но файл не существует: {ffmpeg_path}\n"
+            "Проверьте установку FFmpeg."
+        )
+    # Логируем путь и версию
+    logger.info("FFmpeg path: %s", ffmpeg_path)
     try:
-        AudioSegment.converter
+        result = subprocess.run(
+            [ffmpeg_path, "-version"],
+            capture_output=True, text=True, timeout=10
+        )
+        first_line = result.stdout.strip().split("\n")[0] if result.stdout else "unknown"
+        logger.info("FFmpeg version: %s", first_line)
     except Exception as e:
-        raise RuntimeError("FFmpeg недоступен. Установите FFmpeg и добавьте его в PATH.") from e
+        logger.warning("FFmpeg version check failed: %s", e)
 
 
 def load_wav_mono(path: str) -> Tuple[np.ndarray, int]:

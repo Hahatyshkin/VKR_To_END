@@ -993,11 +993,62 @@ class MainWindow(
         self._enabled_methods = methods
         logger.info(f"Enabled methods changed: {methods}")
 
+    # Маппинг идентификаторов методов из мастера во внутренний формат
+    _WIZARD_METHOD_MAP: Dict[str, str] = {
+        "FWHT": "fwht",
+        "FFT": "fft",
+        "DCT": "dct",
+        "DWT": "dwt",
+        "Huffman": "huffman",
+        "Rosenbrock": "rosenbrock",
+    }
+
     def _open_compare_wizard(self) -> None:
         """Открыть мастер сравнения файлов."""
         wizard = CompareWizard(self)
         wizard.files_selected.connect(self._on_wizard_files_selected)
+        wizard.finished_with_data.connect(self._on_wizard_finished)
         wizard.exec()
+
+    def _on_wizard_finished(self, data: Dict[str, Any]) -> None:
+        """Обработать завершение мастера сравнения с конфигурацией.
+
+        Получает словарь data с ключами: files, methods, block_size,
+        bitrate, select_mode — обновляет виджеты настроек и запускает
+        фоновую обработку.
+        """
+        files = data.get("files", [])
+        wizard_methods = data.get("methods", [])
+
+        # Преобразование идентификаторов методов из формата мастера во внутренний
+        mapped_methods = [
+            self._WIZARD_METHOD_MAP[m]
+            for m in wizard_methods
+            if m in self._WIZARD_METHOD_MAP
+        ]
+        self._enabled_methods = mapped_methods if mapped_methods else None
+
+        # Обновление виджетов настроек из данных мастера
+        if data.get("block_size"):
+            self.ed_block.setText(str(data["block_size"]))
+        if data.get("bitrate"):
+            self.ed_bitrate.setText(data["bitrate"])
+        if "select_mode" in data:
+            self.cb_select.setCurrentIndex(data["select_mode"])
+
+        # Переключаемся на вкладку таблицы результатов
+        self.tabs.setCurrentIndex(1)
+
+        # Запуск фоновой обработки
+        self._start_worker(files, dataset_root=None)
+
+        method_str = ", ".join(mapped_methods) if mapped_methods else "все"
+        self._log_emitter.log_line.emit(
+            f"📊 Запущен сравнительный анализ: {len(files)} файл(ов), "
+            f"методы: [{method_str}], "
+            f"block_size={data.get('block_size')}, "
+            f"bitrate={data.get('bitrate')}"
+        )
 
     def _on_wizard_files_selected(self, files: List[str]) -> None:
         """Обработать выбор файлов в мастере."""
@@ -1005,7 +1056,6 @@ class MainWindow(
             self._log_emitter.log_line.emit(
                 f"📊 Выбрано файлов для сравнения: {len(files)}"
             )
-            # TODO: Запустить сравнительный анализ
 
     def _on_dashboard_file_selected(self, filename: str) -> None:
         """Обработать выбор файла на Dashboard."""

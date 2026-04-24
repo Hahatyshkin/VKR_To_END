@@ -22,6 +22,8 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime
+
+import numpy as np
 from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 from PySide6.QtCore import Qt, Signal, QTimer, QSize, QPropertyAnimation, QEasingCurve, Property
@@ -745,15 +747,15 @@ class MiniSpectrogram(QFrame):
 
         # Имя файла
         filename_short = self._filename[:14] + "..." if len(self._filename) > 14 else self._filename
-        name_label = QLabel(filename_short)
-        name_label.setAlignment(Qt.AlignCenter)
-        name_label.setStyleSheet(f"""
+        self.name_label = QLabel(filename_short)
+        self.name_label.setAlignment(Qt.AlignCenter)
+        self.name_label.setStyleSheet(f"""
             font-size: 11px;
             color: {DesignSystem.colors.text_muted};
             background: transparent;
         """)
-        name_label.setToolTip(self._filename)
-        layout.addWidget(name_label, 0, Qt.AlignCenter)
+        self.name_label.setToolTip(self._filename)
+        layout.addWidget(self.name_label, 0, Qt.AlignCenter)
 
     def _apply_styles(self) -> None:
         """Применить стили."""
@@ -770,13 +772,126 @@ class MiniSpectrogram(QFrame):
         self.setCursor(Qt.PointingHandCursor)
         self.setFixedSize(150, 130)
 
+    def _db_to_color(self, db_value: float) -> QColor:
+        """Map dB value to color. High energy = warm, low energy = cool."""
+        # Normalize from [-100, 0] to [0.0, 1.0]
+        t = max(0.0, min(1.0, (db_value + 100.0) / 100.0))
+
+        # Color stops: blue → cyan → green → yellow → red
+        color_stops = [
+            (0.0, QColor(59, 130, 246)),    # primary #3B82F6
+            (0.25, QColor(96, 165, 250)),    # accent_blue #60A5FA
+            (0.5, QColor(34, 197, 94)),      # success #22C55E
+            (0.75, QColor(245, 158, 11)),    # warning #F59E0B
+            (1.0, QColor(239, 68, 68)),      # error #EF4444
+        ]
+
+        for i in range(len(color_stops) - 1):
+            t_lo, c_lo = color_stops[i]
+            t_hi, c_hi = color_stops[i + 1]
+            if t <= t_hi:
+                span = t_hi - t_lo
+                if span < 1e-9:
+                    return c_hi
+                local_t = (t - t_lo) / span
+                r = int(c_lo.red() + local_t * (c_hi.red() - c_lo.red()))
+                g = int(c_lo.green() + local_t * (c_hi.green() - c_lo.green()))
+                b = int(c_lo.blue() + local_t * (c_hi.blue() - c_lo.blue()))
+                return QColor(min(255, r), min(255, g), min(255, b))
+
+        return QColor(239, 68, 68)  # error red
+
+    def set_spectrum_data(self, freqs: np.ndarray, spectrum_db: np.ndarray) -> None:
+        """Установить данные спектрограммы для отрисовки.
+
+        Параметры:
+        ----------
+        freqs : np.ndarray
+            Массив частот
+        spectrum_db : np.ndarray
+            Массив значений спектра в дБ (диапазон [-100, 0])
+        """
+        self._spectrum_data = (freqs, spectrum_db)
+
+        # Скрываем placeholder иконку, делаем фон прозрачным
+        self.preview_label.clear()
+        self.preview_label.setStyleSheet("""
+            QLabel {
+                background: transparent;
+                border-radius: 10px;
+            }
+        """)
+
+        self.update()
+
     def paintEvent(self, event) -> None:
         """Отрисовать мини-спектрограмму."""
         super().paintEvent(event)
 
-        if self._spectrum_data is not None:
-            # TODO: Отрисовка реальной спектрограммы
-            pass
+        if self._spectrum_data is not None and len(self._spectrum_data) == 2:
+            freqs, spectrum_db = self._spectrum_data
+
+            preview_rect = self.preview_label.geometry()
+            if preview_rect.width() <= 0 or preview_rect.height() <= 0:
+                return
+
+            if len(freqs) != len(spectrum_db) or len(spectrum_db) == 0:
+                return
+
+            painter = QPainter(self)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+            painter.setClipRect(preview_rect)
+
+            # Тёмный фон для области спектрограммы
+            bg_color = QColor(DesignSystem.colors.surface_2)
+            painter.fillRect(preview_rect, bg_color)
+
+            # Даунсэмплирование спектра до количества баров
+            num_bars = min(48, len(spectrum_db))
+            bar_indices = np.linspace(0, len(spectrum_db) - 1, num_bars, dtype=int)
+            bar_values = spectrum_db[bar_indices]
+
+            # Отступы
+            margin_x = 4
+            margin_top = 4
+            margin_bottom = 14  # место для метки "Hz"
+
+            draw_x = preview_rect.x() + margin_x
+            draw_y = preview_rect.y() + margin_top
+            draw_w = preview_rect.width() - 2 * margin_x
+            draw_h = preview_rect.height() - margin_top - margin_bottom
+
+            bar_width = max(1.0, draw_w / num_bars - 1.0)
+            bar_gap = max(0.5, (draw_w - bar_width * num_bars) / max(1, num_bars - 1))
+
+            for i, db_val in enumerate(bar_values):
+                # Нормализация dB в высоту бара
+                t = max(0.0, min(1.0, (float(db_val) + 100.0) / 100.0))
+                bar_height = max(1.0, t * draw_h)
+
+                color = self._db_to_color(float(db_val))
+                painter.setPen(Qt.PenStyle.NoPen)
+                painter.setBrush(QBrush(color))
+
+                bx = draw_x + i * (bar_width + bar_gap)
+                by = draw_y + draw_h - bar_height
+                painter.drawRoundedRect(
+                    int(bx), int(by), max(1, int(bar_width)), max(1, int(bar_height)),
+                    1, 1
+                )
+
+            # Метка "Hz" внизу справа
+            painter.setPen(QPen(QColor(DesignSystem.colors.text_muted)))
+            font = QFont()
+            font.setPointSize(7)
+            painter.setFont(font)
+            painter.drawText(
+                preview_rect.x() + preview_rect.width() - 18,
+                preview_rect.y() + preview_rect.height() - 2,
+                "Hz"
+            )
+
+            painter.end()
 
     def mousePressEvent(self, event) -> None:
         """Обработать клик."""
@@ -1195,12 +1310,14 @@ class DashboardWidget(QWidget):
         previews_layout = QGridLayout(previews_frame)
         previews_layout.setSpacing(12)
 
-        # Placeholder миниатюры
+        # Placeholder миниатюры — сохраняем ссылки для обновления
+        self._preview_widgets: List[MiniSpectrogram] = []
         for i in range(4):
             row, col = i // 2, i % 2
             preview = MiniSpectrogram(f"empty_{i}")
             preview.clicked.connect(self._on_preview_clicked)
             previews_layout.addWidget(preview, row, col)
+            self._preview_widgets.append(preview)
 
         layout.addWidget(previews_frame)
         layout.addStretch(1)
@@ -1358,7 +1475,7 @@ class DashboardWidget(QWidget):
         filename : str
             Имя файла
         spectrum_data : Any
-            Данные спектрограммы для миниатюры
+            Данные спектрограммы для миниатюры (Tuple[np.ndarray, np.ndarray])
         """
         self._recent_files.insert(0, {
             'filename': filename,
@@ -1368,6 +1485,32 @@ class DashboardWidget(QWidget):
 
         # Ограничиваем список
         self._recent_files = self._recent_files[:20]
+
+        # Обновляем миниатюру спектрограммы если есть данные
+        if spectrum_data is not None and hasattr(self, '_preview_widgets'):
+            # Ищем первый пустой (placeholder) виджет
+            target: Optional[MiniSpectrogram] = None
+            for pw in self._preview_widgets:
+                if pw._filename.startswith("empty_"):
+                    target = pw
+                    break
+
+            # Если все заняты — берём самый старый (последний)
+            if target is None:
+                target = self._preview_widgets[-1]
+
+            # Обновляем виджет новыми данными
+            target._filename = filename
+            filename_short = filename[:14] + "..." if len(filename) > 14 else filename
+            target.name_label.setText(filename_short)
+            target.name_label.setToolTip(filename)
+
+            # Распаковываем кортеж (freqs, spectrum_db) и передаём в set_spectrum_data
+            try:
+                freqs, spectrum_db = spectrum_data
+                target.set_spectrum_data(freqs, spectrum_db)
+            except (TypeError, ValueError):
+                logger.warning("add_recent_file: не удалось распаковать spectrum_data")
 
     def get_selected_methods(self) -> List[str]:
         """Получить выбранные методы обработки."""

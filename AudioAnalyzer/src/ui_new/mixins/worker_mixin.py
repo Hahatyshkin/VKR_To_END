@@ -243,8 +243,6 @@ class WorkerMixin:
         json_payload : str
             JSON-строка с результатами обработки файла
         """
-        # DEBUG: print to stdout
-        print(f"[MAIN] _on_worker_result called, payload size={len(json_payload)}", flush=True)
         # Просто накапливаем результаты - не трогаем UI!
         self._pending_results.append(json_payload)
         logger.info("_on_worker_result: accumulated result #%d", len(self._pending_results))

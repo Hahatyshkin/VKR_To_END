@@ -205,9 +205,14 @@ class OnboardingOverlay(QWidget):
     """Оверлей для подсветки элементов и отображения подсказок.
 
     Особенности:
-    - Полупрозрачный фон
+    - Полупрозрачный фон (дочерний виджет, не отдельное окно)
     - Вырезанная область для подсветки элемента
     - Подсказка с описанием
+
+    Архитектура:
+    Оверлей создаётся как дочерний виджет centralWidget главного окна.
+    Это гарантирует корректное отображение на всех платформах (Linux, Windows, macOS),
+    избегая проблем с WA_TranslucentBackground и отдельными окнами на X11.
     """
 
     next_requested = Signal()
@@ -222,11 +227,11 @@ class OnboardingOverlay(QWidget):
         self._current_index: int = 0
         self._total_steps: int = 0
 
-        self.setWindowFlags(
-            Qt.WindowType.FramelessWindowHint |
-            Qt.WindowType.Window
-        )
-        self.setAttribute(Qt.WA_TranslucentBackground)
+        # НЕ используем FramelessWindowHint / WA_TranslucentBackground —
+        # на Linux/X11 это создаёт сплошной чёрный прямоугольник.
+        # Вместо этого оверлей — дочерний виджет, закрывающий parent.
+        self.setAttribute(Qt.WA_NoSystemBackground, False)
+        self.setAutoFillBackground(False)
         self.setMouseTracking(True)
 
         self._setup_ui()
@@ -363,12 +368,12 @@ class OnboardingOverlay(QWidget):
 
         # Позиционируем подсказку
         if step.step_type == OnboardingStepType.DIALOG:
-            # Центрируем диалог
-            parent_rect = self.parent().rect()
+            # Центрируем диалог в пределах оверлея
+            overlay_rect = self.rect()
             tooltip_width = 350
             tooltip_height = 180
-            x = (parent_rect.width() - tooltip_width) // 2
-            y = (parent_rect.height() - tooltip_height) // 2
+            x = (overlay_rect.width() - tooltip_width) // 2
+            y = (overlay_rect.height() - tooltip_height) // 2
             self.tooltip_widget.setGeometry(x, y, tooltip_width, tooltip_height)
         else:
             # Позиционируем относительно цели
@@ -382,7 +387,11 @@ class OnboardingOverlay(QWidget):
         self.update()
 
     def _position_tooltip(self, target_rect: Optional[QRect]) -> None:
-        """Позиционировать подсказку относительно цели."""
+        """Позиционировать подсказку относительно цели.
+
+        Координаты target_rect уже в локальной системе координат
+        центрального виджета (тот же что и оверлей).
+        """
         if not target_rect or not self._current_step:
             return
 
@@ -408,10 +417,10 @@ class OnboardingOverlay(QWidget):
             x = target_rect.left()
             y = target_rect.bottom() + margin
 
-        # Убеждаемся что подсказка в пределах окна
-        parent_rect = self.parent().rect()
-        x = max(10, min(x, parent_rect.width() - tooltip_width - 10))
-        y = max(10, min(y, parent_rect.height() - tooltip_height - 10))
+        # Убеждаемся что подсказка в пределах оверлея
+        overlay_rect = self.rect()
+        x = max(10, min(x, overlay_rect.width() - tooltip_width - 10))
+        y = max(10, min(y, overlay_rect.height() - tooltip_height - 10))
 
         self.tooltip_widget.setGeometry(x, y, tooltip_width, tooltip_height)
 
@@ -446,11 +455,21 @@ class OnboardingOverlay(QWidget):
             )
 
     def showEvent(self, event) -> None:
-        """Обработать показ."""
+        """Обработать показ.
+
+        Оверлей — дочерний виджет, поэтому просто занимаем всю площадь parent
+        и поднимаемся наверх. Не нужно mapToGlobal — координаты локальные.
+        """
         if self.parent():
-            self.resize(self.parent().size())
-            self.move(self.parent().mapToGlobal(QPoint(0, 0)))
+            self.setGeometry(0, 0, self.parent().width(), self.parent().height())
+            self.raise_()
         super().showEvent(event)
+
+    def resizeEvent(self, event) -> None:
+        """Подстраиваться под размер parent при ресайзе."""
+        if self.parent():
+            self.setGeometry(0, 0, self.parent().width(), self.parent().height())
+        super().resizeEvent(event)
 
 
 # =============================================================================
@@ -484,8 +503,10 @@ class OnboardingManager(QObject):
         self._steps: List[OnboardingStep] = DEFAULT_ONBOARDING_STEPS.copy()
         self._current_index: int = 0
 
-        # Создаём оверлей
-        self._overlay = OnboardingOverlay(main_window)
+        # Оверлей создаётся на centralWidget, а не на QMainWindow.
+        # Это исключает проблемы с меню-баром, статус-баром и отдельными окнами.
+        central = main_window.centralWidget()
+        self._overlay = OnboardingOverlay(central)
         self._overlay.next_requested.connect(self._on_next)
         self._overlay.prev_requested.connect(self._on_prev)
         self._overlay.skip_requested.connect(self._on_skip)
@@ -578,7 +599,8 @@ class OnboardingManager(QObject):
         Returns:
         --------
         Optional[QRect]
-            Прямоугольник виджета в координатах главного окна
+            Прямоугольник виджета в координатах centralWidget
+            (совпадают с координатами оверлея)
         """
         # Специальные селекторы
         if selector.startswith("tabs:"):
@@ -588,8 +610,12 @@ class OnboardingManager(QObject):
         # Поиск по objectName
         widget = self._main_window.findChild(QWidget, selector)
         if widget:
-            # Преобразуем координаты
-            global_pos = widget.mapTo(self._main_window, QPoint(0, 0))
+            # Преобразуем координаты в систему centralWidget (parent оверлея)
+            central = self._main_window.centralWidget()
+            if central:
+                global_pos = widget.mapTo(central, QPoint(0, 0))
+            else:
+                global_pos = widget.mapTo(self._main_window, QPoint(0, 0))
             return QRect(global_pos, widget.size())
 
         return None
@@ -605,7 +631,7 @@ class OnboardingManager(QObject):
         Returns:
         --------
         Optional[QRect]
-            Прямоугольник вкладки
+            Прямоугольник вкладки в координатах centralWidget
         """
         # Ищем QTabWidget
         tabs = self._main_window.findChild(QWidget, "tabs")
@@ -623,10 +649,14 @@ class OnboardingManager(QObject):
             return None
 
         # Ищем вкладку по имени
+        central = self._main_window.centralWidget()
         for i in range(tab_bar.count()):
             if tab_name.lower() in tab_bar.tabText(i).lower():
                 rect = tab_bar.tabRect(i)
-                global_pos = tab_bar.mapTo(self._main_window, rect.topLeft())
+                if central:
+                    global_pos = tab_bar.mapTo(central, rect.topLeft())
+                else:
+                    global_pos = tab_bar.mapTo(self._main_window, rect.topLeft())
                 return QRect(global_pos, rect.size())
 
         return None

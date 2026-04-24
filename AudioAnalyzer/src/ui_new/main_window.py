@@ -1082,11 +1082,9 @@ class MainWindow(
         """Обработать показ окна."""
         super().showEvent(event)
 
-        # Онбординг отключён по умолчанию для предотвращения
-        # проблем с оверлеем на Linux (независимое окно может
-        # перекрыть интерфейс чёрным экраном).
-        # Для ручного запуска используйте: self._onboarding_manager.start(force=True)
-        # QTimer.singleShot(500, self._check_onboarding)
+        # Запускаем онбординг с задержкой, чтобы UI полностью отрисовался.
+        # QTimer.singleShot гарантирует, что окно уже отображено.
+        QTimer.singleShot(500, self._check_onboarding)
 
     def _check_onboarding(self) -> None:
         """Проверить нужно ли запустить онбординг."""

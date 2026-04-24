@@ -199,10 +199,18 @@ def dwt_reconstruct(coeffs: List[np.ndarray], orig_len: int) -> np.ndarray:
 
     Собирает сигнал из коэффициентов DWT.
 
+    Поддерживает два формата входных данных:
+    1. Выход dwt_decompose: [D1, D2, ..., DL, AL]
+    2. Выход unflatten: [AL, DL, DL-1, ..., D1]
+
+    Автоматически определяет формат по длине первого элемента:
+    если len(coeffs[0]) <= len(coeffs[-1]) — формат dwt_decompose,
+    иначе — формат unflatten.
+
     Параметры:
     ----------
     coeffs : List[np.ndarray]
-        Список коэффициентов [AL, DL, DL-1, ..., D1]
+        Список коэффициентов DWT
     orig_len : int
         Исходная длина сигнала
 
@@ -211,7 +219,15 @@ def dwt_reconstruct(coeffs: List[np.ndarray], orig_len: int) -> np.ndarray:
     np.ndarray
         Восстановленный сигнал
     """
-    # Начинаем с аппроксимации (первый элемент)
+    # Автоопределение формата: dwt_decompose возвращает [D1,...,DL,AL],
+    # unflatten возвращает [AL,DL-1,...,D1].
+    # У dwt_decompose первый элемент (D1) длиннее последнего (AL).
+    if len(coeffs) >= 2 and len(coeffs[0]) <= len(coeffs[-1]):
+        # Формат dwt_decompose: [D1, D2, ..., DL, AL]
+        # Реверсируем: [AL, DL, ..., D2, D1]
+        coeffs = coeffs[::-1]
+
+    # Начинаем с аппроксимации (первый элемент = AL)
     a = coeffs[0].astype(np.float32)
 
     # Восстанавливаем по уровням (от грубого к детальному)

@@ -1479,8 +1479,6 @@ class Worker(QObject):
         2. Собрать метрики
         3. Отправить результат через сигнал
         """
-        # DEBUG: print to stdout (visible in console even from worker thread)
-        print(f"[WORKER] run() called, files={len(self.wav_paths)}, parallel={self._parallel}", flush=True)
         self._log.info("worker_start", extra={"files": len(self.wav_paths), "parallel": self._parallel})
         self._ui_log(f"▶ Запуск обработки: {len(self.wav_paths)} файлов")
 

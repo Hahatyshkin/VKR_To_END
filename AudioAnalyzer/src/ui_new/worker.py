@@ -1150,6 +1150,230 @@ class Worker(QObject):
         return results
 
     # =========================================================================
+    # АСИНХРОННЫЙ РАСЧЁТ МЕТРИК
+    # =========================================================================
+
+    def _compute_metrics_async(
+        self,
+        original_wav: str,
+        items: List[Tuple[str, str, float]],
+        progress_cb: Optional[Callable[[int, int, str], None]] = None,
+        weights: Optional[Dict[str, float]] = None,
+    ) -> List[Dict]:
+        """Вычислить метрики асинхронно через ThreadPoolExecutor.
+
+        Каждый вариант (метод) рассчитывается в отдельном потоке.
+        После сбора всех результатов выполняется нормализация и score.
+
+        Параметры:
+        ----------
+        original_wav : str
+            Путь к исходному WAV
+        items : list of (variant, path, time_sec)
+        progress_cb : callable(idx, total, msg) or None
+        weights : dict or None
+
+        Возвращает:
+        --------
+        list[dict] — результаты с метриками и score
+        """
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        # Импортируем функции для загрузки аудио
+        try:
+            from processing.codecs import load_wav_mono, decode_audio_to_mono, get_audio_meta
+        except ImportError:
+            from src.processing.codecs import load_wav_mono, decode_audio_to_mono, get_audio_meta
+
+        try:
+            from processing.metrics import compute_lsd_db, compute_snr_db, compute_rmse
+            from processing.metrics import compute_si_sdr_db, compute_spectral_convergence
+            from processing.metrics import compute_spectral_centroid_diff_hz, compute_spectral_cosine_similarity
+            from processing.metrics import compute_stoi_simplified, compute_pesq_approx, compute_pesq_mos
+        except ImportError:
+            from src.processing.metrics import (
+                compute_lsd_db, compute_snr_db, compute_rmse,
+                compute_si_sdr_db, compute_spectral_convergence,
+                compute_spectral_centroid_diff_hz, compute_spectral_cosine_similarity,
+                compute_stoi_simplified, compute_pesq_approx, compute_pesq_mos,
+            )
+
+        # Загружаем референс один раз
+        orig_meta = get_audio_meta(original_wav)
+        ref, sr_ref = load_wav_mono(original_wav)
+
+        total = len(items)
+        if total == 0:
+            return []
+
+        # Функция расчёта метрик для одного варианта
+        def compute_one(idx: int, variant: str, path: str, time_s: float) -> Dict:
+            """Вычислить все метрики для одного варианта."""
+            meta = get_audio_meta(path)
+            sig, sr = decode_audio_to_mono(path)
+
+            # 10 метрик с прогрессом
+            metric_fns = [
+                ('LSD',        lambda: float(compute_lsd_db(ref, sig, sr_ref, sr))),
+                ('SNR',        lambda: float(compute_snr_db(ref, sig))),
+                ('Spec Conv',  lambda: float(compute_spectral_convergence(ref, sig, sr_ref, sr))),
+                ('RMSE',       lambda: float(compute_rmse(ref, sig))),
+                ('SI-SDR',     lambda: float(compute_si_sdr_db(ref, sig))),
+                ('Centroid Δ', lambda: float(compute_spectral_centroid_diff_hz(ref, sig, sr_ref, sr))),
+                ('Cosine',     lambda: float(compute_spectral_cosine_similarity(ref, sig, sr_ref, sr))),
+                ('STOI',       lambda: float(compute_stoi_simplified(ref, sig, sr_ref, sr))),
+                ('PESQ',       lambda: float(compute_pesq_approx(ref, sig, sr_ref, sr))),
+                ('MOS',        lambda: float(compute_pesq_mos(ref, sig, sr_ref, sr))),
+            ]
+
+            vals = {}
+            for mname, fn in metric_fns:
+                if self._cancelled:
+                    break
+                if progress_cb:
+                    progress_cb(idx, total, f"{variant}: {mname}")
+                try:
+                    vals[mname] = fn()
+                except Exception as e:
+                    self._log.warning(f"metric_error", extra={
+                        "variant": variant, "metric": mname, "error": str(e)
+                    })
+                    vals[mname] = float("nan")
+
+            if progress_cb:
+                progress_cb(idx, total, f"{variant}: готово")
+
+            return {
+                "variant": variant,
+                "path": path,
+                "size_bytes": os.path.getsize(path),
+                "sample_rate_hz": meta["sample_rate_hz"],
+                "bit_depth_bits": meta["bit_depth_bits"],
+                "bitrate_bps": meta["bitrate_bps"],
+                "time_sec": float(time_s),
+                "lsd_db": vals.get('LSD', float("nan")),
+                "snr_db": vals.get('SNR', float("nan")),
+                "spec_conv": vals.get('Spec Conv', float("nan")),
+                "rmse": vals.get('RMSE', float("nan")),
+                "si_sdr_db": vals.get('SI-SDR', float("nan")),
+                "spec_centroid_diff_hz": vals.get('Centroid Δ', float("nan")),
+                "spec_cosine": vals.get('Cosine', float("nan")),
+                "stoi": vals.get('STOI', float("nan")),
+                "pesq": vals.get('PESQ', float("nan")),
+                "mos": vals.get('MOS', float("nan")),
+                "orig_sample_rate_hz": orig_meta["sample_rate_hz"],
+                "orig_bit_depth_bits": orig_meta["bit_depth_bits"],
+                "orig_bitrate_bps": orig_meta["bitrate_bps"],
+            }
+
+        # Запускаем расчёт для каждого варианта в отдельном потоке
+        results: List[Dict] = []
+        max_metric_workers = min(total, self._max_workers)
+
+        with ThreadPoolExecutor(max_workers=max_metric_workers) as executor:
+            futures = {}
+            for idx, (variant, path, time_s) in enumerate(items):
+                future = executor.submit(compute_one, idx, variant, path, time_s)
+                futures[future] = (idx, variant)
+
+            for future in as_completed(futures):
+                if self._cancelled:
+                    break
+                idx, variant = futures[future]
+                try:
+                    result = future.result()
+                    # Вычисляем дельты
+                    result["delta_sr"] = result["sample_rate_hz"] - result["orig_sample_rate_hz"]
+                    result["delta_bd"] = result["bit_depth_bits"] - result["orig_bit_depth_bits"]
+                    result["delta_br_bps"] = result["bitrate_bps"] - result["orig_bitrate_bps"]
+                    results.append(result)
+
+                    self._log.info(
+                        f"metrics_done [{idx+1}/{total}]",
+                        extra={
+                            "variant": variant,
+                            "lsd_db": result.get("lsd_db"),
+                            "snr_db": result.get("snr_db"),
+                            "spec_conv": result.get("spec_conv"),
+                            "rmse": result.get("rmse"),
+                            "si_sdr_db": result.get("si_sdr_db"),
+                            "spec_centroid_diff_hz": result.get("spec_centroid_diff_hz"),
+                            "spec_cosine": result.get("spec_cosine"),
+                            "stoi": result.get("stoi"),
+                            "pesq": result.get("pesq"),
+                            "mos": result.get("mos"),
+                        }
+                    )
+                except Exception as e:
+                    self._log.error(f"metrics_variant_error", extra={
+                        "variant": variant, "error": str(e)
+                    })
+
+        if not results:
+            return []
+
+        # Нормализация min-max и расчёт score
+        if progress_cb:
+            progress_cb(total, total, "Нормализация и расчёт score…")
+
+        def _minmax(vals):
+            vals_f = [v for v in vals if v == v]
+            if not vals_f:
+                return None, None
+            return min(vals_f), max(vals_f)
+
+        eps = 1e-12
+        lsd_min, lsd_max = _minmax([r["lsd_db"] for r in results])
+        sc_min, sc_max = _minmax([r["spec_conv"] for r in results])
+        t_min, t_max = _minmax([r["time_sec"] for r in results])
+        snr_min, snr_max = _minmax([r["snr_db"] for r in results])
+        rmse_min, rmse_max = _minmax([r.get("rmse") for r in results])
+        sisdr_min, sisdr_max = _minmax([r.get("si_sdr_db") for r in results])
+        scdiff_min, scdiff_max = _minmax([r.get("spec_centroid_diff_hz") for r in results])
+        cos_min, cos_max = _minmax([r.get("spec_cosine") for r in results])
+        stoi_min, stoi_max = _minmax([r.get("stoi") for r in results])
+        pesq_min, pesq_max = _minmax([r.get("pesq") for r in results])
+        mos_min, mos_max = _minmax([r.get("mos") for r in results])
+
+        w = weights or {
+            'lsd': 0.15, 'snr': 0.15, 'rmse': 0.10, 'si_sdr': 0.10,
+            'spec_conv': 0.10, 'centroid_diff': 0.05, 'cosine': 0.05,
+            'time': 0.05, 'stoi': 0.10, 'pesq': 0.10, 'mos': 0.05,
+        }
+
+        for r in results:
+            # "ниже-лучше" → инвертируем
+            lsd_n = 0.0 if lsd_min is None else (lsd_max - r["lsd_db"]) / ((lsd_max - lsd_min) + eps)
+            sc_n = 0.0 if sc_min is None else (sc_max - r["spec_conv"]) / ((sc_max - sc_min) + eps)
+            rmse_n = 0.0 if rmse_min is None else (rmse_max - r["rmse"]) / ((rmse_max - rmse_min) + eps)
+            scdiff_n = 0.0 if scdiff_min is None else (scdiff_max - r["spec_centroid_diff_hz"]) / ((scdiff_max - scdiff_min) + eps)
+            t_n = 0.0 if t_min is None else (t_max - r["time_sec"]) / ((t_max - t_min) + eps)
+            # "выше-лучше"
+            snr_n = 0.0 if snr_min is None else (r["snr_db"] - snr_min) / ((snr_max - snr_min) + eps)
+            sisdr_n = 0.0 if sisdr_min is None else (r["si_sdr_db"] - sisdr_min) / ((sisdr_max - sisdr_min) + eps)
+            cos_n = 0.0 if cos_min is None else (r["spec_cosine"] - cos_min) / ((cos_max - cos_min) + eps)
+            stoi_n = 0.0 if stoi_min is None else (r["stoi"] - stoi_min) / ((stoi_max - stoi_min) + eps)
+            pesq_n = 0.0 if pesq_min is None else (r["pesq"] - pesq_min) / ((pesq_max - pesq_min) + eps)
+            mos_n = 0.0 if mos_min is None else (r["mos"] - mos_min) / ((mos_max - mos_min) + eps)
+
+            r["score"] = float(
+                w.get('lsd', 0.15) * lsd_n +
+                w.get('spec_conv', 0.10) * sc_n +
+                w.get('snr', 0.15) * snr_n +
+                w.get('rmse', 0.10) * rmse_n +
+                w.get('si_sdr', 0.10) * sisdr_n +
+                w.get('centroid_diff', 0.05) * scdiff_n +
+                w.get('cosine', 0.05) * cos_n +
+                w.get('time', 0.05) * t_n +
+                w.get('stoi', 0.10) * stoi_n +
+                w.get('pesq', 0.10) * pesq_n +
+                w.get('mos', 0.05) * mos_n
+            )
+
+        self._log.info("metrics_async_done", extra={"count": len(results)})
+        return results
+
+    # =========================================================================
     # ОСНОВНОЙ ЦИКЛ
     # =========================================================================
 
@@ -1204,13 +1428,16 @@ class Worker(QObject):
                     break
 
                 # =====================================================================
-                # Вычисление метрик
+                # Вычисление метрик (асинхронно через ThreadPoolExecutor)
                 # =====================================================================
-                # Формируем список для метрик
+                # Формируем список для метрик — все методы включая Daubechies и MDCT
                 items: List[Tuple[str, str, float]] = []
-                
-                # Порядок для отображения
-                order = ['standard', 'fwht', 'fft', 'dct', 'dwt', 'huffman', 'rosenbrock']
+
+                # Порядок для отображения (все 9 методов)
+                order = [
+                    'standard', 'fwht', 'fft', 'dct', 'dwt',
+                    'huffman', 'rosenbrock', 'daubechies', 'mdct',
+                ]
                 display_names = {
                     'standard': 'Стандартный MP3',
                     'fwht': 'FWHT MP3',
@@ -1219,17 +1446,49 @@ class Worker(QObject):
                     'dwt': 'DWT MP3',
                     'huffman': 'Хаффман MP3',
                     'rosenbrock': 'Розенброк MP3',
+                    'daubechies': 'Daubechies DWT MP3',
+                    'mdct': 'MDCT MP3',
                 }
-                
+
                 for name in order:
                     if name in method_results and method_results[name].success:
                         r = method_results[name]
                         items.append((display_names[name], r.mp3_path, r.time_sec))
 
+                # Callback прогресса для метрик
+                def metrics_progress_cb(idx: int, total: int, msg: str):
+                    if not self._cancelled:
+                        self._ui_log(f"  ⏳ Метрики [{idx+1}/{total}]: {msg}")
+
+                # Веса метрик из конфига
                 try:
-                    self._ui_log("  ⏳ Вычисление метрик...")
-                    results = _compute_metrics_batch(wav_path, items)
-                    self._ui_log(f"  ✓ Метрики: {len(results)} методов")
+                    from config import MetricsConfig
+                    mc = MetricsConfig()
+                    metrics_weights = {
+                        'lsd': mc.weight_lsd,
+                        'snr': mc.weight_snr,
+                        'rmse': mc.weight_rmse,
+                        'si_sdr': mc.weight_si_sdr,
+                        'spec_conv': mc.weight_spectral_conv,
+                        'centroid_diff': mc.weight_centroid_diff,
+                        'cosine': mc.weight_cosine_sim,
+                        'time': mc.weight_time,
+                        'stoi': mc.weight_stoi,
+                        'pesq': mc.weight_pesq,
+                        'mos': mc.weight_mos,
+                    }
+                except Exception:
+                    metrics_weights = None
+
+                try:
+                    self._ui_log(f"  ⏳ Вычисление метрик для {len(items)} методов...")
+                    self.status.emit(f"Вычисление метрик: {os.path.basename(wav_path)}…")
+
+                    # Асинхронный расчёт метрик через ThreadPoolExecutor
+                    results = self._compute_metrics_async(
+                        wav_path, items, metrics_progress_cb, metrics_weights
+                    )
+                    self._ui_log(f"  ✓ Метрики: {len(results)} методов рассчитаны")
                 except Exception as e:
                     self._log.error("metrics_error", extra={"error": str(e)})
                     self._ui_log(f"  ⚠ Ошибка метрик: {e}")

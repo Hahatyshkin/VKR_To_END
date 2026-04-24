@@ -431,6 +431,8 @@ def compute_metrics_batch(
     load_wav_func: Callable[[str], Tuple[np.ndarray, int]],
     decode_audio_func: Callable[[str], Tuple[np.ndarray, int]],
     get_meta_func: Callable[[str], Dict[str, int]],
+    progress_cb: Optional[Callable[[int, int, str], None]] = None,
+    weights: Optional[Dict[str, float]] = None,
 ) -> List[Dict]:
     """Посчитать метрики качества для набора результатов.
 
@@ -449,49 +451,91 @@ def compute_metrics_batch(
     - load_wav_func: функция загрузки WAV (из codecs)
     - decode_audio_func: функция декодирования аудио (из codecs)
     - get_meta_func: функция получения метаданных (из codecs)
+    - progress_cb: опциональный callback(i, total, msg) для отчёта прогресса
+    - weights: опциональный словарь весов метрик. Если None — используются
+      веса по умолчанию (совпадают с MetricsConfig).
 
     Возвращает: список словарей с полями размера, метрик, времени и score.
     """
+    # Веса по умолчанию (синхронизированы с config.MetricsConfig)
+    _default_weights = {
+        'lsd': 0.15, 'snr': 0.15, 'rmse': 0.10, 'si_sdr': 0.10,
+        'spec_conv': 0.10, 'centroid_diff': 0.05, 'cosine': 0.05,
+        'time': 0.05, 'stoi': 0.10, 'pesq': 0.10, 'mos': 0.05,
+    }
+    w = weights if weights is not None else _default_weights
+
     # Метаданные исходника
+    logger.info("metrics_batch_start", extra={
+        "original": original_wav,
+        "variants": len(items),
+    })
     orig = get_meta_func(original_wav)
     ref, sr_ref = load_wav_func(original_wav)
 
-    def metrics_for(path: str) -> Tuple[Dict, float, float, float, float, float, float, float, float, float, float]:
-        """Вычислить все метрики для одного файла."""
+    # Названия метрик для логирования
+    _metric_names = [
+        ('LSD', 'lsd_db'),
+        ('SNR', 'snr_db'),
+        ('Spec Conv', 'spec_conv'),
+        ('RMSE', 'rmse'),
+        ('SI-SDR', 'si_sdr_db'),
+        ('Centroid Δ', 'spec_centroid_diff_hz'),
+        ('Cosine', 'spec_cosine'),
+        ('STOI', 'stoi'),
+        ('PESQ', 'pesq'),
+        ('MOS', 'mos'),
+    ]
+
+    def metrics_for(path: str, variant: str, idx: int, total: int) -> Tuple[Dict, float, float, float, float, float, float, float, float, float, float]:
+        """Вычислить все метрики для одного файла с логированием."""
+        if progress_cb:
+            progress_cb(idx, total, f"Загрузка {variant}…")
         meta = get_meta_func(path)
         sig, sr = decode_audio_func(path)
-        lsd = compute_lsd_db(ref, sig, sr_ref, sr)
-        snr = compute_snr_db(ref, sig)
-        sc = compute_spectral_convergence(ref, sig, sr_ref, sr)
-        rmse = compute_rmse(ref, sig)
-        si_sdr = compute_si_sdr_db(ref, sig)
-        sc_diff = compute_spectral_centroid_diff_hz(ref, sig, sr_ref, sr)
-        cos_sim = compute_spectral_cosine_similarity(ref, sig, sr_ref, sr)
-        stoi = compute_stoi_simplified(ref, sig, sr_ref, sr)
-        pesq = compute_pesq_approx(ref, sig, sr_ref, sr)
-        mos = compute_pesq_mos(ref, sig, sr_ref, sr)
-        return meta, float(lsd), float(snr), float(sc), float(rmse), float(si_sdr), float(sc_diff), float(cos_sim), float(stoi), float(pesq), float(mos)
 
-    results: List[Dict] = []
-    for variant, path, time_s in items:
-        meta, lsd, snr, sc, rmse, sisdr, scdiff, cossim, stoi, pesq, mos = metrics_for(path)
+        vals = {}
+        for mi, (mname, mkey) in enumerate(_metric_names):
+            if progress_cb:
+                progress_cb(idx, total, f"{variant}: {mname}")
+            if mkey == 'lsd_db':
+                vals[mkey] = float(compute_lsd_db(ref, sig, sr_ref, sr))
+            elif mkey == 'snr_db':
+                vals[mkey] = float(compute_snr_db(ref, sig))
+            elif mkey == 'spec_conv':
+                vals[mkey] = float(compute_spectral_convergence(ref, sig, sr_ref, sr))
+            elif mkey == 'rmse':
+                vals[mkey] = float(compute_rmse(ref, sig))
+            elif mkey == 'si_sdr_db':
+                vals[mkey] = float(compute_si_sdr_db(ref, sig))
+            elif mkey == 'spec_centroid_diff_hz':
+                vals[mkey] = float(compute_spectral_centroid_diff_hz(ref, sig, sr_ref, sr))
+            elif mkey == 'spec_cosine':
+                vals[mkey] = float(compute_spectral_cosine_similarity(ref, sig, sr_ref, sr))
+            elif mkey == 'stoi':
+                vals[mkey] = float(compute_stoi_simplified(ref, sig, sr_ref, sr))
+            elif mkey == 'pesq':
+                vals[mkey] = float(compute_pesq_approx(ref, sig, sr_ref, sr))
+            elif mkey == 'mos':
+                vals[mkey] = float(compute_pesq_mos(ref, sig, sr_ref, sr))
 
         logger.info(
             "metrics_computed",
-            extra={
-                "variant": variant,
-                "path": path,
-                "lsd_db": float(lsd),
-                "snr_db": float(snr),
-                "spec_conv": float(sc),
-                "rmse": float(rmse),
-                "si_sdr_db": float(sisdr),
-                "spec_centroid_diff_hz": float(scdiff),
-                "spec_cosine": float(cossim),
-                "stoi": float(stoi),
-                "pesq": float(pesq),
-                "mos": float(mos),
-            }
+            extra={"variant": variant, "path": path, **vals},
+        )
+
+        return (
+            meta,
+            vals['lsd_db'], vals['snr_db'], vals['spec_conv'],
+            vals['rmse'], vals['si_sdr_db'], vals['spec_centroid_diff_hz'],
+            vals['spec_cosine'], vals['stoi'], vals['pesq'], vals['mos'],
+        )
+
+    results: List[Dict] = []
+    total_items = len(items)
+    for i, (variant, path, time_s) in enumerate(items):
+        meta, lsd, snr, sc, rmse, sisdr, scdiff, cossim, stoi, pesq, mos = metrics_for(
+            path, variant, i, total_items,
         )
 
         out = {
@@ -520,6 +564,26 @@ def compute_metrics_batch(
         out["delta_bd"] = out["bit_depth_bits"] - out["orig_bit_depth_bits"]
         out["delta_br_bps"] = out["bitrate_bps"] - out["orig_bitrate_bps"]
         results.append(out)
+
+        logger.info(
+            f"metrics_done [{i+1}/{total_items}]",
+            extra={
+                "variant": variant,
+                "lsd_db": float(lsd),
+                "snr_db": float(snr),
+                "spec_conv": float(sc),
+                "rmse": float(rmse),
+                "si_sdr_db": float(sisdr),
+                "spec_centroid_diff_hz": float(scdiff),
+                "spec_cosine": float(cossim),
+                "stoi": float(stoi),
+                "pesq": float(pesq),
+                "mos": float(mos),
+            }
+        )
+
+    if progress_cb:
+        progress_cb(total_items, total_items, "Нормализация и расчёт score…")
 
     # Агрегированный балл (min-max нормировка)
     def _minmax(vals: List[float]) -> Tuple[Optional[float], Optional[float]]:
@@ -558,27 +622,29 @@ def compute_metrics_batch(
         sisdr_n = 0.0 if sisdr_min is None else (r["si_sdr_db"] - sisdr_min) / ((sisdr_max - sisdr_min) + eps)
         cos_n = 0.0 if cos_min is None else (r["spec_cosine"] - cos_min) / ((cos_max - cos_min) + eps)
 
-        # Новые метрики "выше-лучше"
+        # Метрики "выше-лучше"
         stoi_n = 0.0 if stoi_min is None else (r["stoi"] - stoi_min) / ((stoi_max - stoi_min) + eps)
         pesq_n = 0.0 if pesq_min is None else (r["pesq"] - pesq_min) / ((pesq_max - pesq_min) + eps)
         mos_n = 0.0 if mos_min is None else (r["mos"] - mos_min) / ((mos_max - mos_min) + eps)
 
         # Взвешенная сумма (все компоненты приведены к "выше-лучше")
         # Чем выше score, тем лучше метод
+        # Веса берутся из параметра weights (по умолчанию — из MetricsConfig)
         r["score"] = float(
-            0.15 * lsd_n +       # LSD: ниже лучше → инвертировано
-            0.10 * sc_n +        # Spectral Conv: ниже лучше → инвертировано
-            0.15 * snr_n +       # SNR: выше лучше
-            0.10 * rmse_n +      # RMSE: ниже лучше → инвертировано
-            0.10 * sisdr_n +     # SI-SDR: выше лучше
-            0.05 * scdiff_n +    # Centroid Δ: ниже лучше → инвертировано
-            0.05 * cos_n +       # Cosine: выше лучше
-            0.05 * t_n +         # Time: ниже лучше → инвертировано
-            0.10 * stoi_n +      # STOI: выше лучше
-            0.10 * pesq_n +      # PESQ: выше лучше
-            0.05 * mos_n         # MOS: выше лучше
+            w.get('lsd', 0.15) * lsd_n +
+            w.get('spec_conv', 0.10) * sc_n +
+            w.get('snr', 0.15) * snr_n +
+            w.get('rmse', 0.10) * rmse_n +
+            w.get('si_sdr', 0.10) * sisdr_n +
+            w.get('centroid_diff', 0.05) * scdiff_n +
+            w.get('cosine', 0.05) * cos_n +
+            w.get('time', 0.05) * t_n +
+            w.get('stoi', 0.10) * stoi_n +
+            w.get('pesq', 0.10) * pesq_n +
+            w.get('mos', 0.05) * mos_n
         )
 
+    logger.info("metrics_batch_done", extra={"count": len(results)})
     return results
 
 
@@ -730,11 +796,12 @@ def compute_stoi(
         correlations.append(corr)
     
     # Усредняем корреляции
-    # Примечание: стандартный STOI преобразует [-1,1] в [0,1] через (corr+1)/2
-    # Мы сохраняем эту логику для совместимости с диапазоном STOI [0,1]
-    mean_corr = np.mean(correlations)
-    # Преобразуем из [-1, 1] в [0, 1] - это корректно для STOI
-    return float((mean_corr + 1.0) / 2.0)
+    # Стандартный STOI: усредняем корреляции по полосам,
+    # затем ограничиваем диапазон [0, 1] (clip).
+    # Примечание: референсная реализация использует clip, а не (corr+1)/2,
+    # т.к. отрицательная корреляция означает плохое совпадение, а не «среднее».
+    mean_corr = float(np.mean(correlations))
+    return float(max(0.0, min(1.0, mean_corr)))
 
 
 def compute_stoi_simplified(

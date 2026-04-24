@@ -172,19 +172,17 @@ def standard_convert_to_mp3(
 def _compute_metrics_batch(
     original_wav: str,
     items: List[Tuple[str, str, float]],
+    progress_cb=None,
+    weights=None,
 ) -> List[Dict]:
     """Посчитать метрики качества для набора результатов.
 
     Для каждого обработанного файла вычисляет:
     - Размер файла
-    - SNR (Signal-to-Noise Ratio)
-    - RMSE (Root Mean Square Error)
-    - SI-SDR (Scale-Invariant Signal-to-Distortion Ratio)
-    - LSD (Log-Spectral Distance)
-    - Spectral Convergence
-    - Spectral Centroid Difference
-    - Spectral Cosine Similarity
-    - Общий score
+    - SNR, RMSE, SI-SDR, LSD, Spectral Convergence
+    - Spectral Centroid Difference, Cosine Similarity
+    - STOI, PESQ, MOS
+    - Общий score (взвешенный)
 
     Параметры:
     ----------
@@ -192,19 +190,15 @@ def _compute_metrics_batch(
         Путь к исходному WAV (референс)
     items : List[Tuple[str, str, float]]
         Список кортежей (variant, path_to_mp3, time_sec)
+    progress_cb : callable(i, total, msg) или None
+        Callback для отображения прогресса расчёта метрик
+    weights : dict или None
+        Словарь весов метрик. Если None — используются веса по умолчанию.
 
     Возвращает:
     -----------
     List[Dict]
         Список словарей с полями размера, метрик, времени и score
-
-    Пример:
-    -------
-    >>> items = [
-    ...     ("Стандартный MP3", "output/audio_std.mp3", 1.2),
-    ...     ("FWHT MP3", "output/audio_fwht.mp3", 2.5),
-    ... ]
-    >>> results = _compute_metrics_batch("audio.wav", items)
     """
     return _compute_metrics_batch_internal(
         original_wav,
@@ -212,6 +206,8 @@ def _compute_metrics_batch(
         load_wav_func=load_wav_mono,
         decode_audio_func=decode_audio_to_mono,
         get_meta_func=get_audio_meta,
+        progress_cb=progress_cb,
+        weights=weights,
     )
 
 

@@ -188,10 +188,9 @@ def make_qmf_pair(h0: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray, n
     # Low-pass reconstruction: h1 = h0 reversed
     h1 = h0[::-1].copy()
     
-    # High-pass reconstruction: g1 = g0 reversed with alternating sign
-    g1 = np.zeros_like(g0)
-    for n in range(N):
-        g1[n] = ((-1) ** n) * g0[N - 1 - n]
+    # High-pass reconstruction: g1 = g0 reversed (perfect reconstruction)
+    # g1[n] = g0[N-1-n] = (-1)^(N-1-n) * h0[n]
+    g1 = g0[::-1].copy()
     
     return h0, g0, h1, g1
 
@@ -201,7 +200,9 @@ def dwt_1level_daubechies(
     h0: np.ndarray,
     g0: np.ndarray
 ) -> Tuple[np.ndarray, np.ndarray]:
-    """Одноуровневое DWT с произвольным фильтром.
+    """Одноуровневое DWT с произвольным фильтром (numpy-оптимизация).
+    
+    Использует np.convolve + downsampling вместо Python-циклов.
     
     Параметры:
     ----------
@@ -217,24 +218,18 @@ def dwt_1level_daubechies(
     Tuple[np.ndarray, np.ndarray]
         (A, D) — аппроксимация и детали
     """
-    N = len(x)
+    # Свертка + downsampling через numpy (в ~100x быстрее Python-циклов)
+    # a[k] = sum_n x[n] * h0[2k - n + L - 1]  ≡  conv(x, h0)[2k+L-1]  =  conv(x, h0)[L-1::2]
     L = len(h0)
-    
-    # Свертка + downsampling
-    # A[k] = sum_n x[n] * h0[2k - n + L - 1]
-    # D[k] = sum_n x[n] * g0[2k - n + L - 1]
-    
-    n_approx = N // 2
-    a = np.zeros(n_approx, dtype=np.float32)
-    d = np.zeros(n_approx, dtype=np.float32)
-    
-    for k in range(n_approx):
-        for n in range(L):
-            idx = 2 * k - n + L - 1
-            if 0 <= idx < N:
-                a[k] += x[idx] * h0[n]
-                d[k] += x[idx] * g0[n]
-    
+    conv_lo = np.convolve(x.astype(np.float64), h0.astype(np.float64))
+    conv_hi = np.convolve(x.astype(np.float64), g0.astype(np.float64))
+    # Берём каждый 2-й элемент начиная с L-1 (downsampling)
+    a = conv_lo[L - 1::2].astype(np.float32)
+    d = conv_hi[L - 1::2].astype(np.float32)
+    # Обрезаем до ожидаемой длины (len(x) // 2)
+    n_approx = len(x) // 2
+    a = a[:n_approx]
+    d = d[:n_approx]
     return a, d
 
 
@@ -245,7 +240,9 @@ def idwt_1level_daubechies(
     g1: np.ndarray,
     orig_len: int
 ) -> np.ndarray:
-    """Обратное одноуровневое DWT.
+    """Обратное одноуровневое DWT (numpy-оптимизация).
+    
+    Upsampling + свертка через numpy вместо Python-циклов.
     
     Параметры:
     ----------
@@ -265,28 +262,16 @@ def idwt_1level_daubechies(
     np.ndarray
         Восстановленный сигнал
     """
-    N = len(a)
-    L = len(h1)
+    # Upsampling: вставляем нули между отсчётами, затем свёртка
+    # x[n] = sum_k a[k]*h1[n-2k] + d[k]*g1[n-2k] = conv(up_a, h1)[n] + conv(up_d, g1)[n]
+    up_a = np.zeros(2 * len(a), dtype=np.float64)
+    up_a[::2] = a.astype(np.float64)
+    up_d = np.zeros(2 * len(d), dtype=np.float64)
+    up_d[::2] = d.astype(np.float64)
     
-    # Upsampling + свертка + суммирование
-    out_len = 2 * N + L - 1
-    x = np.zeros(out_len, dtype=np.float32)
-    
-    # Upsampling a и свертка с h1
-    for k in range(N):
-        for n in range(L):
-            idx = 2 * k + n
-            if idx < out_len:
-                x[idx] += a[k] * h1[n]
-    
-    # Upsampling d и свертка с g1
-    for k in range(N):
-        for n in range(L):
-            idx = 2 * k + n
-            if idx < out_len:
-                x[idx] += d[k] * g1[n]
-    
-    return x[:orig_len]
+    x = np.convolve(up_a, h1.astype(np.float64)) + np.convolve(up_d, g1.astype(np.float64))
+    # Без сдвига (shift=0): реконструкция начинается с индекса 0
+    return x[:orig_len].astype(np.float32)
 
 
 def dwt_decompose_daubechies(
@@ -356,13 +341,12 @@ def dwt_reconstruct_daubechies(
     for i in range(len(coeffs) - 2, -1, -1):
         d = coeffs[i].astype(np.float64)
         
-        # Выравнивание длин
-        min_len = min(len(a), len(d))
+        # Выравнивание длин: дополняем нулями более короткий массив
         if len(a) != len(d):
             if len(d) < len(a):
                 d = np.pad(d, (0, len(a) - len(d)))
             else:
-                d = d[:len(a)]
+                a = np.pad(a, (0, len(d) - len(a)))
         
         expected_len = len(a) * 2
         a = idwt_1level_daubechies(a, d, h1, g1, expected_len)
@@ -394,7 +378,7 @@ def mdct_window(N: int) -> np.ndarray:
 
 
 def mdct(x: np.ndarray, N: int = 1024) -> np.ndarray:
-    """Modified Discrete Cosine Transform.
+    """Modified Discrete Cosine Transform (numpy-оптимизация, O(N^2) вместо O(N^3)).
     
     MDCT с 50% перекрытием. Для блока длиной 2N возвращает N коэффициентов.
     
@@ -408,36 +392,36 @@ def mdct(x: np.ndarray, N: int = 1024) -> np.ndarray:
     Возвращает:
     -----------
     np.ndarray
-        MDCT коэффициенты
+        MDCT коэффициенты (n_blocks x N)
     """
     L = len(x)
-    if L % N != 0:
-        x = np.pad(x, (0, N - (L % N)))
+    n_blocks = max(1, (L + N - 1) // N)  # ceiling division
+    # Паддинг: последний блок нужен длиной 2N, начинающийся с (n_blocks-1)*N
+    padded_len = (n_blocks - 1) * N + 2 * N  # = (n_blocks + 1) * N
+    if L < padded_len:
+        x = np.pad(x, (0, padded_len - L))
         L = len(x)
     
     win = mdct_window(N)
-    n_blocks = L // N
     
-    # Выходной массив
+    # Предвычисляем матрицу базисных функций MDCT (N x 2N)
+    # M[k, n] = cos(pi/N * (n + 0.5 + N/2) * (k + 0.5))
+    n_idx = np.arange(2 * N, dtype=np.float64)
+    k_idx = np.arange(N, dtype=np.float64)
+    M = np.cos(np.pi / N * np.outer(k_idx + 0.5, n_idx + 0.5 + N / 2))
+    
     coeffs = np.zeros((n_blocks, N), dtype=np.float32)
     
     for b in range(n_blocks):
-        # Блок длиной 2N с 50% перекрытием
         start = b * N
-        block = x[start:start + 2 * N] * win
-        
-        # MDCT формула
-        for k in range(N):
-            c = 0.0
-            for n in range(2 * N):
-                c += block[n] * np.cos(np.pi / N * (n + 0.5 + N / 2) * (k + 0.5))
-            coeffs[b, k] = c
+        block = x[start:start + 2 * N].astype(np.float64) * win
+        coeffs[b] = (M @ block).astype(np.float32)
     
     return coeffs
 
 
 def imdct(coeffs: np.ndarray, N: int = 1024) -> np.ndarray:
-    """Inverse Modified Discrete Cosine Transform.
+    """Inverse Modified Discrete Cosine Transform (numpy-оптимизация, O(N^2) вместо O(N^3)).
     
     Параметры:
     ----------
@@ -454,19 +438,18 @@ def imdct(coeffs: np.ndarray, N: int = 1024) -> np.ndarray:
     n_blocks = coeffs.shape[0]
     win = mdct_window(N)
     
+    # Предвычисляем транспонированную матрицу базисных функций IMDCT
+    n_idx = np.arange(2 * N, dtype=np.float64)
+    k_idx = np.arange(N, dtype=np.float64)
+    M_T = np.cos(np.pi / N * np.outer(n_idx + 0.5 + N / 2, k_idx + 0.5))  # 2N x N
+    
     # Выходной массив с перекрытием
     out_len = (n_blocks + 1) * N
     x = np.zeros(out_len, dtype=np.float32)
-    overlap = np.zeros(N, dtype=np.float32)
     
     for b in range(n_blocks):
-        # IMDCT для блока
-        block = np.zeros(2 * N, dtype=np.float32)
-        for n in range(2 * N):
-            s = 0.0
-            for k in range(N):
-                s += coeffs[b, k] * np.cos(np.pi / N * (n + 0.5 + N / 2) * (k + 0.5))
-            block[n] = s * (2.0 / N)
+        # IMDCT: block = M_T @ coeffs[b] * (2.0/N)
+        block = (M_T @ coeffs[b].astype(np.float64) * (2.0 / N)).astype(np.float32)
         
         # Применение окна и overlap-add
         block *= win

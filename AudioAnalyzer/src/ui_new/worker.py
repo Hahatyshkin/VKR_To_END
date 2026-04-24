@@ -411,6 +411,7 @@ class DaubechiesMethod:
         except ImportError:
             from src.processing.transforms.extended import daubechies_dwt_and_mp3
         
+        logger.info("daubechies_start_parallel", extra={"file": wav_path})
         return daubechies_dwt_and_mp3(
             wav_path, out_dir,
             block_size=settings.get('block_size', 2048),
@@ -443,6 +444,7 @@ class MDCTMethod:
         except ImportError:
             from src.processing.transforms.extended import mdct_and_mp3
         
+        logger.info("mdct_start_parallel", extra={"file": wav_path})
         return mdct_and_mp3(
             wav_path, out_dir,
             block_size=settings.get('block_size', 1024),
@@ -1165,6 +1167,8 @@ class Worker(QObject):
             except ImportError:
                 from src.processing.transforms.extended import daubechies_dwt_and_mp3
 
+            self._ui_log(f"  ⏳ Daubechies DWT (db4): запуск...")
+            self._log.info("daubechies_start", extra={"file": wav_path})
             t_s7 = time.perf_counter()
             try:
                 daub_mp3, t_daub = daubechies_dwt_and_mp3(
@@ -1210,6 +1214,8 @@ class Worker(QObject):
             except ImportError:
                 from src.processing.transforms.extended import mdct_and_mp3
 
+            self._ui_log(f"  ⏳ MDCT: запуск...")
+            self._log.info("mdct_start", extra={"file": wav_path})
             t_s8 = time.perf_counter()
             try:
                 mdct_mp3, t_mdct = mdct_and_mp3(

@@ -97,6 +97,8 @@ from .transforms import (
     FWHTTransform,
     HuffmanLikeTransform,
     RosenbrockLikeTransform,
+    DaubechiesDWTTransform,
+    MDCTTransform,
 
     # Функции-обёртки
     fft_transform_and_mp3,
@@ -105,6 +107,8 @@ from .transforms import (
     fwht_transform_and_mp3,
     huffman_like_transform_and_mp3,
     rosenbrock_like_transform_and_mp3,
+    daubechies_dwt_and_mp3,
+    mdct_and_mp3,
 
     # Утилиты (для совместимости)
     load_audio_safe,
@@ -276,6 +280,8 @@ __all__ = [
     "FWHTTransform",
     "HuffmanLikeTransform",
     "RosenbrockLikeTransform",
+    "DaubechiesDWTTransform",
+    "MDCTTransform",
 
     # Функции-обёртки
     "fft_transform_and_mp3",
@@ -284,6 +290,8 @@ __all__ = [
     "fwht_transform_and_mp3",
     "huffman_like_transform_and_mp3",
     "rosenbrock_like_transform_and_mp3",
+    "daubechies_dwt_and_mp3",
+    "mdct_and_mp3",
 
     # Метрики (переэкспорт)
     "compute_snr_db",

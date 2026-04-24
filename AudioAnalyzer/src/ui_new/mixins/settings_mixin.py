@@ -57,6 +57,8 @@ METHOD_HEADERS = [
     ("dwt", "DWT"),
     ("huff", "Хаффман"),
     ("rb", "Розенброк"),
+    ("daub", "Daubechies"),
+    ("mdct", "MDCT"),
 ]
 
 METRICS_COLS = [

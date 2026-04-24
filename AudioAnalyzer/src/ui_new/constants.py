@@ -21,6 +21,8 @@ VARIANTS: List[str] = [
     "DWT MP3",
     "Хаффман MP3",
     "Розенброк MP3",
+    "Daubechies DWT MP3",
+    "MDCT MP3",
 ]
 
 # Соответствие имени варианта к суффиксу файла
@@ -32,6 +34,8 @@ VARIANT_SUFFIXES: Dict[str, str] = {
     "DWT MP3": "_dwt",
     "Хаффман MP3": "_huffman",
     "Розенброк MP3": "_rosenbrock",
+    "Daubechies DWT MP3": "_daubechies_db4",
+    "MDCT MP3": "_mdct",
 }
 
 # =============================================================================

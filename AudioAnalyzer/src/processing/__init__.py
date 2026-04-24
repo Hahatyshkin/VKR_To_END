@@ -93,6 +93,8 @@ from .audio_ops import (
     FWHTTransform,
     HuffmanLikeTransform,
     RosenbrockLikeTransform,
+    DaubechiesDWTTransform,
+    MDCTTransform,
 
     # Функции-обёртки
     fft_transform_and_mp3,
@@ -101,6 +103,8 @@ from .audio_ops import (
     fwht_transform_and_mp3,
     huffman_like_transform_and_mp3,
     rosenbrock_like_transform_and_mp3,
+    daubechies_dwt_and_mp3,
+    mdct_and_mp3,
 
     # Пакетный расчёт
     _compute_metrics_batch,
@@ -167,6 +171,8 @@ __all__ = [
     "FWHTTransform",
     "HuffmanLikeTransform",
     "RosenbrockLikeTransform",
+    "DaubechiesDWTTransform",
+    "MDCTTransform",
 
     # Функции-обёртки
     "fft_transform_and_mp3",
@@ -175,6 +181,8 @@ __all__ = [
     "fwht_transform_and_mp3",
     "huffman_like_transform_and_mp3",
     "rosenbrock_like_transform_and_mp3",
+    "daubechies_dwt_and_mp3",
+    "mdct_and_mp3",
 
     # Метрики
     "compute_snr_db",

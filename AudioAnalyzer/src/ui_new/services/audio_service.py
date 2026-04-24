@@ -92,11 +92,12 @@ class AudioProcessingService:
     """
     
     # Число методов обработки
-    TOTAL_METHODS: int = 7
+    TOTAL_METHODS: int = 9
     
     # Имена методов в порядке выполнения
     METHOD_ORDER: List[str] = [
-        "fwht", "fft", "dct", "dwt", "huffman", "rosenbrock", "standard"
+        "fwht", "fft", "dct", "dwt", "huffman", "rosenbrock", "standard",
+        "daubechies", "mdct",
     ]
     
     # Отображаемые имена методов
@@ -108,6 +109,8 @@ class AudioProcessingService:
         "huffman": "Хаффман",
         "rosenbrock": "Розенброк",
         "standard": "Стандартный",
+        "daubechies": "Daubechies DWT",
+        "mdct": "MDCT",
     }
     
     def __init__(self, config: AppConfig):
@@ -462,6 +465,24 @@ class AudioProcessingService:
         recommendations.append((
             "standard", 0.75,
             "Стандартное MP3 кодирование (базовый метод)"
+        ))
+        
+        # Daubechies DWT - хорош для музыкальных сигналов
+        if spectral_centroid < 3000 and not is_speech:
+            recommendations.append((
+                "daubechies", 0.85,
+                "Daubechies DWT: хорошие результаты для музыкальных сигналов"
+            ))
+        else:
+            recommendations.append((
+                "daubechies", 0.7,
+                "Daubechies DWT: улучшенная версия вейвлет-преобразования"
+            ))
+        
+        # MDCT - стандарт кодирования MP3/AAC
+        recommendations.append((
+            "mdct", 0.8,
+            "MDCT: преобразование, используемое в MP3/AAC"
         ))
         
         # Сортируем по оценке

@@ -25,6 +25,8 @@ transforms: Модуль трансформаций аудиосигналов.
 5. FWHT - Преобразование Уолша-Адамара
 6. Huffman-like - μ-law компандирование
 7. Rosenbrock-like - Нелинейное сглаживание
+8. Daubechies DWT - Вейвлеты Добеши (db2, db4, db6, db8)
+9. MDCT - Modified Discrete Cosine Transform
 
 Использование:
 ==============
@@ -153,6 +155,14 @@ from .rosenbrock import (
     rosenbrock_process,
 )
 
+# Расширенные методы: Daubechies DWT и MDCT
+from .extended import (
+    DaubechiesDWTTransform,
+    MDCTTransform,
+    daubechies_dwt_and_mp3,
+    mdct_and_mp3,
+)
+
 
 # =============================================================================
 # СПИСОК ВСЕХ ДОСТУПНЫХ ТРАНСФОРМАЦИЙ
@@ -166,6 +176,8 @@ TRANSFORM_CLASSES = {
     "fwht": FWHTTransform,
     "huffman": HuffmanLikeTransform,
     "rosenbrock": RosenbrockLikeTransform,
+    "daubechies": DaubechiesDWTTransform,
+    "mdct": MDCTTransform,
 }
 
 # Словарь {имя: функция} для обратной совместимости
@@ -176,6 +188,8 @@ TRANSFORM_FUNCTIONS = {
     "fwht": fwht_transform_and_mp3,
     "huffman": huffman_like_transform_and_mp3,
     "rosenbrock": rosenbrock_like_transform_and_mp3,
+    "daubechies": daubechies_dwt_and_mp3,
+    "mdct": mdct_and_mp3,
 }
 
 
@@ -265,6 +279,8 @@ __all__ = [
     "FWHTTransform",
     "HuffmanLikeTransform",
     "RosenbrockLikeTransform",
+    "DaubechiesDWTTransform",
+    "MDCTTransform",
 
     # Функции-обёртки
     "fft_transform_and_mp3",
@@ -273,6 +289,8 @@ __all__ = [
     "fwht_transform_and_mp3",
     "huffman_like_transform_and_mp3",
     "rosenbrock_like_transform_and_mp3",
+    "daubechies_dwt_and_mp3",
+    "mdct_and_mp3",
 
     # Низкоуровневые функции FFT
     "fft_forward",
@@ -311,6 +329,12 @@ __all__ = [
     "rosenbrock_nonlinear",
     "normalize_peak",
     "rosenbrock_process",
+
+    # Расширенные методы (Daubechies DWT и MDCT)
+    "DaubechiesDWTTransform",
+    "MDCTTransform",
+    "daubechies_dwt_and_mp3",
+    "mdct_and_mp3",
 
     # Утилиты выбора трансформации
     "TRANSFORM_CLASSES",

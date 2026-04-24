@@ -1142,11 +1142,98 @@ class Worker(QObject):
                 self._stage_stats.get(6, (0.0, 0))[1] + 1
             )
             results['standard'] = MethodResult('standard', std_mp3, t_std, True)
-            self.progress_file.emit(99)  # Почти готово
-            self.status.emit(self._status_with_eta_cycle("Стандартный: готово", 6, 1.0, processed, total))
+            self.progress_file.emit(PROGRESS_RANGES['daubechies'][0])  # Переход к Daubechies
             self._log.info("std_done", extra={"file": wav_path, "out": std_mp3, "time_s": t_std})
             self._ui_log(f"  ✓ Стандартный: {t_std:.2f}с")
+
+        # =====================================================================
+        # Daubechies DWT (db4)
+        # =====================================================================
+        if self._cancelled:
+            return results
         
+        if is_method_enabled('daubechies'):
+            def cb_daub(frac: float, msg: str):
+                if not self._cancelled:
+                    start, end = PROGRESS_RANGES['daubechies']
+                    p = start + int(max(0.0, min(1.0, frac)) * (end - start))
+                    self.progress_file.emit(p)
+                    self.status.emit(self._status_with_eta_cycle(msg, 7, frac, processed, total))
+
+            try:
+                from processing.transforms.extended import daubechies_dwt_and_mp3
+            except ImportError:
+                from src.processing.transforms.extended import daubechies_dwt_and_mp3
+
+            t_s7 = time.perf_counter()
+            try:
+                daub_mp3, t_daub = daubechies_dwt_and_mp3(
+                    wav_path, self.out_dir,
+                    block_size=settings['block_size'],
+                    bitrate=settings['bitrate'],
+                    select_mode=settings['select_mode'],
+                    keep_energy_ratio=settings['keep_energy_ratio'],
+                    sequency_keep_ratio=settings['sequency_keep_ratio'],
+                    wavelet='db4',
+                    levels=settings.get('levels', None),
+                    progress_cb=cb_daub,
+                )
+                self._stage_stats[7] = (
+                    self._stage_stats.get(7, (0.0, 0))[0] + (time.perf_counter() - t_s7),
+                    self._stage_stats.get(7, (0.0, 0))[1] + 1
+                )
+                results['daubechies'] = MethodResult('daubechies', daub_mp3, t_daub, True)
+                self.progress_file.emit(PROGRESS_RANGES['mdct'][0])  # Переход к MDCT
+                self._log.info("daubechies_done", extra={"file": wav_path, "out": daub_mp3, "time_s": t_daub})
+                self._ui_log(f"  ✓ Daubechies DWT: {t_daub:.2f}с")
+            except Exception as e:
+                self._log.error(f"daubechies_error: {e}")
+                results['daubechies'] = MethodResult('daubechies', "", 0.0, False, error_message=str(e))
+                self._ui_log(f"  ⚠ Daubechies DWT: ошибка — {e}")
+
+        # =====================================================================
+        # MDCT
+        # =====================================================================
+        if self._cancelled:
+            return results
+        
+        if is_method_enabled('mdct'):
+            def cb_mdct(frac: float, msg: str):
+                if not self._cancelled:
+                    start, end = PROGRESS_RANGES['mdct']
+                    p = start + int(max(0.0, min(1.0, frac)) * (end - start))
+                    self.progress_file.emit(p)
+                    self.status.emit(self._status_with_eta_cycle(msg, 8, frac, processed, total))
+
+            try:
+                from processing.transforms.extended import mdct_and_mp3
+            except ImportError:
+                from src.processing.transforms.extended import mdct_and_mp3
+
+            t_s8 = time.perf_counter()
+            try:
+                mdct_mp3, t_mdct = mdct_and_mp3(
+                    wav_path, self.out_dir,
+                    block_size=1024,
+                    bitrate=settings['bitrate'],
+                    select_mode=settings['select_mode'],
+                    keep_energy_ratio=settings['keep_energy_ratio'],
+                    sequency_keep_ratio=settings['sequency_keep_ratio'],
+                    progress_cb=cb_mdct,
+                )
+                self._stage_stats[8] = (
+                    self._stage_stats.get(8, (0.0, 0))[0] + (time.perf_counter() - t_s8),
+                    self._stage_stats.get(8, (0.0, 0))[1] + 1
+                )
+                results['mdct'] = MethodResult('mdct', mdct_mp3, t_mdct, True)
+                self._log.info("mdct_done", extra={"file": wav_path, "out": mdct_mp3, "time_s": t_mdct})
+                self._ui_log(f"  ✓ MDCT: {t_mdct:.2f}с")
+            except Exception as e:
+                self._log.error(f"mdct_error: {e}")
+                results['mdct'] = MethodResult('mdct', "", 0.0, False, error_message=str(e))
+                self._ui_log(f"  ⚠ MDCT: ошибка — {e}")
+
+        self.progress_file.emit(99)
         return results
 
     # =========================================================================
@@ -1382,7 +1469,7 @@ class Worker(QObject):
         """Выполнить обработку всех WAV-файлов.
 
         Для каждого файла:
-        1. Запустить 7 методов обработки (параллельно или последовательно)
+        1. Запустить 9 методов обработки (параллельно или последовательно)
         2. Собрать метрики
         3. Отправить результат через сигнал
         """

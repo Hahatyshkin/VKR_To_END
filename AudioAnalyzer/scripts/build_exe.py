@@ -11,6 +11,7 @@
 """
 import os
 import shutil
+import subprocess
 from PyInstaller.__main__ import run
 
 # Ensure we execute from repo root
@@ -107,8 +108,14 @@ args = [
     'src/app.py',
 ]
 
+# ======================================================================
 # Bundle ffmpeg and ffprobe to eliminate external deps
-# Prefer vendored third_party/ffmpeg/bin, fallback to system PATH
+# ======================================================================
+# Priorities:
+#   1. Vendored: third_party/ffmpeg/bin/{ffmpeg,ffprobe}.exe
+#   2. System PATH (including WinGet Gyan.FFmpeg)
+#   3. Fail with clear instructions
+# ======================================================================
 ffmpeg = None
 ffprobe = None
 
@@ -130,6 +137,28 @@ if not ffmpeg:
                 break
         if ffmpeg:
             break
+
+# Also check WinGet Gyan.FFmpeg location (not always in PATH)
+if not ffmpeg:
+    try:
+        winget_base = os.path.join(
+            os.environ.get('LOCALAPPDATA', ''),
+            'Microsoft', 'WinGet', 'Packages'
+        )
+        if os.path.isdir(winget_base):
+            for entry in os.listdir(winget_base):
+                if entry.lower().startswith('gyan.ffmpeg'):
+                    # Try common subdir names
+                    for ver_dir in os.listdir(os.path.join(winget_base, entry)):
+                        if ver_dir.startswith('ffmpeg'):
+                            cand = os.path.join(winget_base, entry, ver_dir, 'bin', 'ffmpeg.exe')
+                            if os.path.isfile(cand):
+                                ffmpeg = cand
+                                break
+                    if ffmpeg:
+                        break
+    except Exception:
+        pass
 
 if not ffprobe:
     # Prefer sibling to found ffmpeg
@@ -154,6 +183,37 @@ if ffmpeg:
 if ffprobe:
     args = ['--add-binary', f'{ffprobe};.'] + args
     print(f"Using FFprobe: {ffprobe}")
+
+# ======================================================================
+# CRITICAL: abort if FFmpeg was not found
+# ======================================================================
+if not ffmpeg:
+    print("")
+    print("=" * 70)
+    print("  ERROR: FFmpeg not found!")
+    print("=" * 70)
+    print("  The built exe will NOT be able to process audio files.")
+    print("")
+    print("  To fix this, choose ONE option:")
+    print("")
+    print("  Option A — Install FFmpeg system-wide:")
+    print("    1. Download: https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip")
+    print("    2. Extract to a folder (e.g. C:\ffmpeg)")
+    print("    3. Add C:\ffmpeg\bin to system PATH")
+    print("    4. Reopen terminal and re-run build")
+    print("")
+    print("  Option B — Vendored (no PATH needed):")
+    print("    1. Download ffmpeg.exe and ffprobe.exe from the link above")
+    print(f"    2. Place them in: {os.path.join(root, 'third_party', 'ffmpeg', 'bin')}")
+    print("    3. Re-run build")
+    print("")
+    print("  Option C — Quick install via winget:")
+    print("    winget install Gyan.FFmpeg")
+    print("    (then reopen terminal and re-run build)")
+    print("=" * 70)
+    print("")
+    import sys
+    sys.exit(1)
 
 print("Building AudioTransformer.exe...")
 print(f"Root: {root}")

@@ -16,11 +16,18 @@ from __future__ import annotations
 import os
 import shutil
 import logging
+import warnings
 from typing import Dict, Tuple
 
 import numpy as np
 import soundfile as sf
-from pydub import AudioSegment
+
+# Подавляем предупреждение pydub о ненайденном ffmpeg при импорте
+# (pydub сам проверяет ffmpeg через subprocess при import)
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore", message=".*Couldn't find ffmpeg.*")
+    from pydub import AudioSegment
+
 import subprocess
 import sys
 
@@ -33,15 +40,43 @@ def configure_ffmpeg_search() -> None:
     """Автонастройка путей ffmpeg/ffprobe для pydub.
 
     Логика:
-    - Сначала берём FFMPEG_BINARY из ENV или which('ffmpeg')
-    - На Windows дополнительно ищем WinGet-путь (gyan.ffmpeg)
+    - Если запущены из PyInstaller (frozen) и переменные окружения уже
+      установлены runtime hook — просто используем их, без повторного поиска.
+    - Иначе: FFMPEG_BINARY из ENV или which('ffmpeg'), WinGet-путь (gyan.ffmpeg)
     - Для ffprobe: рядом с ffmpeg, затем FFPROBE_BINARY, затем which('ffprobe')
     - Проставляем пути в pydub и ENV для стабильной работы внутри exe
     """
     global _FFMPEG_CONFIGURED
     if _FFMPEG_CONFIGURED:
         return
-    # Ищем ffmpeg по приоритетам
+
+    # Если мы в PyInstaller и runtime hook уже настроил пути — доверяем им
+    if getattr(sys, 'frozen', False):
+        ff = os.environ.get("FFMPEG_BINARY")
+        fp = os.environ.get("FFPROBE_BINARY")
+        if ff and os.path.exists(ff) and fp and os.path.exists(fp):
+            AudioSegment.converter = ff
+            AudioSegment.ffprobe = fp
+            _FFMPEG_CONFIGURED = True
+            logger.debug("FFmpeg already configured by runtime hook: %s; %s", ff, fp)
+            return
+        # Если пути из ENV есть, но ffprobe нет — пробуем найти рядом
+        if ff and os.path.exists(ff):
+            if ff.endswith("ffmpeg.exe"):
+                sibling = ff[:-10] + "ffprobe.exe"
+                if os.path.exists(sibling):
+                    fp = sibling
+            if fp:
+                AudioSegment.converter = ff
+                AudioSegment.ffprobe = fp
+                os.environ["FFPROBE_BINARY"] = fp
+                _FFMPEG_CONFIGURED = True
+                logger.debug("FFmpeg from env + ffprobe sibling: %s; %s", ff, fp)
+                return
+        # Логируем, если в frozen-режиме ничего не найдено
+        logger.warning("Frozen mode: FFmpeg/FFprobe not found. Check build configuration.")
+
+    # Ищем ffmpeg по приоритетам (для dev-режима или если frozen не настроен)
     path = os.environ.get("FFMPEG_BINARY") or shutil.which("ffmpeg")
     if not path:
         try:
@@ -49,10 +84,18 @@ def configure_ffmpeg_search() -> None:
             if os.path.isdir(base):
                 for name in os.listdir(base):
                     if name.lower().startswith("gyan.ffmpeg"):
-                        cand = os.path.join(base, name, "ffmpeg-8.0-full_build", "bin", "ffmpeg.exe")
-                        if os.path.exists(cand):
-                            path = cand
-                            break
+                        # Ищем во всех поддиректориях (версии могут отличаться)
+                        pkg_dir = os.path.join(base, name)
+                        for ver_dir in os.listdir(pkg_dir):
+                            if ver_dir.startswith("ffmpeg"):
+                                cand = os.path.join(pkg_dir, ver_dir, "bin", "ffmpeg.exe")
+                                if os.path.exists(cand):
+                                    path = cand
+                                    break
+                            if path:
+                                break
+                    if path:
+                        break
         except Exception as e:
             logger.debug("WinGet ffmpeg search failed: %s", e)
     if path and os.path.exists(path):

@@ -148,7 +148,9 @@ def ensure_ffmpeg_available() -> None:
     try:
         result = subprocess.run(
             [ffmpeg_path, "-version"],
-            capture_output=True, text=True, timeout=10
+            capture_output=True, text=True, timeout=10,
+            creationflags=_ffmpeg_creationflags(),
+            startupinfo=_ffmpeg_startupinfo(),
         )
         first_line = result.stdout.strip().split("\n")[0] if result.stdout else "unknown"
         logger.info("FFmpeg version: %s", first_line)
@@ -176,6 +178,20 @@ def _ffmpeg_creationflags() -> int:
     return 0
 
 
+def _ffmpeg_startupinfo():
+    """STARTUPINFO для скрытия окна консоли при вызове ffmpeg/ffprobe.
+
+    CREATE_NO_WINDOW недостаточен для GUI-приложений (PyInstaller --windowed).
+    STARTUPINFO с SW_HIDE гарантирует отсутствие мерцания консольного окна.
+    """
+    if not sys.platform.startswith('win'):
+        return None
+    si = subprocess.STARTUPINFO()
+    si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    si.wShowWindow = 0  # SW_HIDE
+    return si
+
+
 def _run_ffmpeg(args: list[str]) -> subprocess.CompletedProcess:
     """Запустить ffmpeg/ffprobe с подавлением окна и собрать stdout/stderr."""
     configure_ffmpeg_search()
@@ -186,6 +202,7 @@ def _run_ffmpeg(args: list[str]) -> subprocess.CompletedProcess:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         creationflags=_ffmpeg_creationflags(),
+        startupinfo=_ffmpeg_startupinfo(),
         check=True,
     )
 
@@ -337,6 +354,7 @@ def encode_pcm_to_mp3(pcm: np.ndarray, sample_rate: int, out_mp3: str, bitrate: 
         stdout=_sp.PIPE,
         stderr=_sp.PIPE,
         creationflags=_ffmpeg_creationflags(),
+        startupinfo=_ffmpeg_startupinfo(),
         check=True,
     )
     dt = time.perf_counter() - t0
@@ -365,6 +383,7 @@ def _probe_via_ffmpeg_i(path: str) -> tuple[float,int,int]:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             creationflags=_ffmpeg_creationflags(),
+            startupinfo=_ffmpeg_startupinfo(),
             check=True,
         )
         info = json.loads(cp.stdout.decode('utf-8', errors='ignore') or '{}')

@@ -227,8 +227,8 @@ class WizardDialog(QDialog):
             CSS стиль
         """
         if primary:
-            return """
-                QPushButton {
+            return f"""
+                QPushButton {{
                     background-color: {DesignSystem.colors.primary};
                     color: white;
                     border: none;
@@ -236,28 +236,28 @@ class WizardDialog(QDialog):
                     padding: 8px 24px;
                     font-size: 13px;
                     font-weight: 500;
-                }
-                QPushButton:hover {
+                }}
+                QPushButton:hover {{
                     background-color: {DesignSystem.colors.primary_hover};
-                }
-                QPushButton:disabled {
+                }}
+                QPushButton:disabled {{
                     background-color: {DesignSystem.colors.surface_3};
                     color: {DesignSystem.colors.text_disabled};
-                }
+                }}
             """
         elif secondary:
-            return """
-                QPushButton {
+            return f"""
+                QPushButton {{
                     background-color: {DesignSystem.colors.surface_3};
                     color: {DesignSystem.colors.text_primary};
                     border: none;
                     border-radius: 6px;
                     padding: 8px 24px;
                     font-size: 13px;
-                }
-                QPushButton:hover {
+                }}
+                QPushButton:hover {{
                     background-color: {DesignSystem.colors.border};
-                }
+                }}
             """
         return ""
 

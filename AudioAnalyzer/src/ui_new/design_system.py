@@ -184,7 +184,7 @@ def detect_system_theme() -> str:
 
 @dataclass(frozen=True)
 class GradientPalette:
-    """Градиенты для элементов UI."""
+    """Градиенты для элементов UI (тёмная тема)."""
     
     primary: Tuple[str, str] = ("#6366F1", "#8B5CF6")
     secondary: Tuple[str, str] = ("#A855F7", "#EC4899")
@@ -196,13 +196,27 @@ class GradientPalette:
     header: Tuple[str, str] = ("#1F2937", "#111827")
 
 
+@dataclass(frozen=True)
+class LightGradientPalette:
+    """Градиенты для элементов UI (светлая тема)."""
+
+    primary: Tuple[str, str] = ("#4F46E5", "#6366F1")
+    secondary: Tuple[str, str] = ("#9333EA", "#A855F7")
+    success: Tuple[str, str] = ("#16A34A", "#22C55E")
+    warning: Tuple[str, str] = ("#EA580C", "#F97316")
+    error: Tuple[str, str] = ("#DC2626", "#EF4444")
+    surface: Tuple[str, str] = ("#FFFFFF", "#F1F5F9")
+    card: Tuple[str, str] = ("#FFFFFF", "#F8FAFC")
+    header: Tuple[str, str] = ("#EEF2FF", "#E0E7FF")
+
+
 # =============================================================================
 # ТЕНИ
 # =============================================================================
 
 @dataclass(frozen=True)
 class ShadowPalette:
-    """Тени для элементов UI (CSS-like)."""
+    """Тени для элементов UI (CSS-like, тёмная тема)."""
     
     none: str = "none"
     sm: str = "0 1px 2px rgba(0, 0, 0, 0.3)"
@@ -215,6 +229,23 @@ class ShadowPalette:
     primary: str = "0 4px 14px rgba(99, 102, 241, 0.4)"
     success: str = "0 4px 14px rgba(34, 197, 94, 0.4)"
     error: str = "0 4px 14px rgba(239, 68, 68, 0.4)"
+
+
+@dataclass(frozen=True)
+class LightShadowPalette:
+    """Тени для элементов UI (CSS-like, светлая тема)."""
+
+    none: str = "none"
+    sm: str = "0 1px 2px rgba(0, 0, 0, 0.08)"
+    md: str = "0 4px 6px rgba(0, 0, 0, 0.1)"
+    lg: str = "0 10px 15px rgba(0, 0, 0, 0.12)"
+    xl: str = "0 20px 25px rgba(0, 0, 0, 0.15)"
+    inner: str = "inset 0 2px 4px rgba(0, 0, 0, 0.06)"
+
+    # Colored shadows for accent elements
+    primary: str = "0 4px 14px rgba(79, 70, 229, 0.25)"
+    success: str = "0 4px 14px rgba(22, 163, 74, 0.25)"
+    error: str = "0 4px 14px rgba(220, 38, 38, 0.25)"
 
 
 # =============================================================================
@@ -327,8 +358,12 @@ class DesignSystem:
             theme = detect_system_theme()
         if theme == 'light':
             cls.colors = LightColorPalette()
+            cls.gradients = LightGradientPalette()
+            cls.shadows = LightShadowPalette()
         else:
             cls.colors = ColorPalette()
+            cls.gradients = GradientPalette()
+            cls.shadows = ShadowPalette()
         cls._current_theme = theme
         logger.info("DesignSystem theme set to: %s", theme)
         return theme
@@ -508,10 +543,10 @@ class DesignSystem:
                     border: none;
                 }}
                 QPushButton:hover {{
-                    background-color: rgba(255, 255, 255, 0.1);
+                    background-color: {cls.colors.surface_2};
                 }}
                 QPushButton:pressed {{
-                    background-color: rgba(255, 255, 255, 0.05);
+                    background-color: {cls.colors.surface_3};
                 }}
             """,
         }
@@ -1069,7 +1104,9 @@ __all__ = [
     "ColorPalette",
     "LightColorPalette",
     "GradientPalette",
+    "LightGradientPalette",
     "ShadowPalette",
+    "LightShadowPalette",
     "Typography",
     "Animation",
     "apply_modern_style",

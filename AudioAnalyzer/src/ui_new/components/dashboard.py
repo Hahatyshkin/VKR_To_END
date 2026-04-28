@@ -946,9 +946,6 @@ class DashboardWidget(QWidget):
         # Header
         self._build_header(main_layout)
 
-        # KPI карточки (компактные)
-        self._build_kpi_cards(main_layout)
-
         # Быстрые действия (в строку)
         self._build_quick_actions_row(main_layout)
 
@@ -1019,71 +1016,6 @@ class DashboardWidget(QWidget):
         header_layout.addWidget(app_label)
 
         layout.addWidget(header)
-
-    def _build_kpi_cards(self, layout: QVBoxLayout) -> None:
-        """Построить KPI карточки."""
-        cards_layout = QHBoxLayout()
-        cards_layout.setSpacing(12)
-
-        # Карточка: Анализированные файлы
-        self.files_card = KPICard(
-            title="Файлы",
-            value="0",
-            subtitle="В сессии",
-            icon_name="folder_open",
-            color="accent_blue"
-        )
-        self.files_card.setMaximumWidth(200)
-        self.files_card.clicked.connect(self.open_file_requested)
-        cards_layout.addWidget(self.files_card)
-
-        # Карточка: Средний SNR
-        self.snr_card = KPICard(
-            title="SNR",
-            value="-- dB",
-            subtitle="Качество",
-            icon_name="analytics",
-            color="success"
-        )
-        self.snr_card.setMaximumWidth(200)
-        cards_layout.addWidget(self.snr_card)
-
-        # Карточка: Средний LSD
-        self.lsd_card = KPICard(
-            title="LSD",
-            value="-- дБ",
-            subtitle="Спектр. расст.",
-            icon_name="analytics",
-            color="warning"
-        )
-        self.lsd_card.setMaximumWidth(200)
-        cards_layout.addWidget(self.lsd_card)
-
-        # Карточка: Методы
-        self.methods_card = KPICard(
-            title="Методов",
-            value="0",
-            subtitle="Использовано",
-            icon_name="method",
-            color="secondary"
-        )
-        self.methods_card.setMaximumWidth(200)
-        cards_layout.addWidget(self.methods_card)
-
-        # Карточка: Время обработки
-        self.time_card = KPICard(
-            title="Время",
-            value="0.0s",
-            subtitle="Обработка",
-            icon_name="clock",
-            color="accent_orange"
-        )
-        self.time_card.setMaximumWidth(200)
-        cards_layout.addWidget(self.time_card)
-        
-        cards_layout.addStretch(1)
-
-        layout.addLayout(cards_layout)
 
     def _build_quick_actions(self, layout: QVBoxLayout) -> None:
         """Построить панель быстрых действий."""
@@ -1362,47 +1294,7 @@ class DashboardWidget(QWidget):
         """
         self._results = results
 
-        # Обновляем KPI карточки
-        self.files_card.set_value(str(len(results)))
-
         if results:
-            # Средний SNR (используем snr_db из ResultRow)
-            import math
-            snr_values = []
-            for r in results:
-                if hasattr(r, 'snr_db') and r.snr_db is not None:
-                    try:
-                        val = float(r.snr_db)
-                        if not math.isnan(val) and not math.isinf(val):
-                            snr_values.append(val)
-                    except (ValueError, TypeError):
-                        pass
-            if snr_values:
-                avg_snr = sum(snr_values) / len(snr_values)
-                self.snr_card.set_value(f"{avg_snr:.1f} dB")
-            else:
-                self.snr_card.set_value("-- dB")
-
-            # Средний LSD
-            lsd_values = []
-            for r in results:
-                if hasattr(r, 'lsd_db') and r.lsd_db is not None:
-                    try:
-                        val = float(r.lsd_db)
-                        if not math.isnan(val) and not math.isinf(val):
-                            lsd_values.append(val)
-                    except (ValueError, TypeError):
-                        pass
-            if lsd_values:
-                avg_lsd = sum(lsd_values) / len(lsd_values)
-                self.lsd_card.set_value(f"{avg_lsd:.2f} дБ")
-            else:
-                self.lsd_card.set_value("-- дБ")
-
-            # Количество уникальных методов
-            methods = set(r.variant for r in results if r.variant)
-            self.methods_card.set_value(str(len(methods)))
-
             # Обновляем последние операции
             self._update_recent_activity(results[-10:])
 
@@ -1414,12 +1306,7 @@ class DashboardWidget(QWidget):
         time_seconds : float
             Время обработки в секундах
         """
-        if time_seconds < 60:
-            self.time_card.set_value(f"{time_seconds:.1f}s")
-        else:
-            minutes = int(time_seconds // 60)
-            seconds = time_seconds % 60
-            self.time_card.set_value(f"{minutes}m {seconds:.0f}s")
+        pass
 
     def _update_recent_activity(self, results: List[ResultRow]) -> None:
         """Обновить список последних операций."""

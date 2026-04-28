@@ -101,7 +101,9 @@ args = [
     '--exclude-module', 'numpy.f2py.tests',  # Requires pytest
     '--exclude-module', 'OpenGL',  # Optional for pyqtgraph
     '--exclude-module', 'pyqtgraph.opengl',  # Requires OpenGL
-    '--exclude-module', 'distutils',  # Removed in Python 3.12, setuptools alias causes PyInstaller conflict
+    # NOTE: do NOT exclude 'distutils' — setuptools vendors it and
+    # PyInstaller's hook-distutils.py creates an alias to the vendored copy.
+    # Excluding it causes: ValueError: Target module "distutils" already imported as ExcludedModule
     # Runtime hook for FFmpeg
     '--runtime-hook', 'hooks/runtime_ffmpeg.py',
     # Entry point

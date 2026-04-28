@@ -263,6 +263,10 @@ class MainWindow(
         logging.getLogger().addHandler(self._qt_log_handler)
         logging.getLogger().setLevel(logging.INFO)
 
+        # Автоопределение темы ОС (светлая/тёмная) ДО построения UI,
+        # чтобы все виджеты сразу использовали правильную палитру
+        DesignSystem.set_theme()
+
         # Инициализация компонентов Фазы 3
         self._init_phase3_components()
 
@@ -665,9 +669,6 @@ class MainWindow(
 
     def _initialize_ui(self) -> None:
         """Инициализация UI после построения."""
-        # Автоопределение темы ОС (светлая/тёмная) и применение палитры
-        DesignSystem.set_theme()  # None = автоопределение через detect_system_theme()
-
         # Применяем современный дизайн через Design System
         self.setStyleSheet(get_global_stylesheet())
         logger.info("Applied modern design system (theme=%s)", DesignSystem.current_theme())

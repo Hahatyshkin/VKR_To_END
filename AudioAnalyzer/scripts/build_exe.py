@@ -101,6 +101,7 @@ args = [
     '--exclude-module', 'numpy.f2py.tests',  # Requires pytest
     '--exclude-module', 'OpenGL',  # Optional for pyqtgraph
     '--exclude-module', 'pyqtgraph.opengl',  # Requires OpenGL
+    '--exclude-module', 'distutils',  # Removed in Python 3.12, setuptools alias causes PyInstaller conflict
     # Runtime hook for FFmpeg
     '--runtime-hook', 'hooks/runtime_ffmpeg.py',
     # Entry point

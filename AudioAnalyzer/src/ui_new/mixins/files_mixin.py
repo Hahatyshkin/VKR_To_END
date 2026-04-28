@@ -414,7 +414,7 @@ class FilesMixin:
 
         try:
             if platform.system() == "Windows":
-                subprocess.run(["explorer", output_dir])
+                os.startfile(output_dir)
             elif platform.system() == "Darwin":  # macOS
                 subprocess.run(["open", output_dir])
             else:  # Linux

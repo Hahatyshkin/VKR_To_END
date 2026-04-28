@@ -35,6 +35,7 @@ from PySide6.QtWidgets import (
 )
 
 # Event Bus integration
+from ..design_system import DesignSystem
 from ..events import (
     EventBus,
     EventType,
@@ -105,7 +106,7 @@ class PlayerMixin:
         # Информация о файле
         # -------------------------------------------------------------------------
         widgets['player_info_label'] = QLabel("Файл не выбран")
-        widgets['player_info_label'].setStyleSheet("color: gray; margin: 5px;")
+        widgets['player_info_label'].setStyleSheet(f"color: {DesignSystem.colors.text_muted}; margin: 5px;")
         layout.addWidget(widgets['player_info_label'])
 
         # -------------------------------------------------------------------------
@@ -207,10 +208,10 @@ class PlayerMixin:
                 f"{size_mb:.2f} МБ | "
                 f"Изменён: {mtime.strftime('%Y-%m-%d %H:%M')}"
             )
-            self.player_info_label.setStyleSheet("color: #333; margin: 5px;")
+            self.player_info_label.setStyleSheet(f"color: {DesignSystem.colors.text_secondary}; margin: 5px;")
         except Exception as e:
             self.player_info_label.setText(f"Ошибка: {e}")
-            self.player_info_label.setStyleSheet("color: red; margin: 5px;")
+            self.player_info_label.setStyleSheet(f"color: {DesignSystem.colors.error}; margin: 5px;")
 
         # Загружаем в плеер
         self._media_player.setSource(QUrl.fromLocalFile(file_path))
@@ -297,7 +298,7 @@ class PlayerMixin:
         error = self._media_player.errorString()
         if error:
             self.player_info_label.setText(f"❌ Ошибка: {error}")
-            self.player_info_label.setStyleSheet("color: red; margin: 5px;")
+            self.player_info_label.setStyleSheet(f"color: {DesignSystem.colors.error}; margin: 5px;")
 
     def on_position_slider_moved(self, value: int) -> None:
         """Перемотка по слайдеру."""

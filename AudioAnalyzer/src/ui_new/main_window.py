@@ -86,7 +86,7 @@ from .worker import ResultRow
 from .export_xlsx import export_results_to_xlsx, generate_export_filename, is_export_available
 
 # Импорт Design System
-from .design_system import DesignSystem, get_global_stylesheet, apply_modern_style
+from .design_system import DesignSystem, get_global_stylesheet, apply_modern_style, detect_system_theme
 
 # Импорт DI Container
 from .services.container import init_container, get_container, ServiceContainer
@@ -665,9 +665,12 @@ class MainWindow(
 
     def _initialize_ui(self) -> None:
         """Инициализация UI после построения."""
+        # Автоопределение темы ОС (светлая/тёмная) и применение палитры
+        DesignSystem.set_theme()  # None = автоопределение через detect_system_theme()
+
         # Применяем современный дизайн через Design System
         self.setStyleSheet(get_global_stylesheet())
-        logger.info("Applied modern design system")
+        logger.info("Applied modern design system (theme=%s)", DesignSystem.current_theme())
         
         # Применяем пресет
         apply_preset(self, "Стандартный")

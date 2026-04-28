@@ -18,6 +18,7 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 import pyqtgraph as pg
 from PySide6.QtCore import Qt, Signal
+from ui_new.design_system import DesignSystem
 from PySide6.QtWidgets import (
     QCheckBox,
     QHBoxLayout,
@@ -82,7 +83,7 @@ class InteractiveSpectrumWidget(QWidget):
 
         # Метка координат курсора
         self.coords_label = QLabel("Частота: — Гц, Амплитуда: — дБ")
-        self.coords_label.setStyleSheet("color: #666; font-size: 11px;")
+        self.coords_label.setStyleSheet(f"color: {DesignSystem.colors.text_muted}; font-size: 11px;")
         controls_layout.addWidget(self.coords_label, 1)
 
         # Кнопки управления
@@ -162,8 +163,9 @@ class InteractiveSpectrumWidget(QWidget):
         # Crosshair (перекрестие)
         self.vline = pg.InfiniteLine(angle=90, movable=False)
         self.hline = pg.InfiniteLine(angle=0, movable=False)
-        self.vline.setPen(pg.mkPen(color='#aaa', style=Qt.DashLine))
-        self.hline.setPen(pg.mkPen(color='#aaa', style=Qt.DashLine))
+        crosshair_color = DesignSystem.colors.text_disabled
+        self.vline.setPen(pg.mkPen(color=crosshair_color, style=Qt.DashLine))
+        self.hline.setPen(pg.mkPen(color=crosshair_color, style=Qt.DashLine))
         self.plot_widget.addItem(self.vline, ignoreBounds=True)
         self.plot_widget.addItem(self.hline, ignoreBounds=True)
 

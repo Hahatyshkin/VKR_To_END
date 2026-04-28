@@ -22,6 +22,7 @@ gradient = DesignSystem.get_gradient('primary')
 from __future__ import annotations
 
 import logging
+import sys
 from dataclasses import dataclass, field
 from typing import Dict, Optional, Tuple
 from enum import Enum
@@ -91,6 +92,90 @@ class ColorPalette:
     border: str = "#374151"
     border_light: str = "#4B5563"
     divider: str = "#27272A"
+
+
+@dataclass(frozen=True)
+class LightColorPalette:
+    """Светлая цветовая палитра темы."""
+
+    # Primary Colors (Indigo — адаптированы для светлого фона)
+    primary: str = "#4F46E5"
+    primary_hover: str = "#6366F1"
+    primary_pressed: str = "#4338CA"
+    primary_container: str = "#EEF2FF"
+    primary_light: str = "#818CF8"
+
+    # Secondary Colors (Purple)
+    secondary: str = "#9333EA"
+    secondary_hover: str = "#A855F7"
+    secondary_pressed: str = "#7E22CE"
+
+    # Surface Colors (elevation-based)
+    surface_0: str = "#F8FAFC"       # Lowest elevation
+    surface_1: str = "#FFFFFF"       # Base
+    surface_2: str = "#F1F5F9"       # Raised
+    surface_3: str = "#E2E8F0"       # Overlay
+
+    # Text Colors
+    text_primary: str = "#0F172A"
+    text_secondary: str = "#475569"
+    text_muted: str = "#64748B"
+    text_disabled: str = "#94A3B8"
+
+    # Accent Colors
+    accent_blue: str = "#2563EB"
+    accent_green: str = "#16A34A"
+    accent_orange: str = "#EA580C"
+    accent_pink: str = "#DB2777"
+    accent_teal: str = "#0D9488"
+    accent_yellow: str = "#CA8A04"
+
+    # Status Colors
+    success: str = "#16A34A"
+    success_bg: str = "#DCFCE7"
+    warning: str = "#EA580C"
+    warning_bg: str = "#FFF7ED"
+    error: str = "#DC2626"
+    error_bg: str = "#FEF2F2"
+    info: str = "#2563EB"
+    info_bg: str = "#EFF6FF"
+
+    # Border & Divider
+    border: str = "#CBD5E1"
+    border_light: str = "#E2E8F0"
+    divider: str = "#E2E8F0"
+
+
+# =============================================================================
+# ОПРЕДЕЛЕНИЕ ТЕМЫ ОС
+# =============================================================================
+
+def detect_system_theme() -> str:
+    """Определить текущую тему оформления операционной системы.
+
+    На Windows читает реестр: AppsUseLightTheme (0 = тёмная, 1 = светлая).
+    На macOS/Linux всегда возвращает 'dark'.
+
+    Возвращает:
+    --------
+    str
+        'light' или 'dark'
+    """
+    if sys.platform == 'win32':
+        try:
+            import winreg
+            key = winreg.OpenKey(
+                winreg.HKEY_CURRENT_USER,
+                r"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize",
+            )
+            value, _ = winreg.QueryValueEx(key, "AppsUseLightTheme")
+            winreg.CloseKey(key)
+            return 'light' if value == 1 else 'dark'
+        except Exception:
+            logger.debug("Failed to detect Windows theme, falling back to dark")
+            return 'dark'
+    # macOS / Linux — по умолчанию тёмная
+    return 'dark'
 
 
 # =============================================================================
@@ -222,6 +307,36 @@ class DesignSystem:
     shadows = ShadowPalette()
     typography = Typography()
     animation = Animation()
+    _current_theme: str = 'dark'
+
+    @classmethod
+    def set_theme(cls, theme: str | None = None) -> str:
+        """Установить тему оформления ('light', 'dark' или None для автоопределения).
+
+        Параметры:
+        ----------
+        theme : str | None
+            'light', 'dark' или None (автоопределение через ОС).
+
+        Возвращает:
+        -----------
+        str
+            Установленная тема ('light' или 'dark').
+        """
+        if theme is None:
+            theme = detect_system_theme()
+        if theme == 'light':
+            cls.colors = LightColorPalette()
+        else:
+            cls.colors = ColorPalette()
+        cls._current_theme = theme
+        logger.info("DesignSystem theme set to: %s", theme)
+        return theme
+
+    @classmethod
+    def current_theme(cls) -> str:
+        """Текущая тема оформления."""
+        return cls._current_theme
     
     @classmethod
     def get_color(cls, name: str) -> str:
@@ -952,10 +1067,12 @@ def get_global_stylesheet() -> str:
 __all__ = [
     "DesignSystem",
     "ColorPalette",
+    "LightColorPalette",
     "GradientPalette",
     "ShadowPalette",
     "Typography",
     "Animation",
     "apply_modern_style",
     "get_global_stylesheet",
+    "detect_system_theme",
 ]

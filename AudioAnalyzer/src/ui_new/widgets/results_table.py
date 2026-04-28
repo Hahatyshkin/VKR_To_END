@@ -212,7 +212,7 @@ class ResultsTable(QTableWidget):
         
         try:
             if sys.platform == 'win32':
-                subprocess.run(['explorer', folder])
+                os.startfile(folder)
             elif sys.platform == 'darwin':
                 subprocess.run(['open', folder])
             else:

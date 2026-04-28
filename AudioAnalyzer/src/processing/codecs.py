@@ -105,7 +105,8 @@ def ensure_ffmpeg_available() -> None:
     try:
         result = subprocess.run(
             [ffmpeg_path, "-version"],
-            capture_output=True, text=True, timeout=10
+            capture_output=True, text=True, timeout=10,
+            creationflags=_ffmpeg_creationflags(),
         )
         first_line = result.stdout.strip().split("\n")[0] if result.stdout else "unknown"
         logger.info("FFmpeg version: %s", first_line)

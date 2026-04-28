@@ -198,7 +198,7 @@ class KPICard(QFrame):
             }}
             KPICard:hover {{
                 border-color: {color};
-                background-color: #2a2d32;
+                background-color: {DesignSystem.colors.surface_3};
             }}
         """)
 

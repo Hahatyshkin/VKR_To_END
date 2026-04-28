@@ -35,7 +35,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING
 
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QColor
 from PySide6.QtWidgets import (
     QCheckBox,
     QComboBox,
@@ -61,6 +61,8 @@ from PySide6.QtWidgets import (
 
 if TYPE_CHECKING:
     from ..worker import ResultRow
+
+from ..design_system import DesignSystem
 
 logger = logging.getLogger("ui_new.components.wizards")
 
@@ -136,33 +138,33 @@ class WizardDialog(QDialog):
 
         # Header
         header = QFrame()
-        header.setStyleSheet("background-color: #1F2937; padding: 16px;")
+        header.setStyleSheet(f"background-color: {DesignSystem.colors.surface_2}; padding: 16px;")
         header_layout = QVBoxLayout(header)
         header_layout.setSpacing(8)
 
         self.title_label = QLabel("Мастер")
-        self.title_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #F9FAFB;")
+        self.title_label.setStyleSheet(f"font-size: 18px; font-weight: bold; color: {DesignSystem.colors.text_primary};")
         header_layout.addWidget(self.title_label)
 
         self.description_label = QLabel("")
-        self.description_label.setStyleSheet("font-size: 13px; color: #9CA3AF;")
+        self.description_label.setStyleSheet(f"font-size: 13px; color: {DesignSystem.colors.text_muted};")
         self.description_label.setWordWrap(True)
         header_layout.addWidget(self.description_label)
 
         # Прогресс-бар
         self.progress_bar = QProgressBar()
-        self.progress_bar.setStyleSheet("""
-            QProgressBar {
-                background-color: #374151;
+        self.progress_bar.setStyleSheet(f"""
+            QProgressBar {{
+                background-color: {DesignSystem.colors.surface_3};
                 border: none;
                 border-radius: 4px;
                 text-align: center;
-                color: #9CA3AF;
-            }
-            QProgressBar::chunk {
-                background-color: #3B82F6;
+                color: {DesignSystem.colors.text_muted};
+            }}
+            QProgressBar::chunk {{
+                background-color: {DesignSystem.colors.primary};
                 border-radius: 4px;
-            }
+            }}
         """)
         self.progress_bar.setFormat("Шаг %v из %m")
         header_layout.addWidget(self.progress_bar)
@@ -171,12 +173,12 @@ class WizardDialog(QDialog):
 
         # Страницы
         self.pages_stack = QStackedWidget()
-        self.pages_stack.setStyleSheet("background-color: #111827;")
+        self.pages_stack.setStyleSheet(f"background-color: {DesignSystem.colors.surface_0};")
         layout.addWidget(self.pages_stack, 1)
 
         # Кнопки навигации
         buttons_frame = QFrame()
-        buttons_frame.setStyleSheet("background-color: #1F2937; padding: 16px;")
+        buttons_frame.setStyleSheet(f"background-color: {DesignSystem.colors.surface_2}; padding: 16px;")
         buttons_layout = QHBoxLayout(buttons_frame)
 
         self.btn_back = QPushButton("← Назад")
@@ -227,7 +229,7 @@ class WizardDialog(QDialog):
         if primary:
             return """
                 QPushButton {
-                    background-color: #3B82F6;
+                    background-color: {DesignSystem.colors.primary};
                     color: white;
                     border: none;
                     border-radius: 6px;
@@ -236,25 +238,25 @@ class WizardDialog(QDialog):
                     font-weight: 500;
                 }
                 QPushButton:hover {
-                    background-color: #2563EB;
+                    background-color: {DesignSystem.colors.primary_hover};
                 }
                 QPushButton:disabled {
-                    background-color: #374151;
-                    color: #6B7280;
+                    background-color: {DesignSystem.colors.surface_3};
+                    color: {DesignSystem.colors.text_disabled};
                 }
             """
         elif secondary:
             return """
                 QPushButton {
-                    background-color: #374151;
-                    color: #E5E7EB;
+                    background-color: {DesignSystem.colors.surface_3};
+                    color: {DesignSystem.colors.text_primary};
                     border: none;
                     border-radius: 6px;
                     padding: 8px 24px;
                     font-size: 13px;
                 }
                 QPushButton:hover {
-                    background-color: #4B5563;
+                    background-color: {DesignSystem.colors.border};
                 }
             """
         return ""
@@ -424,16 +426,16 @@ class CompareWizard(WizardDialog):
         self.btn_add_files = QPushButton("📁 Добавить файлы...")
         self.btn_add_files.setStyleSheet("""
             QPushButton {
-                background-color: #374151;
-                color: #E5E7EB;
-                border: 2px dashed #6B7280;
+                background-color: {DesignSystem.colors.surface_3};
+                color: {DesignSystem.colors.text_primary};
+                border: 2px dashed {DesignSystem.colors.text_disabled};
                 border-radius: 8px;
                 padding: 16px;
                 font-size: 14px;
             }
             QPushButton:hover {
-                background-color: #4B5563;
-                border-color: #3B82F6;
+                background-color: {DesignSystem.colors.border};
+                border-color: {DesignSystem.colors.primary};
             }
         """)
         self.btn_add_files.clicked.connect(self._on_add_files)
@@ -443,18 +445,18 @@ class CompareWizard(WizardDialog):
         self.files_list = QListWidget()
         self.files_list.setStyleSheet("""
             QListWidget {
-                background-color: #1F2937;
-                border: 1px solid #374151;
+                background-color: {DesignSystem.colors.surface_2};
+                border: 1px solid {DesignSystem.colors.surface_3};
                 border-radius: 6px;
                 padding: 8px;
             }
             QListWidget::item {
-                color: #E5E7EB;
+                color: {DesignSystem.colors.text_primary};
                 padding: 8px;
                 border-radius: 4px;
             }
             QListWidget::item:selected {
-                background-color: #3B82F6;
+                background-color: {DesignSystem.colors.primary};
             }
         """)
         layout.addWidget(self.files_list, 1)
@@ -477,9 +479,9 @@ class CompareWizard(WizardDialog):
         methods_group = QGroupBox("Методы анализа")
         methods_group.setStyleSheet("""
             QGroupBox {
-                color: #E5E7EB;
+                color: {DesignSystem.colors.text_primary};
                 font-weight: bold;
-                border: 1px solid #374151;
+                border: 1px solid {DesignSystem.colors.surface_3};
                 border-radius: 6px;
                 margin-top: 12px;
                 padding-top: 12px;
@@ -505,7 +507,7 @@ class CompareWizard(WizardDialog):
         for method_id, method_name in methods:
             cb = QCheckBox(method_name)
             cb.setChecked(True)
-            cb.setStyleSheet("color: #E5E7EB; padding: 4px;")
+            cb.setStyleSheet(f"color: {DesignSystem.colors.text_primary}; padding: 4px;")
             self.method_checks[method_id] = cb
             methods_layout.addWidget(cb)
 
@@ -563,7 +565,7 @@ class CompareWizard(WizardDialog):
         layout.setSpacing(16)
 
         self.summary_label = QLabel()
-        self.summary_label.setStyleSheet("color: #E5E7EB; font-size: 14px;")
+        self.summary_label.setStyleSheet(f"color: {DesignSystem.colors.text_primary}; font-size: 14px;")
         self.summary_label.setWordWrap(True)
         layout.addWidget(self.summary_label)
 
@@ -701,11 +703,11 @@ class BatchProcessWizard(WizardDialog):
         self.folder_edit.setPlaceholderText("Выберите папку...")
         self.folder_edit.setStyleSheet("""
             QLineEdit {
-                background-color: #1F2937;
-                border: 1px solid #374151;
+                background-color: {DesignSystem.colors.surface_2};
+                border: 1px solid {DesignSystem.colors.surface_3};
                 border-radius: 6px;
                 padding: 12px;
-                color: #E5E7EB;
+                color: {DesignSystem.colors.text_primary};
             }
         """)
         path_layout.addWidget(self.folder_edit, 1)
@@ -718,7 +720,7 @@ class BatchProcessWizard(WizardDialog):
 
         # Информация о папке
         self.folder_info = QLabel("Выберите папку для просмотра информации")
-        self.folder_info.setStyleSheet("color: #9CA3AF;")
+        self.folder_info.setStyleSheet(f"color: {DesignSystem.colors.text_muted};")
         layout.addWidget(self.folder_info)
 
         layout.addStretch(1)
@@ -746,7 +748,7 @@ class BatchProcessWizard(WizardDialog):
         for method_id, method_name in methods:
             cb = QCheckBox(method_name)
             cb.setChecked(True)
-            cb.setStyleSheet("color: #E5E7EB;")
+            cb.setStyleSheet(f"color: {DesignSystem.colors.text_primary};")
             self.method_checks[method_id] = cb
             methods_layout.addWidget(cb)
 
@@ -778,7 +780,7 @@ class BatchProcessWizard(WizardDialog):
         layout.setContentsMargins(24, 24, 24, 24)
 
         self.summary_label = QLabel()
-        self.summary_label.setStyleSheet("color: #E5E7EB; font-size: 14px;")
+        self.summary_label.setStyleSheet(f"color: {DesignSystem.colors.text_primary}; font-size: 14px;")
         self.summary_label.setWordWrap(True)
         layout.addWidget(self.summary_label)
 

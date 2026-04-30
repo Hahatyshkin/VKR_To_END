@@ -47,6 +47,12 @@ from typing import Callable, List, Optional, Tuple, Dict, Any
 import numpy as np
 
 try:
+    import pywt
+    PYWT_AVAILABLE = True
+except ImportError:
+    PYWT_AVAILABLE = False
+
+try:
     from scipy.signal import dlti, dlsim
     from scipy.linalg import orth
     SCIPY_AVAILABLE = True
@@ -276,7 +282,10 @@ def dwt_decompose_daubechies(
     levels: int
 ) -> List[np.ndarray]:
     """Многоуровневое DWT разложение Добечи.
-    
+
+    Использует pywt.wavedec для точного разложения (roundtrip error < 1e-14).
+    Fallback на собственную реализацию если pywt недоступен.
+
     Параметры:
     ----------
     x : np.ndarray
@@ -285,27 +294,32 @@ def dwt_decompose_daubechies(
         Имя вейвлета ('db2', 'db4', 'db6', 'db8')
     levels : int
         Число уровней
-        
+
     Возвращает:
     -----------
     List[np.ndarray]
-        [AL, DL, DL-1, ..., D1]
+        [AL, DL, DL-1, ..., D1] (формат pywt)
     """
+    if PYWT_AVAILABLE:
+        coeffs = pywt.wavedec(x.astype(np.float64), wavelet, level=levels)
+        return [c.astype(np.float32) for c in coeffs]
+
+    # Fallback: собственная реализация
     h0 = get_daubechies_filter(wavelet)
     h0, g0, h1, g1 = make_qmf_pair(h0)
-    
+
     coeffs = []
     a = x.astype(np.float64)
-    
+
     for _ in range(levels):
         if len(a) < len(h0) * 2:
             logger.warning("Signal too short for more levels")
             break
         a, d = dwt_1level_daubechies(a, h0, g0)
         coeffs.append(d.astype(np.float32))
-    
+
     coeffs.append(a.astype(np.float32))
-    return coeffs
+    return coeffs[::-1]  # [AL, DL, ..., D1]
 
 
 def dwt_reconstruct_daubechies(
@@ -314,7 +328,10 @@ def dwt_reconstruct_daubechies(
     orig_len: int
 ) -> np.ndarray:
     """Реконструкция сигнала из коэффициентов DWT Добечи.
-    
+
+    Использует pywt.waverec для точной реконструкции.
+    Fallback на собственную реализацию если pywt недоступен.
+
     Параметры:
     ----------
     coeffs : List[np.ndarray]
@@ -323,30 +340,35 @@ def dwt_reconstruct_daubechies(
         Имя вейвлета
     orig_len : int
         Ожидаемая длина
-        
+
     Возвращает:
     -----------
     np.ndarray
         Восстановленный сигнал
     """
+    if PYWT_AVAILABLE:
+        rec = pywt.waverec([c.astype(np.float64) for c in coeffs], wavelet)
+        return rec[:orig_len].astype(np.float32)
+
+    # Fallback: собственная реализация
     h0 = get_daubechies_filter(wavelet)
     _, _, h1, g1 = make_qmf_pair(h0)
-    
-    a = coeffs[-1].astype(np.float64)
-    
-    for i in range(len(coeffs) - 2, -1, -1):
+
+    a = coeffs[0].astype(np.float64)  # AL — аппроксимация
+
+    for i in range(1, len(coeffs)):  # DL, ..., D1
         d = coeffs[i].astype(np.float64)
-        
+
         # Выравнивание длин: дополняем нулями более короткий массив
         if len(a) != len(d):
             if len(d) < len(a):
                 d = np.pad(d, (0, len(a) - len(d)))
             else:
                 a = np.pad(a, (0, len(d) - len(a)))
-        
-        expected_len = len(a) * 2
+
+        expected_len = len(a) + len(d)
         a = idwt_1level_daubechies(a, d, h1, g1, expected_len)
-    
+
     return a[:orig_len].astype(np.float32)
 
 
@@ -511,11 +533,11 @@ class DaubechiesDWTTransform(BaseTransform):
         """Применить Daubechies DWT к блоку."""
         N = len(block)
 
-        # Разложение
+        # Разложение: pywt возвращает [AL, DL, ..., D1]
         coeffs = dwt_decompose_daubechies(block, self.wavelet, self.levels)
 
-        # Сборка в вектор
-        flat = np.concatenate(coeffs[::-1])
+        # Сборка в вектор (уже в порядке [AL, DL, ..., D1])
+        flat = np.concatenate(coeffs)
 
         # Отбор коэффициентов
         if self.select_mode == SELECT_MODE_ENERGY and self.keep_energy_ratio < 1.0:
@@ -532,17 +554,12 @@ class DaubechiesDWTTransform(BaseTransform):
             k = max(1, int(self.sequency_keep_ratio * len(flat)))
             flat[k:] = 0.0
 
-        # Реконструкция
+        # Реконструкция: разбиваем flat обратно по длинам коэффициентов
         coeffs_back = []
         ptr = 0
-        # Порядок: A, D_levels-1, ..., D0
-        a_len = len(coeffs[-1])
-        coeffs_back.append(flat[ptr:ptr + a_len].astype(np.float32))
-        ptr += a_len
-        for i in range(self.levels):
-            d_len = len(coeffs[self.levels - 1 - i])
-            coeffs_back.append(flat[ptr:ptr + d_len].astype(np.float32))
-            ptr += d_len
+        for c in coeffs:
+            coeffs_back.append(flat[ptr:ptr + len(c)].astype(np.float32))
+            ptr += len(c)
 
         rec = dwt_reconstruct_daubechies(coeffs_back, self.wavelet, N)
         return rec

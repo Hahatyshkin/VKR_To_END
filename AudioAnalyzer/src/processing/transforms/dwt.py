@@ -221,8 +221,11 @@ def dwt_reconstruct(coeffs: List[np.ndarray], orig_len: int) -> np.ndarray:
     """
     # Автоопределение формата: dwt_decompose возвращает [D1,...,DL,AL],
     # unflatten возвращает [AL,DL-1,...,D1].
-    # У dwt_decompose первый элемент (D1) длиннее последнего (AL).
-    if len(coeffs) >= 2 and len(coeffs[0]) <= len(coeffs[-1]):
+    # У dwt_decompose длины убывают: D1 > D2 > ... > AL,
+    # поэтому len(coeffs[0]) > len(coeffs[1]).
+    # У unflatten длины возрастают: AL <= DL < ... < D1,
+    # поэтому len(coeffs[0]) <= len(coeffs[1]).
+    if len(coeffs) >= 2 and len(coeffs[0]) > len(coeffs[1]):
         # Формат dwt_decompose: [D1, D2, ..., DL, AL]
         # Реверсируем: [AL, DL, ..., D2, D1]
         coeffs = coeffs[::-1]

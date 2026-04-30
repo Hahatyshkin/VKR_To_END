@@ -74,61 +74,58 @@ logger = logging.getLogger("audio.processing.transforms.extended")
 # DAUBECHIES WAVELET FILTERS
 # =============================================================================
 
-# Коэффициенты фильтров Добечи (low-pass decomposition)
-# Источник: Daubechies, I. (1992). Ten Lectures on Wavelets
+# Коэффициенты фильтров Добечи (low-pass decomposition, dec_lo)
+# Источник: PyWavelets (pywt.Wavelet), подтверждённые эталонные значения
+# Соответствуют: Daubechies, I. (1992). Ten Lectures on Wavelets
 
 DAUBECHIES_FILTERS: Dict[str, np.ndarray] = {
     "db2": np.array([
         -0.1294095225512603,
          0.2241438680420134,
          0.8365163037378079,
-        -0.4829629131445351
+         0.4829629131445342
     ]),
     "db4": np.array([
         -0.010597401784997278,
-         0.0328830116668852,
-         0.03044131396494487,
+         0.03288301166688520,
+         0.03084138183556076,
         -0.18703481171909309,
         -0.027983769416859854,
-         0.6308812094983859,
-         0.7148465705525415,
-         0.23037781330885523
+         0.63088076792985890,
+         0.71484657055291570,
+         0.23037781330889650
     ]),
     "db6": np.array([
-         0.0018899503329001,
-        -0.0003029205147214,
-        -0.0149522583367721,
-         0.0038087520138906,
-         0.0491371796736075,
-        -0.0272190299170560,
-        -0.0519458381077090,
-         0.2978577956052771,
-         0.6756307362972900,
-         0.3372588957623721,
-        -0.1247467601388658,
-        -0.0502700585885480,
+        -0.001077301085308480,
+         0.004777257510945511,
+         0.000553842201161496,
+        -0.03158203931748603,
+         0.02752286553030573,
+         0.09750160558732304,
+        -0.12976686756726190,
+        -0.22626469396543980,
+         0.31525035170919760,
+         0.75113390802109540,
+         0.49462389039845310,
+         0.11154074335010950
     ]),
     "db8": np.array([
-        -0.0001174767860023,
-         0.0002028928481302,
-         0.0007778457306189,
-        -0.0012621997424280,
-        -0.0022433583822095,
-         0.0036713962024354,
-         0.0061677022405599,
-        -0.0102689951880182,
-        -0.0106756994011376,
-         0.0203687199276296,
-         0.0106756994011376,
-        -0.0203687199276296,
-        -0.0061677022405599,
-         0.0102689951880182,
-         0.0022433583822095,
-        -0.0036713962024354,
-         0.0007778457306189,
-         0.0012621997424280,
-        -0.0002028928481302,
-        -0.0001174767860023,
+        -0.000117476786002396,
+         0.000675449406450569,
+        -0.000391740373376947,
+        -0.004870352993451574,
+         0.008746094047405777,
+         0.013981027917398280,
+        -0.044088253930794750,
+        -0.017369301001807550,
+         0.12874742662047850,
+         0.000472484573913283,
+        -0.28401554296154690,
+        -0.015829105256349310,
+         0.58535468365420670,
+         0.67563073629728980,
+         0.31287159091429990,
+         0.054415842243104010
     ]),
 }
 
@@ -178,20 +175,20 @@ def make_qmf_pair(h0: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray, n
     Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
         (h0, g0, h1, g1) - квадруплет фильтров
     """
+    # High-pass decomposition (dec_hi)
+    # Правильная формула (верифицирована по pywt):
+    # dec_hi[n] = (-1)^(n+1) * h0[N-1-n]
+    # Ранее использовалась неверная формула: (-1)^(N-1-n) * h0[n]
     N = len(h0)
-    
-    # High-pass decomposition: g0[n] = (-1)^n * h0[N-1-n]
-    g0 = np.zeros_like(h0)
-    for n in range(N):
-        g0[n] = ((-1) ** n) * h0[N - 1 - n]
-    
-    # Low-pass reconstruction: h1 = h0 reversed
+    g0 = np.array([((-1) ** (n + 1)) * h0[N - 1 - n] for n in range(N)], dtype=np.float64)
+
+    # Low-pass reconstruction (rec_lo): h1 = h0 reversed
     h1 = h0[::-1].copy()
-    
-    # High-pass reconstruction: g1 = g0 reversed (perfect reconstruction)
-    # g1[n] = g0[N-1-n] = (-1)^(N-1-n) * h0[n]
-    g1 = g0[::-1].copy()
-    
+
+    # High-pass reconstruction (rec_hi): g1[n] = (-1)^n * h0[n]
+    # Ключевое исправление: ранее использовалось g0[::-1], что давало неправильный знак
+    g1 = np.array([((-1) ** n) * h0[n] for n in range(N)], dtype=np.float64)
+
     return h0, g0, h1, g1
 
 
@@ -219,17 +216,13 @@ def dwt_1level_daubechies(
         (A, D) — аппроксимация и детали
     """
     # Свертка + downsampling через numpy (в ~100x быстрее Python-циклов)
-    # a[k] = sum_n x[n] * h0[2k - n + L - 1]  ≡  conv(x, h0)[2k+L-1]  =  conv(x, h0)[L-1::2]
+    # Downsampling offset = 1 для корректного согласования с обратным преобразованием
     L = len(h0)
     conv_lo = np.convolve(x.astype(np.float64), h0.astype(np.float64))
     conv_hi = np.convolve(x.astype(np.float64), g0.astype(np.float64))
-    # Берём каждый 2-й элемент начиная с L-1 (downsampling)
-    a = conv_lo[L - 1::2].astype(np.float32)
-    d = conv_hi[L - 1::2].astype(np.float32)
-    # Обрезаем до ожидаемой длины (len(x) // 2)
-    n_approx = len(x) // 2
-    a = a[:n_approx]
-    d = d[:n_approx]
+    # Берём каждый 2-й элемент начиная с offset=1 (без обрезки длины)
+    a = conv_lo[1::2].astype(np.float32)
+    d = conv_hi[1::2].astype(np.float32)
     return a, d
 
 
@@ -270,8 +263,11 @@ def idwt_1level_daubechies(
     up_d[::2] = d.astype(np.float64)
     
     x = np.convolve(up_a, h1.astype(np.float64)) + np.convolve(up_d, g1.astype(np.float64))
-    # Без сдвига (shift=0): реконструкция начинается с индекса 0
-    return x[:orig_len].astype(np.float32)
+    # Filter delay compensation: fwd_offset + inv_offset = L - 1
+    # При fwd_offset = 1, inv_offset = L - 2
+    L = len(h1)
+    inv_offset = L - 2
+    return x[inv_offset:inv_offset + orig_len].astype(np.float32)
 
 
 def dwt_decompose_daubechies(

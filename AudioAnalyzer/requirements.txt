@@ -5,6 +5,7 @@ pydub
 soundfile
 pyinstaller
 pyinstaller-hooks-contrib
+PyWavelets  # pywt — точное Daubechies DWT (wavedec/waverec)
 openpyxl  # для экспорта в Excel
 pyqtgraph  # для интерактивных графиков
 structlog  # для структурированного логирования

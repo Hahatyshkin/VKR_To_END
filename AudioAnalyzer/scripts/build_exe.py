@@ -36,6 +36,8 @@ args = [
     '--collect-all', 'soundfile',
     # NumPy submodules
     '--collect-submodules', 'numpy',
+    # PyWavelets for Daubechies DWT (pywt.wavedec/waverec)
+    '--collect-submodules', 'pywt',
     # Our processing module
     '--collect-submodules', 'processing',
     # Explicitly include our UI modules (ui_new is the active one)

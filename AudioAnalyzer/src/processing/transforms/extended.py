@@ -686,13 +686,18 @@ class MDCTTransform(BaseTransform):
             progress_cb(0.0, "MDCT: загрузка")
 
         x, sr = load_audio_safe(wav_path)
+        n = len(x)
         N = self.mdct_size
 
         # MDCT с overlap-add
         if progress_cb:
             progress_cb(0.1, "MDCT: прямое преобразование")
 
-        coeffs = mdct(x, N)
+        # Паддинг N сэмплов с каждой стороны для устранения граничных артефактов.
+        # Без паддинга первые/последние N сэмплов имеют неполное перекрытие
+        # в OLA (только один блок вместо двух), что даёт SNR ~20 дБ вместо 120 дБ.
+        x_padded = np.pad(x, (N, N), mode='constant')
+        coeffs = mdct(x_padded, N)
 
         if progress_cb:
             progress_cb(0.4, "MDCT: отбор коэффициентов")
@@ -718,11 +723,10 @@ class MDCTTransform(BaseTransform):
             progress_cb(0.6, "MDCT: обратное преобразование")
 
         # Обратное MDCT
-        y = imdct(coeffs, N)
+        y_padded = imdct(coeffs, N)
 
-        # Нормализация
-        if np.max(np.abs(y)) > 0:
-            y = y / np.max(np.abs(y)) * 0.95
+        # Удаляем паддинг: берём N..N+n (исключаем граничные артефакты)
+        y = y_padded[N:N + n]
 
         out_mp3 = self.get_output_path(wav_path, out_dir)
 
